@@ -16,10 +16,11 @@
 <body>
 <div class="container w-25">
     <h1>로그인 페이지</h1>
+    메세지 : ${message}
     <form id="loginForm" method="post">
         <div class="mb-3">
             <label for="idInput" class="form-label">ID</label>
-            <input type="text" name="id" class="form-control" id="idInput" aria-describedby="emailHelp">
+            <input type="text" name="id" class="form-control" id="idInput">
         </div>
         <div class="mb-3">
             <label for="pwInput" class="form-label">Password</label>

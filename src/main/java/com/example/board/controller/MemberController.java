@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -22,8 +23,10 @@ public class MemberController {
     }
 
     @PostMapping("login")
-    public void loginProcess() {
+    public String loginProcess() {
         System.out.println("login process working");
+
+        return "redirect:/board/list";
     }
 
     @GetMapping("join")
@@ -32,11 +35,18 @@ public class MemberController {
     }
 
     @PostMapping("join")
-    public String joinProcess(Member member) {
+    public String joinProcess(Member member, RedirectAttributes rttr) {
         System.out.println("join process working");
 
         boolean ok = memberService.addMember(member);
 
-        return "redirect:/member/login";
+        if (ok) {
+            rttr.addFlashAttribute("message", "회원가입이 되었습니다.");
+            return "redirect:/member/login";
+        } else {
+            rttr.addFlashAttribute("message", "회원가입이 되지 않았습니다..");
+            return "redirect:/member/join";
+        }
+
     }
 }
