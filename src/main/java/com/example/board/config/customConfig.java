@@ -20,7 +20,9 @@ public class customConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeHttpRequests().anyRequest().permitAll();
+
+        http.formLogin().loginPage("/member/login");
+        http.logout().logoutUrl("/member/logout");
 
         return http.build();
     }

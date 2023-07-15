@@ -17,7 +17,7 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("board")
+    @GetMapping("list")
     public void board(Model model) {
         //게시물 조회
         Map<String, Object> info = boardService.selectBoard();
@@ -25,7 +25,7 @@ public class BoardController {
         model.addAllAttributes(info);
     }
 
-    @GetMapping("boardDetail")
+    @GetMapping("detail")
     public void boardDetail(@RequestParam("detailId") Integer detailId) {
 
     }
