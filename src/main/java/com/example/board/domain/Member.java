@@ -9,4 +9,5 @@ public class Member {
     private String idNumber;
     private String nickname;
     private String address;
+    private String email;
 }
