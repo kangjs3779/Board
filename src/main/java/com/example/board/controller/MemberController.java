@@ -22,13 +22,6 @@ public class MemberController {
         System.out.println("login form working");
     }
 
-    @PostMapping("login")
-    public String loginProcess() {
-        System.out.println("login process working");
-
-        return "redirect:/board/list";
-    }
-
     @GetMapping("join")
     public void joinForm() {
         //join form 포워드
@@ -44,7 +37,7 @@ public class MemberController {
             rttr.addFlashAttribute("message", "회원가입이 되었습니다.");
             return "redirect:/member/login";
         } else {
-            rttr.addFlashAttribute("message", "회원가입이 되지 않았습니다..");
+            rttr.addFlashAttribute("message", "회원가입이 실패하였습니다.");
             return "redirect:/member/join";
         }
 

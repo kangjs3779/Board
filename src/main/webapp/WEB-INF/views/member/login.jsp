@@ -19,8 +19,8 @@
     메세지 : ${message}
     <form id="loginForm" method="post">
         <div class="mb-3">
-            <label for="idInput" class="form-label">ID</label>
-            <input type="text" name="id" class="form-control" id="idInput">
+            <label for="usernameInput" class="form-label">ID</label>
+            <input type="text" name="username" class="form-control" id="usernameInput">
         </div>
         <div class="mb-3">
             <label for="pwInput" class="form-label">Password</label>

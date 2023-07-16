@@ -18,8 +18,8 @@
     <h1>회원 가입 페이지</h1>
     <form id="joinForm" method="post">
         <div class="input-group mb-3">
-            <label class="input-group-text" for="idInput">아이디</label>
-            <input type="text" class="form-control" name="id" id="idInput" placeholder="Username">
+            <label class="input-group-text" for="usernameInput">아이디</label>
+            <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Username">
             <button class="btn btn-outline-secondary" type="button">중복확인</button>
         </div>
         <div class="input-group mb-3">

@@ -21,7 +21,7 @@ public class customConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        http.formLogin().loginPage("/member/login");
+        http.formLogin().loginPage("/member/login").defaultSuccessUrl("/board/list", true);
         http.logout().logoutUrl("/member/logout");
 
         return http.build();

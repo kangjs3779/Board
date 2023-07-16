@@ -18,7 +18,6 @@ public class MemberService {
         //사용자의 비밀번호를 암호화
         String plain = member.getPassword();
         member.setPassword(passwordEncoder.encode(plain));
-        System.out.println(member.getPassword());
 
         Integer count = memberMapper.addMember(member);
 
