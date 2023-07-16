@@ -23,4 +23,18 @@ public class MemberService {
 
         return count == 1;
     }
+
+    public Member selectMemberByUsername(String username) {
+        Member member = memberMapper.selectMemberByUsername(username);
+
+        return member;
+    }
+
+    public boolean modifyMemberByUsername(Member member) {
+        Integer count;
+
+        count = memberMapper.modifyMemberByUsername(member);
+
+        return count == 1;
+    }
 }

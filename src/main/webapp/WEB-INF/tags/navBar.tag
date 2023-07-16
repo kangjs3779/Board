@@ -18,6 +18,9 @@
                     <a class="nav-link active" aria-current="page" href="/member/login">로그인</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/member/logout">로그아웃</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/member/join">회원가입</a>
                 </li>
                 <li class="nav-item">
@@ -32,5 +35,3 @@
         </div>
     </div>
 </nav>
-
-<sec:authentication property="principal"></sec:authentication>

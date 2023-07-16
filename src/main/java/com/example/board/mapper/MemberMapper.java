@@ -4,6 +4,7 @@ import com.example.board.domain.Member;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface MemberMapper {
@@ -18,4 +19,19 @@ public interface MemberMapper {
             SELECT * FROM Member WHERE username = #{username}
             """)
     Member selectByUsername(String username);
+
+    @Select("""
+            SELECT * FROM Member WHERE username = #{username}
+            """)
+    Member selectMemberByUsername(String username);
+
+    @Update("""
+            UPDATE Member 
+            SET nickname = #{nickname},
+                idNumber = #{idNumber},
+                address = #{address},
+                email = #{email}
+            WHERE username = #{username}
+            """)
+    Integer modifyMemberByUsername(Member member);
 }

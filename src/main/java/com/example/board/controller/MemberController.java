@@ -2,8 +2,12 @@ package com.example.board.controller;
 
 import com.example.board.domain.Member;
 import com.example.board.service.MemberService;
+import lombok.extern.flogger.Flogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +23,7 @@ public class MemberController {
 
     @GetMapping("login")
     public void loginForm() {
-        System.out.println("login form working");
+        //로그인 포워드
     }
 
     @GetMapping("join")
@@ -29,8 +33,7 @@ public class MemberController {
 
     @PostMapping("join")
     public String joinProcess(Member member, RedirectAttributes rttr) {
-        System.out.println("join process working");
-
+        //회원가입 과정
         boolean ok = memberService.addMember(member);
 
         if (ok) {
@@ -41,5 +44,37 @@ public class MemberController {
             return "redirect:/member/join";
         }
 
+    }
+
+    @GetMapping("myPage")
+    @PreAuthorize("isAuthenticated()")
+    public void myPageForm(Authentication authentication, Model model) {
+        //마이페이지 포워드
+        Member member = memberService.selectMemberByUsername(authentication.getName());
+
+        model.addAttribute("member", member);
+    }
+
+    @GetMapping("modify")
+    @PreAuthorize("isAuthenticated()")
+    public void modifyForm(Authentication authentication, Model model) {
+        //수정페이지 포워드
+        Member member = memberService.selectMemberByUsername(authentication.getName());
+
+        model.addAttribute("member", member);
+    }
+
+    @PostMapping("modify")
+    public String modifyProcess(Member member, RedirectAttributes rttr) {
+        //수정페이지 과정
+        boolean ok = memberService.modifyMemberByUsername(member);
+
+        if(ok) {
+            rttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
+        } else {
+            rttr.addFlashAttribute("message", "회원정보를 수정하지 못했습니다.");
+        }
+
+        return "redirect:/member/myPage";
     }
 }
