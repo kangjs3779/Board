@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,6 +17,8 @@
     <title>Title</title>
 </head>
 <body>
+<my:navBar/>
+
 <div class="container">
   <h1>게시글</h1>
 </div>
