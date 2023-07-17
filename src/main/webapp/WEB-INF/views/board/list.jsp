@@ -15,34 +15,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Title</title>
 </head>
 <body>
 <my:navBar current="shareRoom"/>
-<my:alert/>
 
 <div class="container">
-    <h1>Share Room</h1>
+    <h1 class="text-center">Share Room</h1>
+    <my:alert/>
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">제목</th>
-            <th scope="col">작성자</th>
-            <th scope="col">게시날짜</th>
+            <th class="col text-center">#</th>
+            <th class="col text-center">제목</th>
+            <th class="col text-center">작성자</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${list}" var="list">
             <tr>
-                <th>${list.id}</th>
-                <td><a href="/board/detail?detailId=${list.id}">${list.title}</a></td>
-                <td>${list.writer}</td>
-                <td>${list.inserted}</td>
+                <th class="col text-center">${list.id}</th>
+                <td class="col-10 text-center"><a href="/board/detail?boardId=${list.id}">${list.title}</a></td>
+                <td class="col text-center">${list.writer}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-secondary">
+            <i class="fa-regular fa-pen-to-square"></i>
+            글쓰기
+        </button>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

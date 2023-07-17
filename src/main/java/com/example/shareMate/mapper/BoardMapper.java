@@ -12,4 +12,9 @@ public interface BoardMapper {
             SELECT * FROM Board
             """)
     List<Board> selectBoardList();
+
+    @Select("""
+            SELECT * FROM Board WHERE id = #{boardId}
+            """)
+    Board selectBoardByBoardId(Integer boardId);
 }

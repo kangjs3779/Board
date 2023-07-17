@@ -18,11 +18,23 @@ public class BoardService {
     public Map<String, Object> selectBoard() {
         Map<String, Object> info = new HashMap<>();
 
-        //게시물 조회
+        //게시물 전체 조회
         List<Board> list = boardMapper.selectBoardList();
 
         //map에 저장
         info.put("list", list);
+
+        return info;
+    }
+
+    public Map<String, Object> selectBoardByDetailId(Integer boardId) {
+        Map<String, Object> info = new HashMap<>();
+
+        //상세 페이지 조회
+        Board board = boardMapper.selectBoardByBoardId(boardId);
+
+        //map에 저장
+        info.put("board", board);
 
         return info;
     }

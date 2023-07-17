@@ -19,14 +19,18 @@ public class BoardController {
 
     @GetMapping("list")
     public void board(Model model) {
-        //게시물 조회
+        //shareroom 전체 게시글 조회
         Map<String, Object> info = boardService.selectBoard();
 
         model.addAllAttributes(info);
     }
 
     @GetMapping("detail")
-    public void boardDetail(@RequestParam("detailId") Integer detailId) {
+    public void boardDetail(
+            @RequestParam("boardId") Integer boardId,
+            Model model) {
+        Map<String, Object> info = boardService.selectBoardByDetailId(boardId);
 
+        model.addAllAttributes(info);
     }
 }
