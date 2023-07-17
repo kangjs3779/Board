@@ -18,39 +18,39 @@
 </head>
 <body>
 <my:navBar/>
-<my:alert/>
 
 <div class="container w-25">
     <h1>회원 가입 페이지</h1>
+    <my:alert status="${status}"/>
     <form id="joinForm" method="post">
         <div class="input-group mb-3">
             <label class="input-group-text" for="usernameInput">아이디</label>
-            <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Username">
+            <input type="text" required class="form-control" name="username" id="usernameInput" placeholder="Username">
             <button class="btn btn-outline-secondary" type="button">중복확인</button>
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="pwInput">비밀번호</label>
-            <input type="text" name="password" class="form-control" id="pwInput" placeholder="Password">
+            <input type="text" required name="password" class="form-control" id="pwInput" placeholder="Password">
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="emailInput">이메일</label>
-            <input type="email" name="email" class="form-control" id="emailInput" placeholder="email">
+            <input type="email" required name="email" class="form-control" id="emailInput" placeholder="email">
         </div>
-<%--        <div class="input-group mb-3">--%>
-<%--            <label class="input-group-text" for="pwCheckInput">비밀번호 확인</label>--%>
-<%--            <input type="text" class="form-control" id="pwCheckInput" placeholder="Password Check" aria-label="Username" aria-describedby="basic-addon1">--%>
-<%--        </div>--%>
+        <%--        <div class="input-group mb-3">--%>
+        <%--            <label class="input-group-text" for="pwCheckInput">비밀번호 확인</label>--%>
+        <%--            <input type="text" class="form-control" id="pwCheckInput" placeholder="Password Check" aria-label="Username" aria-describedby="basic-addon1">--%>
+        <%--        </div>--%>
         <div class="input-group mb-3">
             <label class="input-group-text" for="idNumberInput">주민번호</label>
-            <input type="text" name="idNumber" class="form-control" id="idNumberInput" placeholder="주민번호">
+            <input type="text" required name="idNumber" class="form-control" id="idNumberInput" placeholder="주민번호">
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="nicknameInput">닉네임</label>
-            <input type="text" name="nickname" class="form-control" id="nicknameInput" placeholder="nickname">
+            <input type="text" required name="nickname" class="form-control" id="nicknameInput" placeholder="nickname">
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="addressInput">주소</label>
-            <input type="text" name="address" class="form-control" id="addressInput" placeholder="address">
+            <input type="text" required name="address" class="form-control" id="addressInput" placeholder="address">
         </div>
     </form>
 

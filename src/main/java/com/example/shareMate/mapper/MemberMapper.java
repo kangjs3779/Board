@@ -1,10 +1,7 @@
 package com.example.shareMate.mapper;
 
 import com.example.shareMate.domain.Member;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface MemberMapper {
@@ -28,10 +25,14 @@ public interface MemberMapper {
     @Update("""
             UPDATE Member 
             SET nickname = #{nickname},
-                idNumber = #{idNumber},
                 address = #{address},
                 email = #{email}
             WHERE username = #{username}
             """)
     Integer modifyMemberByUsername(Member member);
+
+    @Delete("""
+            DELETE FROM Member WHERE username = #{username}
+            """)
+    Integer deleteMemberByUsername(Member member);
 }

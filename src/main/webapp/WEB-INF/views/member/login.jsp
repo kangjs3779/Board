@@ -22,7 +22,7 @@
 
 <div class="container w-25">
     <h1>로그인 페이지</h1>
-    <my:alert status="fail"/>
+    <my:alert status="${status}"/>
     <form id="loginForm" method="post">
         <div class="mb-3">
             <label for="usernameInput" class="form-label">ID</label>

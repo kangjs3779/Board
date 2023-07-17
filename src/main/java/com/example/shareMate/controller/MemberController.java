@@ -2,6 +2,8 @@ package com.example.shareMate.controller;
 
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.service.MemberService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -37,9 +39,13 @@ public class MemberController {
 
         if (ok) {
             rttr.addFlashAttribute("message", "회원가입이 되었습니다.");
+            rttr.addFlashAttribute("status", "success");
+
             return "redirect:/member/login";
         } else {
             rttr.addFlashAttribute("message", "회원가입이 실패하였습니다.");
+            rttr.addFlashAttribute("status", "fail");
+
             return "redirect:/member/join";
         }
 
@@ -68,12 +74,40 @@ public class MemberController {
         //수정페이지 과정
         boolean ok = memberService.modifyMemberByUsername(member);
 
-        if(ok) {
+        if (ok) {
             rttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
+            rttr.addFlashAttribute("status", "success");
         } else {
             rttr.addFlashAttribute("message", "회원정보를 수정하지 못했습니다.");
+            rttr.addFlashAttribute("status", "fail");
         }
 
         return "redirect:/member/myPage";
     }
+
+    @PostMapping("delete")
+    public String deleteProcess(
+            Member member,
+            RedirectAttributes rttr,
+            HttpServletRequest request) throws Exception {
+
+        boolean ok = memberService.deleteMemberByUsername(member);
+
+        if (ok) {
+            rttr.addFlashAttribute("message", "회원 탈퇴가 완료되었습니다.");
+            rttr.addFlashAttribute("status", "success");
+            //로그아웃
+            request.logout();
+
+            return "redirect:/member/login";
+        } else {
+            rttr.addFlashAttribute("message", "회원 탈퇴가 실패하였습니다.");
+            rttr.addFlashAttribute("status", "fail");
+
+            return "redirect:/member/myPage";
+        }
+
+
+    }
+
 }

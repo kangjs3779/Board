@@ -21,24 +21,17 @@
 <my:alert/>
 
 <div class="container w-50">
-    <h1>${member.nickname}님의 회원정보입니다.</h1>
+    <h1>${member.nickname}님 수정 정보를 입력해주세요.</h1>
     <form action="/member/modify" id="modifyForm" method="post">
         <div class="mb-3 row">
-            <label for="usernameInput" class="col-sm-2 col-form-label">ID</label>
             <div class="col-sm-10">
-                <input type="text" readonly class="form-control" name="username" id="usernameInput" value="${member.username}">
+                <input type="hidden" readonly class="form-control" name="username" id="usernameInput" value="${member.username}">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="nicknameInput" class="col-sm-2 col-form-label">NickName</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="nickname" id="nicknameInput" value="${member.nickname}">
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="IDNumberInput" class="col-sm-2 col-form-label">IDNumber</label>
-            <div class="col-sm-10">
-                <input type="text" readonly class="form-control" name="idNumber" id="IDNumberInput" value="${member.idNumber}">
             </div>
         </div>
         <div class="mb-3 row">
