@@ -1,6 +1,6 @@
-package com.example.board.mapper;
+package com.example.shareMate.mapper;
 
-import com.example.board.domain.Member;
+import com.example.shareMate.domain.Member;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

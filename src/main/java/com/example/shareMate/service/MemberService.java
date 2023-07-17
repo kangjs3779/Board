@@ -1,7 +1,7 @@
-package com.example.board.service;
+package com.example.shareMate.service;
 
-import com.example.board.domain.Member;
-import com.example.board.mapper.MemberMapper;
+import com.example.shareMate.domain.Member;
+import com.example.shareMate.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

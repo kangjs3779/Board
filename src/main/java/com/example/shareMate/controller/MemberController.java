@@ -1,8 +1,7 @@
-package com.example.board.controller;
+package com.example.shareMate.controller;
 
-import com.example.board.domain.Member;
-import com.example.board.service.MemberService;
-import lombok.extern.flogger.Flogger;
+import com.example.shareMate.domain.Member;
+import com.example.shareMate.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;

@@ -1,7 +1,7 @@
-package com.example.board.service;
+package com.example.shareMate.service;
 
-import com.example.board.domain.Board;
-import com.example.board.mapper.BoardMapper;
+import com.example.shareMate.domain.Board;
+import com.example.shareMate.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

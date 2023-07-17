@@ -1,4 +1,4 @@
-package com.example.board.domain;
+package com.example.shareMate.domain;
 
 import lombok.Data;
 

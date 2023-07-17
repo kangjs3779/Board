@@ -1,4 +1,4 @@
-package com.example.board.security;
+package com.example.shareMate.security;
 
 import org.springframework.stereotype.Component;
 

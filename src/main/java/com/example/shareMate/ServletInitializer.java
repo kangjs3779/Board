@@ -1,4 +1,4 @@
-package com.example.board;
+package com.example.shareMate;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

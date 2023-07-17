@@ -1,6 +1,6 @@
-package com.example.board.controller;
+package com.example.shareMate.controller;
 
-import com.example.board.service.BoardService;
+import com.example.shareMate.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
