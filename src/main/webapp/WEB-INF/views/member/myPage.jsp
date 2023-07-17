@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
@@ -75,7 +76,7 @@
                     <div class="mb-3">
                         <label for="passowordInput" class="col-form-label">Password:</label>
                         <input type="text" name="password" class="form-control" id="passowordInput">
-                        <input type="text" name="username" class="form-control" value="${member.username}">
+                        <input type="hidden" name="username" class="form-control" value="${member.username}">
                     </div>
                 </form>
             </div>

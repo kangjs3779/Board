@@ -11,4 +11,5 @@ public class Board {
     private Date inserted;
     private String body;
     private String writer;
+    private String memberId;
 }

@@ -1,16 +1,22 @@
 package com.example.shareMate.service;
 
+import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
+import com.example.shareMate.mapper.BoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MemberService {
 
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private BoardMapper boardMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -49,6 +55,16 @@ public class MemberService {
         Member originMember = selectMemberByUsername(member.getUsername());
 
         if (passwordEncoder.matches(member.getPassword(), originMember.getPassword())) {
+            //비밀번호 일치하면
+
+            //작성한 게시글 유무 확인
+            List<Board> boardList = boardMapper.selectBoardByMemberId(member.getUsername());
+            if(boardList.size() != 0) {
+                //작성한 게시글이 있으면 모두 삭제
+                boardMapper.deleteBoardBymemberId(member.getUsername());
+            }
+
+            //회원정보 삭제
             count = memberMapper.deleteMemberByUsername(member);
         }
 
