@@ -17,7 +17,7 @@
     <title>Title</title>
 </head>
 <body>
-<my:navBar/>
+<my:navBar current="myPage"/>
 
 <%--회원 정보--%>
 <div class="container w-50">

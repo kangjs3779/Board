@@ -18,10 +18,10 @@
 </head>
 <body>
 <my:navBar/>
-<my:alert/>
 
 <div class="container w-50">
     <h1>${member.nickname}님 수정 정보를 입력해주세요.</h1>
+    <my:alert status="${status}"/>
     <form action="/member/modify" id="modifyForm" method="post">
         <div class="mb-3 row">
             <div class="col-sm-10">

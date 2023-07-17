@@ -18,11 +18,11 @@
     <title>Title</title>
 </head>
 <body>
-<my:navBar/>
+<my:navBar current="shareRoom"/>
 <my:alert/>
 
 <div class="container">
-    <h1>게시판</h1>
+    <h1>Share Room</h1>
     <table class="table table-bordered">
         <thead>
         <tr>

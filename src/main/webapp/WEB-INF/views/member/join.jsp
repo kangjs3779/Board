@@ -17,7 +17,7 @@
     <title>Title</title>
 </head>
 <body>
-<my:navBar/>
+<my:navBar current="join"/>
 
 <div class="container w-25">
     <h1>회원 가입 페이지</h1>

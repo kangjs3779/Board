@@ -18,7 +18,7 @@
     <title>Title</title>
 </head>
 <body>
-<my:navBar/>
+<my:navBar current="login"/>
 
 <div class="container w-25">
     <h1>로그인 페이지</h1>
