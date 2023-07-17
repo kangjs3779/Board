@@ -18,6 +18,7 @@
 </head>
 <body>
 <my:navBar/>
+<my:alert/>
 
 <div class="container">
   <h1>게시글</h1>

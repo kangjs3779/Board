@@ -18,6 +18,8 @@
 </head>
 <body>
 <my:navBar/>
+<my:alert/>
+
 <div class="container w-50">
     <h1>${member.nickname}님의 회원정보입니다.</h1>
     <form action="/member/modify" id="modifyForm" method="post">

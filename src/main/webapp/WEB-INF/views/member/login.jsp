@@ -22,7 +22,7 @@
 
 <div class="container w-25">
     <h1>로그인 페이지</h1>
-    메세지 : ${message}
+    <my:alert status="fail"/>
     <form id="loginForm" method="post">
         <div class="mb-3">
             <label for="usernameInput" class="form-label">ID</label>
@@ -35,7 +35,7 @@
     </form>
 
     <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-outline-secondary" type="submit" form="loginForm">login</button>
+        <button class="btn btn-outline-secondary" type="submit" form="loginForm" id="liveToastBtn">login</button>
         <a class="btn btn-outline-secondary" href="/member/join">join</a>
     </div>
 </div>

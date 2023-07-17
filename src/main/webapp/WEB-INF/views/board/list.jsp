@@ -19,6 +19,7 @@
 </head>
 <body>
 <my:navBar/>
+<my:alert/>
 
 <div class="container">
     <h1>게시판</h1>

@@ -18,6 +18,7 @@
 </head>
 <body>
 <my:navBar/>
+
 <div class="container w-50">
     <h1>${member.nickname}님의 회원정보입니다.</h1>
     <form action="/member/delete" id="deleteForm" method="post">
@@ -55,10 +56,13 @@
 
     <div class="d-grid gap-2 d-md-block">
         <a class="btn btn-outline-secondary" href="/member/modify">Modify</a>
-        <button class="btn btn-outline-secondary" type="submit" form="deleteForm">Delete</button>
+        <button class="btn btn-outline-secondary" type="button" form="deleteForm" id="liveToastBtn">Delete</button>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<my:alert/>
+
 </body>
 </html>

@@ -18,6 +18,7 @@
 </head>
 <body>
 <my:navBar/>
+<my:alert/>
 
 <div class="container w-25">
     <h1>회원 가입 페이지</h1>
