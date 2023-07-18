@@ -20,6 +20,7 @@
 </head>
 <body>
 <my:navBar/>
+<span id="boardIdInfo" class="d-none">${board.id}</span>
 
 <div class="container w-50">
     <my:alert status="${status}"/>
@@ -38,9 +39,36 @@
             <hr>
 
             <%--댓글--%>
-            <footer class="blockquote-footer">댓글창</footer>
+            <div class="mb-3"><strong>댓글&nbsp;<span id="commentCount"></span>개</strong></div>
+
+            <%--댓글 리스트--%>
+            <div id="commentListBox">
+                <hr>
+                <div class="mb-2 row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">닉네임</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                        <span style="font-size: 12px; color: gray;">yyymmyy&nbsp;&nbsp;&nbsp;</span><span style="font-size: 12px; color: gray;">답글쓰기</span>
+                    </div>
+                </div>
+            </div>
+
+            <%--댓글 입력창--%>
+            <sec:authorize access="isAuthenticated()">
+                <form>
+                    <div class="form-floating">
+                        <input class="form-control" id="commentInput">
+                        <label for="commentInput" style="color: gray"><span id="nicknameInfo">${member.nickname}</span>님 댓글을 남겨보세요.</label>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn" style="color: gray;" id="addCommentBtn">등록</button>
+                    </div>
+                </form>
+            </sec:authorize>
         </div>
     </div>
+
+
     <%--  버튼  --%>
     <sec:authorize access="isAuthenticated() and #board.memberId == principal.username">
         <div class="d-grid gap-2 d-md-block">
@@ -86,5 +114,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/BoardComment.js"></script>
 </body>
 </html>

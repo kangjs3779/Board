@@ -30,7 +30,7 @@ public class BoardController {
     @GetMapping("list")
     public void board(Model model) {
         //shareroom 전체 게시글 조회
-        Map<String, Object> info = boardService.selectBoard();
+        Map<String, Object> info = boardService.selectAllBoard();
 
         model.addAllAttributes(info);
     }
@@ -41,6 +41,13 @@ public class BoardController {
             Model model) {
         //게시글 상세 조회
         Map<String, Object> info = boardService.selectBoardByDetailId(boardId);
+
+        //로그인한 사용자의 정보 불러옴
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Member member = memberService.selectMemberByUsername(authentication.getName());
+            info.put("member", member);
+        }
 
         model.addAllAttributes(info);
     }
@@ -65,7 +72,7 @@ public class BoardController {
         board.setMemberId(authentication.getName());
         boolean ok = boardService.addBoard(board);
 
-        if(ok) {
+        if (ok) {
             rttr.addFlashAttribute("message", "게시글이 추가되었습니다.");
             rttr.addFlashAttribute("status", "success");
             return "redirect:/board/detail?boardId=" + board.getId();
@@ -90,7 +97,7 @@ public class BoardController {
 
         boolean ok = boardService.deleteBoard(boardId, member);
 
-        if(ok) {
+        if (ok) {
             rttr.addFlashAttribute("message", "해당 게시글이 삭제 되었습니다.");
             rttr.addFlashAttribute("status", "success");
 
@@ -127,7 +134,7 @@ public class BoardController {
         //게시글 수정 과정
         boolean ok = boardService.modifyBoardByBoardId(board);
 
-        if(ok) {
+        if (ok) {
             rttr.addFlashAttribute("message", "게시글이 수정되었습니다.");
             rttr.addFlashAttribute("status", "success");
 
@@ -136,6 +143,6 @@ public class BoardController {
             rttr.addFlashAttribute("status", "fail");
         }
 
-            return "redirect:/board/detail?boardId=" + board.getId();
+        return "redirect:/board/detail?boardId=" + board.getId();
     }
 }

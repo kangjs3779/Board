@@ -22,7 +22,7 @@ public class BoardService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Map<String, Object> selectBoard() {
+    public Map<String, Object> selectAllBoard() {
         Map<String, Object> info = new HashMap<>();
 
         //게시물 전체 조회
