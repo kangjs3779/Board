@@ -78,7 +78,6 @@ public class BoardService {
             //게시글 삭제
             count = boardMapper.deleteBoardByBoardId(boardId);
         }
-
         return count == 1;
     }
 

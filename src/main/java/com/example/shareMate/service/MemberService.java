@@ -18,6 +18,8 @@ public class MemberService {
     @Autowired
     private BoardMapper boardMapper;
     @Autowired
+    private BoardService boardService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public boolean addMember(Member member) {
@@ -59,15 +61,15 @@ public class MemberService {
 
             //작성한 게시글 유무 확인
             List<Board> boardList = boardMapper.selectBoardByMemberId(member.getUsername());
-            if(boardList.size() != 0) {
-                //작성한 게시글이 있으면 모두 삭제
-                boardMapper.deleteBoardBymemberId(member.getUsername());
+            if (boardList.size() != 0) {
+                for (Board board : boardList) {
+                    //작성한 게시글이 있으면 모두 삭제
+                    boardService.deleteBoard(board.getId(), member);
+                }
             }
-
             //회원정보 삭제
             count = memberMapper.deleteMemberByUsername(member);
         }
-
         return count == 1;
     }
 }

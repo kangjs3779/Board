@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     @Select("""
-            SELECT * FROM Board
+            SELECT * FROM Board ORDER BY inserted DESC
             """)
     List<Board> selectBoardList();
 
