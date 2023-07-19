@@ -27,14 +27,16 @@ function commentList() {
                         <input type="text" readonly class="form-control-plaintext" id="commentInput${comment.id}" value="${comment.body}">
                         <div class="d-grid gap-2 d-md-flex">
                             <span style="font-size: 12px; color: gray;">${date}</span>
-                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1 childcomment" comment-id="${comment.id}">답글쓰기</button>
+                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1 childCommentBtn" comment-id="${comment.id}">답글쓰기</button>
                             <button style="font-size: 12px; color: gray; padding: 0px;" comment-id="${comment.id}" class="btn me-md-1 ${comment.editable == true ? '' : 'd-none'} commentmodify" >수정</button>
                             <button style="font-size: 12px; color: gray; padding: 0px;" comment-id="${comment.id}" class="btn ${comment.editable == true ? '' : 'd-none'} commentdelete"  >삭제</button>
                         </div>
+                        <!--대댓폼-->
+                        <span id="childCommentFormBox${comment.id}">
+                        </span>
                         <!--대댓리스트-->
                         <span id="childCommentBox${comment.id}">
                         </span>
-                        <!--대댓리스트-->
                     </div>
                 </div>
                 `)
@@ -73,6 +75,30 @@ function commentList() {
                     })
                 });
             }
+
+            //답글 달기 버튼을 누르면 입력창이 뜨도록 함
+            $(document).on("click", ".childCommentBtn", function () {
+                let commentId = $(this).attr("comment-id");
+                console.log(commentId);
+                $("#childCommentFormBox" + commentId).append(`
+                <br>
+                <form>
+                    <input type="hidden" value="${commentId}" id="commentIdInput">
+                    <div class="form-floating">
+                        <input class="form-control" id="childCommentInput">
+                        <label for="childCommentInput" style="color: gray">대댓을 남겨주세요.</label>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn" style="color: gray;" id="addChildCommentBtn">등록</button>
+                    </div>
+                </form>
+                `);
+            });
+
+            //대댓을 입력하고 등록을 누르면
+            $(document).on("click", "#addChildCommentBtn", function () {
+                console.log("대댓 등록 버튼")
+            })
 
             //수정 버튼을 누르면 수정 입력창이 뜨도록 함
             $(".commentmodify").click(function () {
