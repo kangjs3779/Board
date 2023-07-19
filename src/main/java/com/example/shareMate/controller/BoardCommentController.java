@@ -4,6 +4,7 @@ import com.example.shareMate.domain.BoardComment;
 import com.example.shareMate.service.BoardCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,9 @@ public class BoardCommentController {
     private BoardCommentService boardCommentService;
 
     @GetMapping("list")
-    public List<BoardComment> list(@RequestParam("boardId") Integer boardId) {
+    public List<BoardComment> list(@RequestParam("boardId") Integer boardId, Authentication authentication) {
         //댓글 전체 조회
-        List<BoardComment> list = boardCommentService.selectAllComment(boardId);
+        List<BoardComment> list = boardCommentService.selectAllComment(boardId, authentication);
 
         return list;
     }

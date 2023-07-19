@@ -56,6 +56,7 @@
             <%--댓글 입력창--%>
             <sec:authorize access="isAuthenticated()">
                 <form>
+                    <input type="hidden" value="${member.username}" id="usernameInput">
                     <div class="form-floating">
                         <input class="form-control" id="commentInput">
                         <label for="commentInput" style="color: gray"><span id="nicknameInfo">${member.nickname}</span>님 댓글을 남겨보세요.</label>

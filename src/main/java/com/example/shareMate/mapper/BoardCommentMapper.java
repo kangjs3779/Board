@@ -16,9 +16,9 @@ public interface BoardCommentMapper {
 
     @Insert("""
             INSERT INTO BoardComment 
-                (nickname, boardId, body)
+                (nickname, boardId, body, memberId)
             VALUES
-                (#{nickname}, #{boardId}, #{body})
+                (#{nickname}, #{boardId}, #{body}, #{memberId})
             """)
     Integer add(BoardComment boardComment);
 }

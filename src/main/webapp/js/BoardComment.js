@@ -27,8 +27,8 @@ function commentList() {
                         <div class="d-grid gap-2 d-md-flex">
                             <span style="font-size: 12px; color: gray;">${date}</span>
                             <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1" >답글쓰기</button>
-                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1" >수정</button>
-                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn" >삭제</button>
+                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1 ${comment.editable == true ? '' : 'd-none'}" >수정</button>
+                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn ${comment.editable == true ? '' : 'd-none'}"  >삭제</button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,8 @@ $("#addCommentBtn").click(function () {
     let nickname = $("#nicknameInfo").text();
     let body = $("#commentInput").val();
     let boardId = $("#boardIdInfo").text();
-    let data = {nickname, body, boardId};
+    let memberId = $("#usernameInput").val();
+    let data = {nickname, body, boardId, memberId};
     console.log(data)
 
     $.ajax("/boardComment/add", {

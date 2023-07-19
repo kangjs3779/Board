@@ -12,4 +12,6 @@ public class BoardComment {
     private String nickname;
     private String body;
     private LocalDateTime inserted;
+    private boolean editable;
+    private String memberId;
 }
