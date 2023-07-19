@@ -21,19 +21,57 @@ function commentList() {
 
                 $("#commentListBox").append(`
                 <hr>
-                <div class="mb-2 row" >
-                    <label for="commentInput${comment.id}" class="col-sm-2 col-form-label">${comment.nickname}</label>
+                <div class="mb-2 row commentBox" comment-id="${comment.id}">
+                    <label for="commentInput${comment.id}" class="col-sm-2 col-form-label"><strong>${comment.nickname}</strong></label>
                     <div class="col-sm-10" id="commentBox${comment.id}">
                         <input type="text" readonly class="form-control-plaintext" id="commentInput${comment.id}" value="${comment.body}">
                         <div class="d-grid gap-2 d-md-flex">
                             <span style="font-size: 12px; color: gray;">${date}</span>
-                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1" >답글쓰기</button>
+                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1 childcomment" comment-id="${comment.id}">답글쓰기</button>
                             <button style="font-size: 12px; color: gray; padding: 0px;" comment-id="${comment.id}" class="btn me-md-1 ${comment.editable == true ? '' : 'd-none'} commentmodify" >수정</button>
                             <button style="font-size: 12px; color: gray; padding: 0px;" comment-id="${comment.id}" class="btn ${comment.editable == true ? '' : 'd-none'} commentdelete"  >삭제</button>
                         </div>
+                        <!--대댓리스트-->
+                        <span id="childCommentBox${comment.id}">
+                        </span>
+                        <!--대댓리스트-->
                     </div>
                 </div>
                 `)
+            }
+
+            //대댓 리스트 조회
+            childCommentList();
+            function childCommentList() {
+                $(".commentBox").each(function () {
+                    let commentId = $(this).attr("comment-id");
+                    console.log(commentId);
+                    $.ajax("/childComment/list?commentId=" + commentId, {
+                        method: "get",
+                        success: function (childComments) {
+                            $("#childCommentBox" + commentId).empty();
+                            for (childComment of childComments) {
+                                const insertedDate = new Date(childComment.inserted); // 작성날짜
+                                const date = insertedDate.toISOString().split('T')[0]; //작성날짜
+
+                                $("#childCommentBox" + commentId).append(`
+                            <hr>
+                            <div class="mb-2 row childCommentBox" childComment-id="${childComment.id}">
+                                <label for="childCommentInput${childComment.id}" class="col-sm-2 col-form-label"><strong>${childComment.nickname}</strong></label>
+                                <div class="col-sm-10" id="childCommentBox${comment.id}">
+                                    <input type="text" readonly class="form-control-plaintext" id="childCommentInput${childComment.id}" value="${childComment.body}">
+                                    <div class="d-grid gap-2 d-md-flex">
+                                        <span style="font-size: 12px; color: gray;">${date}</span>
+                                        <button style="font-size: 12px; color: gray; padding: 0px;" childComment-id="${childComment.id}" class="btn me-md-1" >수정</button>
+                                        <button style="font-size: 12px; color: gray; padding: 0px;" childComment-id="${childComment.id}" class="btn"  >삭제</button>
+                                    </div>
+                                </div>
+                            </div>
+                            `);
+                            }
+                        }
+                    })
+                });
             }
 
             //수정 버튼을 누르면 수정 입력창이 뜨도록 함
@@ -68,7 +106,7 @@ function commentList() {
                 let id = $(this).attr("comment-id");
                 let data = {id}
 
-                if(confirm("댓글을 삭제하시겠습니까?") == true) {
+                if (confirm("댓글을 삭제하시겠습니까?") == true) {
                     $.ajax("/boardComment/delete", {
                         method: "delete",
                         contentType: "application/json",
@@ -78,7 +116,6 @@ function commentList() {
                         }
                     })
                 }
-
 
 
             })
