@@ -1,7 +1,9 @@
 package com.example.shareMate.service;
 
 import com.example.shareMate.domain.Board;
+import com.example.shareMate.domain.BoardComment;
 import com.example.shareMate.domain.Member;
+import com.example.shareMate.mapper.BoardCommentMapper;
 import com.example.shareMate.mapper.BoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class BoardService {
     private MemberMapper memberMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private BoardCommentMapper boardCommentMapper;
 
     public Map<String, Object> selectAllBoard() {
         Map<String, Object> info = new HashMap<>();
@@ -56,12 +60,22 @@ public class BoardService {
     }
 
     public boolean deleteBoard(Integer boardId, Member member) {
-        //게시글 삭제
+        //게시글 삭제를 위한 메소드
         Integer count = 0;
         Member origin = memberMapper.selectMemberByUsername(member.getUsername());
 
         //비밀번호 확인
         if(passwordEncoder.matches(member.getPassword(), origin.getPassword())) {
+            //댓글이 있는지 확인
+            List<BoardComment> comments = boardCommentMapper.selectAllComment(boardId);
+
+            if(comments.size() != 0) {
+                //댓글이 있으면 삭제
+                for(BoardComment comment : comments) {
+                    boardCommentMapper.deleteComment(comment);
+                }
+            }
+            //게시글 삭제
             count = boardMapper.deleteBoardByBoardId(boardId);
         }
 
