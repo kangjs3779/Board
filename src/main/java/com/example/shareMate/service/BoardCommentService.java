@@ -24,11 +24,9 @@ public class BoardCommentService {
 
         //로그인을 한 사용자이면
         if (authentication != null) {
-            System.out.println("시작 : " + authentication.getName());
             for (BoardComment comment : comments) {
                 //회원의 정보를 찾아서
-                Member member = memberService.selectMemberByUsername(authentication.getName());
-                System.out.println(authentication.getName() + ", " + member.getUsername());
+                Member member = memberService.selectMemberByUsername(comment.getMemberId());
                 //comment자바빈에 로그인한 정보와 회원의 정보가 같은지 다른지의 결과를 넣음
                 comment.setEditable(authentication.getName().equals(member.getUsername()));
             }
@@ -38,7 +36,7 @@ public class BoardCommentService {
     }
 
     public Map<String, Object> add(BoardComment boardComment) {
-        Map<String, Object> res = new HashMap<String, Object>();
+        Map<String, Object> res = new HashMap<>();
 
         Integer count = boardCommentMapper.add(boardComment);
 
@@ -46,6 +44,40 @@ public class BoardCommentService {
             res.put("message", "댓글이 등록되었습니다.");
         } else {
             res.put("message", "댓글이 등록되지 않았습니다.");
+        }
+
+        return res;
+    }
+
+    public BoardComment selectCommentByCommentId(Integer commentId) {
+        BoardComment boardComment = boardCommentMapper.selectCommentByCommentId(commentId);
+
+        return  boardComment;
+    }
+
+    public Map<String, Object> modifyComment(BoardComment boardComment) {
+        Map<String, Object> res = new HashMap<>();
+
+        Integer count = boardCommentMapper.modifyComment(boardComment);
+
+        if (count == 1) {
+            res.put("message", "댓글이 수정되었습니다.");
+        } else {
+            res.put("message", "댓글이 수정되지 않았습니다.");
+        }
+
+        return res;
+    }
+
+    public Map<String, Object> deleteComment(BoardComment boardComment) {
+        Map<String, Object> res = new HashMap<>();
+
+        Integer count = boardCommentMapper.deleteComment(boardComment);
+
+        if (count == 1) {
+            res.put("message", "댓글이 삭제되었습니다.");
+        } else {
+            res.put("message", "댓글이 삭제되지 않았습니다.");
         }
 
         return res;

@@ -1,5 +1,6 @@
 package com.example.shareMate.controller;
 
+import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.BoardComment;
 import com.example.shareMate.service.BoardCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,30 @@ public class BoardCommentController {
     public ResponseEntity<Map<String, Object>> add(@RequestBody BoardComment boardComment) {
         // 댓글 등록
         Map<String, Object> res = boardCommentService.add(boardComment);
+        return ResponseEntity.ok().body(res);
+    }
+
+    @GetMapping("get")
+    public BoardComment get(@RequestParam("commentId") Integer commentId) {
+        //해당 댓글 조회
+        BoardComment boardComment = boardCommentService.selectCommentByCommentId(commentId);
+
+        return boardComment;
+    }
+
+    @PatchMapping("modify")
+    public ResponseEntity<Map<String, Object>> modify(@RequestBody BoardComment boardComment) {
+        //댓글 수정
+        Map<String, Object> res = boardCommentService.modifyComment(boardComment);
+
+        return ResponseEntity.ok().body(res);
+    }
+
+    @DeleteMapping("delete")
+    public ResponseEntity<Map<String, Object>> delete(@RequestBody BoardComment boardComment) {
+        //댓글 삭제
+        Map<String, Object> res = boardCommentService.deleteComment(boardComment);
+
         return ResponseEntity.ok().body(res);
     }
 }

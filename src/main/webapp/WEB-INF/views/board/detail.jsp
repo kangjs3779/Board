@@ -43,14 +43,6 @@
 
             <%--댓글 리스트--%>
             <div id="commentListBox">
-                <hr>
-                <div class="mb-2 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">닉네임</label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                        <span style="font-size: 12px; color: gray;">yyymmyy&nbsp;&nbsp;&nbsp;</span><span style="font-size: 12px; color: gray;">답글쓰기</span>
-                    </div>
-                </div>
             </div>
 
             <%--댓글 입력창--%>
