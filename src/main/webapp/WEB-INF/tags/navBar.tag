@@ -27,7 +27,7 @@
                     </sec:authorize>
                     <sec:authorize access="isAnonymous()">
                         <li class="nav-item">
-                            <a class="nav-link ${current == 'join' ? 'active' : ''}" href="/member/join">회원가입</a>
+                            <a class="nav-link ${current == 'join' ? 'active' : ''}" href="/member/signup">회원가입</a>
                         </li>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">

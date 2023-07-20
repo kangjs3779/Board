@@ -36,4 +36,9 @@ public interface BoardCommentMapper {
             DELETE FROM BoardComment WHERE id = #{id}
             """)
     Integer deleteComment(BoardComment boardComment);
+
+    @Select("""
+            SELECT COUNT(*) FROM BoardComment Where boardId = #{boardId}
+            """)
+    Integer selectCommentByBoarId(Integer boardId);
 }

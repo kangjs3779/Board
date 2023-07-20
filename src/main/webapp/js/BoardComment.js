@@ -202,7 +202,6 @@ $(document).on("click", "#addChildCommentBtn", function () {
     let memberId = $("#usernameInput").val();
     let nickname = $("#nicknameInfo").text();
     let data = {body, commentId, memberId, nickname};
-    console.log(data)
 
     $.ajax("/childComment/add", {
         method: "post",
@@ -220,7 +219,6 @@ $(document).on("click", "#addChildCommentBtn", function () {
 //답글 수정 버튼을 누르면
 $(document).on("click", ".modifyChild", function () {
     let childCommentId = $(this).attr("childComment-id");
-    console.log(childCommentId)
     //해당 답글의 정보를 불러옴
     $.ajax("/childComment/get?childCommentId=" + childCommentId, {
         method: "get",
@@ -250,7 +248,6 @@ $(document).on("click", "#modifyChildBtn", function () {
     let id = $(this).attr("childComment-id");
     let body = $("#childCommentInput" + id).val();
     let data = {id, body}
-    console.log(data)
 
     $.ajax("/childComment/modify", {
         method: "patch",
@@ -269,7 +266,6 @@ $(document).on("click", ".deleteChild", function () {
     let data = {id}
 
     let ok = confirm("답글을 삭제하시겠습니까?");
-    console.log(ok)
     if(ok) {
         $.ajax("/childComment/delete", {
             method: "delete",

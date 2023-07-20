@@ -47,4 +47,9 @@ public interface BoardMapper {
             DELETE FROM Board WHERE memberId = #{memberId}
             """)
     void deleteBoardBymemberId(String memberId);
+
+    @Update("""
+            UPDATE Board SET viewCount = viewCount + 1 WHERE id = #{id}
+            """)
+    void addViewCount(Board board);
 }

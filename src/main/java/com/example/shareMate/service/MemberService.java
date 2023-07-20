@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MemberService {
@@ -73,5 +74,14 @@ public class MemberService {
             count = memberMapper.deleteMemberByUsername(member);
         }
         return count == 1;
+    }
+
+    public Map<String, Object> checkUserName(String username) {
+        //아이디 중복 확인
+        Member member = memberMapper.selectByUsername(username);
+        System.out.println(username);
+        System.out.println(member == null);
+
+        return Map.of("available", member == null);
     }
 }

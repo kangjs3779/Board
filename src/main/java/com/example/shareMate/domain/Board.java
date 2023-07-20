@@ -12,4 +12,6 @@ public class Board {
     private String body;
     private String writer;
     private String memberId;
+    private Integer viewCount;
+    private Integer commentCount;
 }

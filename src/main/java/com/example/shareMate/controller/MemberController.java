@@ -9,10 +9,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 
 @Controller
@@ -27,12 +27,12 @@ public class MemberController {
         //로그인 포워드
     }
 
-    @GetMapping("join")
+    @GetMapping("signup")
     public void joinForm() {
         //join form 포워드
     }
 
-    @PostMapping("join")
+    @PostMapping("signup")
     public String joinProcess(Member member, RedirectAttributes rttr) {
         //회원가입 과정
         boolean ok = memberService.addMember(member);
@@ -106,8 +106,13 @@ public class MemberController {
 
             return "redirect:/member/myPage";
         }
+    }
 
-
+    @GetMapping("checkUsername")
+    @ResponseBody
+    public Map<String, Object> checkUserName(@RequestParam("username") String username) {
+        //아이디 중복확인
+        return memberService.checkUserName(username);
     }
 
 }

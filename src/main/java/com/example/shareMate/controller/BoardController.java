@@ -5,15 +5,13 @@ import com.example.shareMate.domain.Member;
 import com.example.shareMate.service.BoardService;
 import com.example.shareMate.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -144,5 +142,14 @@ public class BoardController {
         }
 
         return "redirect:/board/detail?boardId=" + board.getId();
+    }
+
+    @PatchMapping("view")
+    @ResponseBody
+    public ResponseEntity<Integer> view(@RequestBody Board board) {
+        //조회수
+        boardService.addViewCount(board);
+
+        return ResponseEntity.ok().build();
     }
 }

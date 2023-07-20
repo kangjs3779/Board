@@ -35,6 +35,12 @@ public class BoardService {
         //게시물 전체 조회
         List<Board> list = boardMapper.selectBoardList();
 
+        //댓글 갯수
+        for (Board board : list) {
+            Integer commentCount = boardCommentMapper.selectCommentByBoarId(board.getId());
+            board.setCommentCount(commentCount);
+        }
+
         //map에 저장
         info.put("list", list);
 
@@ -85,10 +91,16 @@ public class BoardService {
     }
 
     public boolean modifyBoardByBoardId(Board board) {
+        //게시글 수정
         Integer count = 0;
 
         count = boardMapper.modifyBoardByBoardId(board);
 
         return count == 1;
+    }
+
+    public void addViewCount(Board board) {
+        //조회수
+        boardMapper.addViewCount(board);
     }
 }
