@@ -76,34 +76,36 @@ function commentList() {
                 });
             }
 
-            //답글 달기 버튼을 누르면 입력창이 뜨도록 함
+            // 답글 달기 버튼을 누르면 입력창이 토글되도록 함
             $(document).on("click", ".childCommentBtn", function () {
                 let commentId = $(this).attr("comment-id");
                 console.log(commentId);
+                const childCommentFormBox = $("#childCommentFormBox" + commentId);
 
-                $("#childCommentFormBox" + commentId).append(`
-                <br>
-                <form>
-                    <input type="hidden" value="${commentId}" id="commentIdInput">
-                    <div class="form-floating">
-                        <input class="form-control" id="childCommentInput">
-                        <label for="childCommentInput" style="color: gray">대댓을 남겨주세요.</label>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn" style="color: gray;" id="addChildCommentBtn">등록</button>
-                    </div>
-                </form>
-                `);
+                // 입력창이 이미 열려있는지 확인
+                const isFormVisible = childCommentFormBox.children("form").length > 0;
+                console.log(isFormVisible)
 
-
-
-
+                // 입력창이 열려있으면 닫기
+                if (isFormVisible) {
+                    childCommentFormBox.empty();
+                } else {
+                    // 입력창이 닫혀있으면 열기
+                    childCommentFormBox.append(`
+                    <br>
+                    <form>
+                        <input type="hidden" value="${commentId}" id="commentIdInput">
+                        <div class="form-floating">
+                            <input class="form-control" id="childCommentInput">
+                            <label for="childCommentInput" style="color: gray">답글을 남겨주세요.</label>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn" style="color: gray;" id="addChildCommentBtn">답글 등록</button>
+                        </div>
+                    </form>
+                    `);
+                }
             });
-
-            //대댓을 입력하고 등록을 누르면
-            $(document).on("click", "#addChildCommentBtn", function () {
-                console.log("대댓 등록 버튼")
-            })
 
             //수정 버튼을 누르면 수정 입력창이 뜨도록 함
             $(".commentmodify").click(function () {
@@ -190,3 +192,8 @@ $(document).on("click", "#commentmodifyBtn", function () {
         }
     })
 });
+
+//답글 등록 버튼을 누르면
+$(document).on("click", "#addChildCommentBtn", function () {
+    console.log("click")
+})
