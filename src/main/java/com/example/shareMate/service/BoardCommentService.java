@@ -22,6 +22,8 @@ public class BoardCommentService {
     private MemberMapper memberMapper;
     @Autowired
     private ChildCommentMapper childCommentMapper;
+    @Autowired
+    private ChildCommentService childCommentService;
 
     public List<BoardComment> selectAllComment(Integer boardId, Authentication authentication) {
         //댓글 전체 조회
@@ -87,8 +89,8 @@ public class BoardCommentService {
         if(comments.size() != 0) {
             //답글이 있으면
             for(ChildComment comment : comments) {
-                childCommentMapper.delete(comment);
                 //해당 답글 모두 삭제
+                childCommentService.delete(comment);
             }
         }
 

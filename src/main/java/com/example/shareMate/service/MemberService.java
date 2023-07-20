@@ -19,6 +19,8 @@ public class MemberService {
     @Autowired
     private BoardMapper boardMapper;
     @Autowired
+    private BoardService boardService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public boolean addMember(Member member) {
@@ -63,7 +65,7 @@ public class MemberService {
             if (boardList.size() != 0) {
                 for (Board board : boardList) {
                     //작성한 게시글이 있으면 모두 삭제
-                    boardMapper.deleteBoardByBoardId(board.getId());
+                    boardService.deleteBoard(board.getId(), member);
                 }
             }
 

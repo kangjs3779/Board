@@ -26,6 +26,8 @@ public class BoardService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private BoardCommentMapper boardCommentMapper;
+    @Autowired
+    private BoardCommentService boardCommentService;
 
     public Map<String, Object> selectAllBoard() {
         Map<String, Object> info = new HashMap<>();
@@ -73,9 +75,7 @@ public class BoardService {
             if(comments.size() != 0) {
                 //댓글이 있으면 삭제
                 for(BoardComment comment : comments) {
-
-
-                    boardCommentMapper.deleteComment(comment);
+                    boardCommentService.deleteComment(comment);
                 }
             }
             //게시글 삭제
