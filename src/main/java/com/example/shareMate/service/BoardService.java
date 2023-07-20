@@ -7,6 +7,7 @@ import com.example.shareMate.mapper.BoardCommentMapper;
 import com.example.shareMate.mapper.BoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +73,8 @@ public class BoardService {
             if(comments.size() != 0) {
                 //댓글이 있으면 삭제
                 for(BoardComment comment : comments) {
+
+
                     boardCommentMapper.deleteComment(comment);
                 }
             }

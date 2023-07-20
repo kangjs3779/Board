@@ -5,6 +5,7 @@ import com.example.shareMate.domain.Member;
 import com.example.shareMate.mapper.BoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,6 @@ public class MemberService {
     private MemberMapper memberMapper;
     @Autowired
     private BoardMapper boardMapper;
-    @Autowired
-    private BoardService boardService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -64,9 +63,10 @@ public class MemberService {
             if (boardList.size() != 0) {
                 for (Board board : boardList) {
                     //작성한 게시글이 있으면 모두 삭제
-                    boardService.deleteBoard(board.getId(), member);
+                    boardMapper.deleteBoardByBoardId(board.getId());
                 }
             }
+
             //회원정보 삭제
             count = memberMapper.deleteMemberByUsername(member);
         }
