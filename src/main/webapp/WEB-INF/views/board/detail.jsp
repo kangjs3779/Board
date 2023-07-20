@@ -84,11 +84,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">회원 탈퇴</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">게시물 삭제</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    회원 탈퇴를 하시려면 비밀번호를 입력해주세요.
+                    게시물을 삭제하려면 비밀번호를 입력해주세요.
                     <form id="deleteForm" action="/board/delete" method="post">
                         <div class="mb-3">
                             <label for="passowordInput" class="col-form-label">Password:</label>
