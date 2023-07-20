@@ -1,6 +1,7 @@
 package com.example.shareMate.service;
 
 import com.example.shareMate.domain.BoardComment;
+import com.example.shareMate.domain.ChildComment;
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.mapper.BoardCommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class BoardCommentService {
     private BoardCommentMapper boardCommentMapper;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private ChildCommentService childCommentService;
 
     public List<BoardComment> selectAllComment(Integer boardId, Authentication authentication) {
         //댓글 전체 조회
@@ -73,8 +76,19 @@ public class BoardCommentService {
         return res;
     }
 
-    public Map<String, Object> deleteComment(BoardComment boardComment) {
+    public Map<String, Object> deleteComment(BoardComment boardComment, Authentication authentication) {
         Map<String, Object> res = new HashMap<>();
+
+        //대댓이 있는지 확인
+        List<ChildComment> comments = childCommentService.selectAllChildComment(boardComment.getId(), authentication);
+
+        if(comments.size() != 0) {
+            //답글이 있으면
+            for(ChildComment comment : comments) {
+                childCommentService.delete(comment);
+                //해당 답글 모두 삭제
+            }
+        }
 
         Integer count = boardCommentMapper.deleteComment(boardComment);
 

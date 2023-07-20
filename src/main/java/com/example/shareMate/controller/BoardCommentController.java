@@ -52,9 +52,9 @@ public class BoardCommentController {
     }
 
     @DeleteMapping("delete")
-    public ResponseEntity<Map<String, Object>> delete(@RequestBody BoardComment boardComment) {
+    public ResponseEntity<Map<String, Object>> delete(@RequestBody BoardComment boardComment, Authentication authentication) {
         //댓글 삭제
-        Map<String, Object> res = boardCommentService.deleteComment(boardComment);
+        Map<String, Object> res = boardCommentService.deleteComment(boardComment, authentication);
 
         return ResponseEntity.ok().body(res);
     }
