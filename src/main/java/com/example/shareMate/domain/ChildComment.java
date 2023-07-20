@@ -12,4 +12,5 @@ public class ChildComment {
     private String memberId;
     private String nickname;
     private LocalDateTime inserted;
+    private boolean editable;
 }

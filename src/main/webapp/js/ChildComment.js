@@ -4,10 +4,7 @@
 // //대댓 리스트 조회
 // function childCommentList() {
 //     console.log("대댓 list")
-//     $(document).find(".commentBox").each(function() {
-//         let commentId = $(this).attr("comment-id");
-//         console.log(commentId);
-//     });
+//     $(document).find면
 // }
 //
 // //답글쓰기를 클릭하면
