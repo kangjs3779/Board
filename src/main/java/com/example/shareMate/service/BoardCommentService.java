@@ -25,6 +25,10 @@ public class BoardCommentService {
         //로그인을 한 사용자이면
         if (authentication != null) {
             for (BoardComment comment : comments) {
+                //로그인을 한 사용자는 대댓가능
+                comment.setRepliable(true);
+
+                //로그인을 하고 본인의 댓글 수정 및 삭제 가능
                 //회원의 정보를 찾아서
                 Member member = memberService.selectMemberByUsername(comment.getMemberId());
                 //comment자바빈에 로그인한 정보와 회원의 정보가 같은지 다른지의 결과를 넣음
@@ -52,7 +56,7 @@ public class BoardCommentService {
     public BoardComment selectCommentByCommentId(Integer commentId) {
         BoardComment boardComment = boardCommentMapper.selectCommentByCommentId(commentId);
 
-        return  boardComment;
+        return boardComment;
     }
 
     public Map<String, Object> modifyComment(BoardComment boardComment) {

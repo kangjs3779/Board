@@ -21,7 +21,6 @@ public class ChildCommentController {
     @GetMapping("list")
     public List<ChildComment> list(@RequestParam("commentId") Integer commentId) {
         List<ChildComment> comments = childCommentService.selectAllChildComment(commentId);
-        System.out.println(comments.size() + "controller");
         return comments;
     }
 }

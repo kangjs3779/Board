@@ -14,7 +14,6 @@ public class ChildCommentService {
 
     public List<ChildComment> selectAllChildComment(Integer commentId) {
         List<ChildComment> comments = childCommentMapper.selectAllChildComment(commentId);
-        System.out.println(comments.size() + "serviece");
         return comments;
     }
 }

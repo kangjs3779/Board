@@ -14,4 +14,5 @@ public class BoardComment {
     private LocalDateTime inserted;
     private boolean editable;
     private String memberId;
+    private boolean repliable;
 }

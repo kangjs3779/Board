@@ -27,7 +27,7 @@ function commentList() {
                         <input type="text" readonly class="form-control-plaintext" id="commentInput${comment.id}" value="${comment.body}">
                         <div class="d-grid gap-2 d-md-flex">
                             <span style="font-size: 12px; color: gray;">${date}</span>
-                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1 childCommentBtn" comment-id="${comment.id}">답글쓰기</button>
+                            <button style="font-size: 12px; color: gray; padding: 0px;"  class="btn me-md-1 childCommentBtn ${comment.repliable == true ? '' : 'd-none'}" comment-id="${comment.id}">답글쓰기</button>
                             <button style="font-size: 12px; color: gray; padding: 0px;" comment-id="${comment.id}" class="btn me-md-1 ${comment.editable == true ? '' : 'd-none'} commentmodify" >수정</button>
                             <button style="font-size: 12px; color: gray; padding: 0px;" comment-id="${comment.id}" class="btn ${comment.editable == true ? '' : 'd-none'} commentdelete"  >삭제</button>
                         </div>
@@ -80,6 +80,7 @@ function commentList() {
             $(document).on("click", ".childCommentBtn", function () {
                 let commentId = $(this).attr("comment-id");
                 console.log(commentId);
+
                 $("#childCommentFormBox" + commentId).append(`
                 <br>
                 <form>
@@ -93,6 +94,10 @@ function commentList() {
                     </div>
                 </form>
                 `);
+
+
+
+
             });
 
             //대댓을 입력하고 등록을 누르면
