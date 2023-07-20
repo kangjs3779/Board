@@ -27,31 +27,31 @@
     <div class="mb-3 row">
         <label for="usernameInput" class="col-sm-2 col-form-label">ID</label>
         <div class="col-sm-10">
-            <input type="text" readonly class="form-control" id="usernameInput" value="${member.username}">
+            <input type="text" readonly class="form-control-plaintext" id="usernameInput" value="${member.username}">
         </div>
     </div>
     <div class="mb-3 row">
         <label for="nicknameInput" class="col-sm-2 col-form-label">NickName</label>
         <div class="col-sm-10">
-            <input type="text" readonly class="form-control" id="nicknameInput" value="${member.nickname}">
+            <input type="text" readonly class="form-control-plaintext" id="nicknameInput" value="${member.nickname}">
         </div>
     </div>
     <div class="mb-3 row">
         <label for="IDNumberInput" class="col-sm-2 col-form-label">IDNumber</label>
         <div class="col-sm-10">
-            <input type="text" readonly class="form-control" id="IDNumberInput" value="${member.idNumber}">
+            <input type="text" readonly class="form-control-plaintext" id="IDNumberInput" value="${member.idNumber}">
         </div>
     </div>
     <div class="mb-3 row">
         <label for="addressInput" class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-            <input type="text" readonly class="form-control" id="addressInput" value="${member.address}">
+            <input type="text" readonly class="form-control-plaintext" id="addressInput" value="${member.address}">
         </div>
     </div>
     <div class="mb-3 row">
         <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-            <input type="text" readonly class="form-control" id="emailInput" value="${member.email}">
+            <input type="text" readonly class="form-control-plaintext" id="emailInput" value="${member.email}">
         </div>
     </div>
 
