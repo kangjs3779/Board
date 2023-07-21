@@ -52,7 +52,24 @@
         <div class="input-group mb-3">
             <label class="input-group-text" for="emailInput">이메일</label>
             <input type="email" required name="email" class="form-control" id="emailInput" placeholder="email">
-            <button class="btn btn-outline-secondary" type="button">이메일 인증</button>
+            <button class="btn btn-outline-secondary" type="button" id="checkEmailBtn" disabled>중복확인</button>
+            <div class="valid-feedback emailCheckComment">
+
+            </div>
+            <div class="invalid-feedback emailCheckComment">
+
+            </div>
+        </div>
+        <div class="input-group mb-3 d-none" id="verificationCodeInput">
+            <label class="input-group-text">인증번호</label>
+            <input type="email" required name="email" class="form-control" placeholder="인증번호를 입력해주세요.">
+            <button class="btn btn-outline-secondary" type="button">인증</button>
+            <div class="valid-feedback">
+
+            </div>
+            <div class="invalid-feedback">
+
+            </div>
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="idNumberInput">주민번호</label>

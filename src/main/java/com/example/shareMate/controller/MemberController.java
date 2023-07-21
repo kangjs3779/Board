@@ -4,6 +4,7 @@ import com.example.shareMate.domain.Member;
 import com.example.shareMate.service.MemberService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.OnClose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -113,6 +114,12 @@ public class MemberController {
     public Map<String, Object> checkUserName(@RequestParam("username") String username) {
         //아이디 중복확인
         return memberService.checkUserName(username);
+    }
+
+    @GetMapping("checkEmail")
+    @ResponseBody
+    public Map<String, Object> checkEmail(@RequestParam("email") String email) {
+        return memberService.checkEmail(email);
     }
 
 }

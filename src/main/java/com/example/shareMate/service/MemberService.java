@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class MemberService {
     private BoardService boardService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
@@ -83,5 +85,16 @@ public class MemberService {
         System.out.println(member == null);
 
         return Map.of("available", member == null);
+    }
+
+    public  Map<String, Object> checkEmail(String email) {
+        Map<String, Object> data = new HashMap<>();
+
+        //이메일 중복 확인
+        //중복된 이메일이 없으면 사용 가능
+        Member member = memberMapper.selectMemberByEmail(email);
+        data.put("available", member == null);
+
+        return data;
     }
 }
