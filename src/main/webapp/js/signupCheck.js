@@ -27,9 +27,11 @@ $("#usernameCheckBtn").click(function () {
                 checkUsername = true;
             } else {
                 $("#usernameInput").addClass("is-invalid");
+                checkUsername = false;
             }
-        }
-    })
+        },
+        complete: enableSubmitBtn
+    });
 })
 
 //아이디 입력창에 키업이 발생하면
@@ -54,6 +56,7 @@ $(".pw").keyup(function () {
     } else {
         $("#pwCheckInput").removeClass("is-valid");
         $("#pwCheckInput").addClass("is-invalid");
+        checkPw = false;
     }
 
     enableSubmitBtn();
@@ -89,11 +92,10 @@ $("#checkEmailBtn").click(function () {
 
     $.ajax("/member/checkEmail?email=" + email, {
         success : function (data) {
-
             if(data.available) {
                 $("#emailInput").removeClass("is-invalid");
                 $("#emailInput").addClass("is-valid");
-                $(".emailCheckComment").text("사용 가능한 이메일 입니다.");
+                $(".emailCheckComment").text("사용 가능한 이메일입니다.");
                 checkEmail = true;
                 //중복확인 버튼 없애고 인증 번호 발송 버튼 활성화
                 $("#veriCodeSendBtn").removeClass("d-none");
@@ -101,9 +103,11 @@ $("#checkEmailBtn").click(function () {
             } else {
                 $("#emailInput").removeClass("is-valid");
                 $("#emailInput").addClass("is-invalid");
-                $(".emailCheckComment").text("이미 사용된 이메일 입니다.");
+                $(".emailCheckComment").text("이미 사용된 이메일입니다.");
+                checkEmail = false;
             }
-        }
+        },
+        complete: enableSubmitBtn
     })
 })
 
@@ -122,15 +126,36 @@ $("#veriCodeSendBtn").click(function () {
 
 //인증 번호를 입력하고 인증버튼을 눌렀을 때
 $("#veriCodeBtn").click(function () {
-    let code = $("#veriCodeInput").val();
+    let code = $("#veriCodeInput").val().trim();
 
     $.ajax("/member/checkveriCode?code=" + code, {
         method: "get",
-        success: function () {
+        success: function (data) {
             console.log("인증 성공")
-        }
+            if(data.available) {
+                console.log(data.available);
+                $("#veriCodeInput").addClass("is-valid");
+                $(".veriCodeCheckComment").text("인증번호가 일치합니다.");
+                $("#veriCodeSendBtn").addClass("d-none")
+                checkVerification = true;
+            } else {
+                $("#veriCodeInput").addClass("is-invalid");
+                $(".veriCodeCheckComment").text("인증번호가 일치하지 않습니다.");
+                checkVerification = false;
+            }
+        },
+        complete: enableSubmitBtn
     })
+})
 
+//인증번호 입력창에 키업이 발생
+$("#veriCodeInput").keyup(function () {
+    checkVerification = false;
+    $("#veriCodeInput").removeClass("is-valid");
+    $("#veriCodeInput").removeClass("is-invalid");
+    $("#veriCodeSendBtn").removeClass("d-none")
+
+    enableSubmitBtn();
 })
 
 //타이머 메소드

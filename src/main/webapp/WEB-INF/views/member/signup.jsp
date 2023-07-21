@@ -64,11 +64,9 @@
             <label class="input-group-text">인증번호</label>
             <input type="email" required name="email" class="form-control" id="veriCodeInput" placeholder="인증번호를 입력해주세요.">
             <button class="btn btn-outline-secondary" id="veriCodeBtn" type="button">인증</button>
-            <div class="valid-feedback">
-
+            <div class="valid-feedback veriCodeCheckComment">
             </div>
-            <div class="invalid-feedback">
-
+            <div class="invalid-feedback veriCodeCheckComment">
             </div>
         </div>
         <div class="input-group mb-3">

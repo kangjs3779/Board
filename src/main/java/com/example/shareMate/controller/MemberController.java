@@ -1,11 +1,8 @@
 package com.example.shareMate.controller;
 
 import com.example.shareMate.domain.Member;
-import com.example.shareMate.service.MailSendService;
 import com.example.shareMate.service.MemberService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.OnClose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -23,8 +20,6 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private MailSendService mailSendService;
 
     @GetMapping("login")
     public void loginForm() {
@@ -122,13 +117,21 @@ public class MemberController {
     @GetMapping("checkEmail")
     @ResponseBody
     public Map<String, Object> checkEmail(@RequestParam("email") String email) {
+        //이메일 중복확인
         return memberService.checkEmail(email);
     }
 
     @GetMapping("veriCode")
     @ResponseBody
     public String veriCode(@RequestParam("email") String email) {
-        System.out.println(email);
-        return mailSendService.joinEmail(email);
+        //인증코드 보내기
+        return memberService.joinEmail(email);
+    }
+
+    @GetMapping("checkveriCode")
+    @ResponseBody
+    public Map<String, Object> checkVeriCode(@RequestParam("code") Integer code) {
+        //인증코드 확인
+        return memberService.checkVeriCode(code);
     }
 }
