@@ -1,6 +1,7 @@
 package com.example.shareMate.controller;
 
 import com.example.shareMate.domain.Member;
+import com.example.shareMate.service.MailSendService;
 import com.example.shareMate.service.MemberService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private MailSendService mailSendService;
 
     @GetMapping("login")
     public void loginForm() {
@@ -122,4 +125,10 @@ public class MemberController {
         return memberService.checkEmail(email);
     }
 
+    @GetMapping("veriCode")
+    @ResponseBody
+    public String veriCode(@RequestParam("email") String email) {
+        System.out.println(email);
+        return mailSendService.joinEmail(email);
+    }
 }

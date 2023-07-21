@@ -54,16 +54,16 @@
             <input type="email" required name="email" class="form-control" id="emailInput" placeholder="email">
             <button class="btn btn-outline-secondary" type="button" id="checkEmailBtn" disabled>중복확인</button>
             <div class="valid-feedback emailCheckComment">
-
             </div>
+            <button class="btn btn-outline-secondary d-none" id="veriCodeSendBtn" type="button">인증 번호 발송</button>
+            <div id="timer" style="margin-left: 7px; display: none;">남은 시간: <span id="minutes">03</span>분 <span id="seconds">00</span>초</div>
             <div class="invalid-feedback emailCheckComment">
-
             </div>
         </div>
         <div class="input-group mb-3 d-none" id="verificationCodeInput">
             <label class="input-group-text">인증번호</label>
-            <input type="email" required name="email" class="form-control" placeholder="인증번호를 입력해주세요.">
-            <button class="btn btn-outline-secondary" type="button">인증</button>
+            <input type="email" required name="email" class="form-control" id="veriCodeInput" placeholder="인증번호를 입력해주세요.">
+            <button class="btn btn-outline-secondary" id="veriCodeBtn" type="button">인증</button>
             <div class="valid-feedback">
 
             </div>
