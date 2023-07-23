@@ -27,6 +27,10 @@
         <h4 class="card-header">Find Mate</h4>
         <div class="card-body">
             <form id="boardForm" method="post" action="/board/addBoard">
+                <input type="radio" class="btn-check" name="roll" id="leader" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="leader">파티장</label>
+                <input type="radio" class="btn-check" name="roll" id="member" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="member">파티원</label>
                 <div class="form-floating mb-3">
                     <input type="text" name="title" class="form-control form-control-lg" id="titleInput" placeholder="제목을 입력해주세요.">
                     <label for="titleInput">Title</label>
@@ -41,7 +45,7 @@
                 </div>
                 <button type="submit" class="btn btn-outline-secondary" form="boardForm">
                     <i class="fa-regular fa-pen-to-square"></i>
-                    글쓰기
+                    Ott 서비스 선택
                 </button>
             </form>
         </div>
