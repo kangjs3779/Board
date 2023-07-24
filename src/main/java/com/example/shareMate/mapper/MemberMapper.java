@@ -4,7 +4,6 @@ import com.example.shareMate.domain.Member;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface MemberMapper {
@@ -16,7 +15,10 @@ public interface MemberMapper {
     Integer addMember(Member member);
 
     @Select("""
-            SELECT * FROM Member WHERE username = #{username}
+            SELECT m.*, a.authority
+            FROM Member m LEFT JOIN Authority a
+                on m.username = a.memberId
+            WHERE m.username = #{username}
             """)
     Member selectByUsername(String username);
 
