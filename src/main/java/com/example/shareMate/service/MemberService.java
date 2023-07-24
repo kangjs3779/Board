@@ -6,6 +6,7 @@ import com.example.shareMate.mapper.BoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.websocket.OnClose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,10 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class MemberService {
@@ -78,6 +76,8 @@ public class MemberService {
                 for (Board board : boardList) {
                     //작성한 게시글이 있으면 모두 삭제
                     boardService.deleteBoard(board.getId(), member);
+                    //ott서비스 정보 모두 삭제
+
                 }
             }
 
@@ -155,5 +155,15 @@ public class MemberService {
         System.out.println("auth : " + authNumber);
         System.out.println(code.equals(authNumber));
         return Map.of("available", code.equals(authNumber));
+    }
+
+    public Map<String, Object> selectAllMember() {
+        Map<String, Object> info = new HashMap<>();
+
+        //회원 정보 전체 리스트 조회
+       List<Member> list = memberMapper.selectAllMember();
+       info.put("list", list);
+
+       return info;
     }
 }

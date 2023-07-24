@@ -5,6 +5,7 @@ import com.example.shareMate.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -133,5 +134,14 @@ public class MemberController {
     public Map<String, Object> checkVeriCode(@RequestParam("code") Integer code) {
         //인증코드 확인
         return memberService.checkVeriCode(code);
+    }
+
+    @GetMapping("list")
+    @PreAuthorize("hasAuthority('admin')")
+    public void list(Model model) {
+        //회원 리스트 조회
+        Map<String, Object> list = memberService.selectAllMember();
+
+        model.addAllAttributes(list);
     }
 }

@@ -35,6 +35,11 @@
                             <a class="nav-link ${current == 'myPage' ? 'active' : ''}" href="/member/myPage">마이페이지</a>
                         </li>
                     </sec:authorize>
+                    <sec:authorize access="hasAuthority('admin')">
+                        <li class="nav-item">
+                            <a class="nav-link ${current == 'list' ? 'active' : ''}" href="/member/list">회원리스트</a>
+                        </li>
+                    </sec:authorize>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

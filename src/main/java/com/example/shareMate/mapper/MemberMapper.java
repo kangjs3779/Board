@@ -3,6 +3,9 @@ package com.example.shareMate.mapper;
 import com.example.shareMate.domain.Member;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface MemberMapper {
 
@@ -40,4 +43,9 @@ public interface MemberMapper {
             SELECT * FROM Member WHERE email = #{email}
             """)
     Member selectMemberByEmail(String email);
+
+    @Select("""
+            SELECT * FROM Member
+            """)
+    List<Member> selectAllMember();
 }

@@ -10,4 +10,5 @@ public class Member {
     private String nickname;
     private String address;
     private String email;
+    private String authority;
 }
