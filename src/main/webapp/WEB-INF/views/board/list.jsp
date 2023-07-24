@@ -39,6 +39,7 @@
                 <th class="col text-center">${list.id}</th>
                 <td class="col-10 text-center titleLink" boardId="${list.id}">
                     <a href="/board/detail?boardId=${list.id}">${list.title}</a>
+                    <span class="badge text-bg-${list.roll == 1 ? 'warning' : 'success'}">${list.roll == 1 ? '파티장' : '파티원'}</span>
                     <c:if test="${list.commentCount gt 0}">
                         <span style="color: gray;">[${list.commentCount}]</span>
                     </c:if>

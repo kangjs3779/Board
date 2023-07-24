@@ -14,4 +14,5 @@ public class Board {
     private String memberId;
     private Integer viewCount;
     private Integer commentCount;
+    private Integer roll;
 }

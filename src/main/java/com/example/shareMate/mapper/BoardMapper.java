@@ -19,9 +19,9 @@ public interface BoardMapper {
 
     @Insert("""
             INSERT INTO Board 
-                (title, body, writer, memberId) 
+                (title, body, writer, memberId, roll) 
             VALUES 
-                (#{title}, #{body}, #{writer}, #{memberId})
+                (#{title}, #{body}, #{writer}, #{memberId}, #{roll})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     Integer addBoard(Board board);

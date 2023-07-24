@@ -73,7 +73,11 @@ public class BoardController {
         if (ok) {
             rttr.addFlashAttribute("message", "게시글이 추가되었습니다.");
             rttr.addFlashAttribute("status", "success");
-            return "redirect:/board/detail?boardId=" + board.getId();
+
+            //파티장, 파티원에따라 다른 redirect 페이지
+            String path = (board.getRoll() == 1) ? "redirect:/board/addOttService" : "redirect:/board/detail?boardId=" + board.getId();
+
+            return path;
 
         } else {
             rttr.addFlashAttribute("message", "게시글이 추가하지 못했습니다.");
@@ -151,5 +155,11 @@ public class BoardController {
         boardService.addViewCount(board);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("addOttService")
+    @PreAuthorize("isAuthenticated()")
+    public void addOttService() {
+        //파티장이 ott서비스 선택하는 폼에 포워드
     }
 }
