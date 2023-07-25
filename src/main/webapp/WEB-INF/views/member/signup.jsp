@@ -56,13 +56,12 @@
             <div class="valid-feedback emailCheckComment">
             </div>
             <button class="btn btn-outline-secondary d-none" id="veriCodeSendBtn" type="button">인증 번호 발송</button>
-            <div id="timer" style="margin-left: 7px; display: none;">남은 시간: <span id="minutes">03</span>분 <span id="seconds">00</span>초</div>
             <div class="invalid-feedback emailCheckComment">
             </div>
         </div>
         <div class="input-group mb-3 d-none" id="verificationCodeInput">
             <label class="input-group-text">인증번호</label>
-            <input type="email" required name="email" class="form-control" id="veriCodeInput" placeholder="인증번호를 입력해주세요.">
+            <input type="text" required class="form-control" id="veriCodeInput" placeholder="인증번호를 입력해주세요.">
             <button class="btn btn-outline-secondary" id="veriCodeBtn" type="button">인증</button>
             <div class="valid-feedback veriCodeCheckComment">
             </div>
@@ -70,17 +69,27 @@
             </div>
         </div>
         <div class="input-group mb-3">
-            <label class="input-group-text" for="idNumberInput">주민번호</label>
-            <input type="text" required name="idNumber" class="form-control" id="idNumberInput" placeholder="주민번호">
+            <label class="input-group-text" for="phoneNumInput">전화번호</label>
+            <input type="text" required name="phoneNum" class="form-control" id="phoneNumInput" placeholder="'-'를 빼고 입력해주세요.">
+            <button class="btn btn-outline-secondary" id="phoneNumBtn" type="button">중복확인</button>
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="nicknameInput">닉네임</label>
             <input type="text" required name="nickname" class="form-control" id="nicknameInput" placeholder="nickname">
+            <button class="btn btn-outline-secondary" id="nicknameBtn" type="button">중복확인</button>
         </div>
+        <%--주소--%>
         <div class="input-group mb-3">
             <label class="input-group-text" for="addressInput">주소</label>
-            <input type="text" required name="address" class="form-control" id="addressInput" placeholder="address">
+            <input type="text" readonly required name="address" class="form-control" id="addressInput" placeholder="우편번호 찾기 버튼을 눌러주세요.">
+            <button class="btn btn-outline-secondary" type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
         </div>
+        <%--다음 주소 찾기 input--%>
+        <input type="hidden" id="sample4_roadAddress" placeholder="도로명주소">
+        <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+        <span id="guide" style="color:#999;display:none"></span>
+        <input type="hidden" id="sample4_detailAddress" placeholder="상세주소">
+        <input type="hidden" id="sample4_extraAddress" placeholder="참고항목">
     </form>
 
     <button class="btn btn-outline-secondary" id="joinBtn" type="submit" form="joinForm" disabled>
@@ -90,6 +99,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/signupCheck.js"></script>
 </body>
 </html>

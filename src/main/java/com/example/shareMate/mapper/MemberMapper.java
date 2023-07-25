@@ -9,17 +9,18 @@ import java.util.List;
 public interface MemberMapper {
 
     @Insert("""
-            INSERT INTO Member (username, password, nickname, idNumber, address, email)
-            VALUES (#{username}, #{password}, #{nickname}, #{idNumber}, #{address}, #{email})
+            INSERT INTO Member (username, password, nickname, phoneNum, address, email)
+            VALUES (#{username}, #{password}, #{nickname}, #{phoneNum}, #{address}, #{email})
             """)
     Integer addMember(Member member);
 
     @Select("""
-            SELECT m.*, a.authority
+            SELECT *
             FROM Member m LEFT JOIN Authority a
                 on m.username = a.memberId
             WHERE m.username = #{username}
             """)
+    @ResultMap("memberMap")
     Member selectByUsername(String username);
 
     @Select("""

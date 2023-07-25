@@ -27,7 +27,6 @@
     <div class="card mb-3">
         <div class="card-header d-flex align-items-center">
             <h3 class="flex-grow-1">${board.title}</h3>
-            <p>${board.roll}</p>
             <p class="text-end m-0" style="color: gray;">조회수 ${board.viewCount}</p>
         </div>
         <div class="card-body">

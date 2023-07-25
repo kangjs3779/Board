@@ -37,9 +37,9 @@
         </div>
     </div>
     <div class="mb-3 row">
-        <label for="IDNumberInput" class="col-sm-2 col-form-label">IDNumber</label>
+        <label for="phoneNumInput" class="col-sm-2 col-form-label">phone number</label>
         <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="IDNumberInput" value="${member.idNumber}">
+            <input type="text" readonly class="form-control-plaintext" id="phoneNumInput" value="${member.phoneNum}">
         </div>
     </div>
     <div class="mb-3 row">
@@ -57,27 +57,9 @@
 
     <%--  버튼  --%>
     <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#myBoardModal">내가 쓴 게시글</button>
+        <a class="btn btn-outline-secondary" href="/member/myBoard">내가 쓴 게시글</a>
         <a class="btn btn-outline-secondary" href="/member/modify">Modify</a>
         <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-    </div>
-</div>
-
-<!-- 내가 쓴 게시글 모달 -->
-<div class="modal fade" id="myBoardModal" tabindex="-1" aria-labelledby="myBoardModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">내가 쓴 게시글 확인</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
     </div>
 </div>
 
