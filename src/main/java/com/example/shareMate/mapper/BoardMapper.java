@@ -49,7 +49,7 @@ public interface BoardMapper {
     void deleteBoardBymemberId(String memberId);
 
     @Update("""
-            UPDATE Board SET viewCount = viewCount + 1 WHERE id = #{id}
+            UPDATE Board SET viewCount = viewCount + 1 WHERE id = #{boardId}
             """)
-    void addViewCount(Board board);
+    void addViewCount(Integer boardId);
 }

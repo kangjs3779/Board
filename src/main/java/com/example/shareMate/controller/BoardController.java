@@ -148,15 +148,6 @@ public class BoardController {
         return "redirect:/board/detail?boardId=" + board.getId();
     }
 
-    @PatchMapping("view")
-    @ResponseBody
-    public ResponseEntity<Integer> view(@RequestBody Board board) {
-        //조회수
-        boardService.addViewCount(board);
-
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("addOttService")
     @PreAuthorize("isAuthenticated()")
     public void addOttService() {

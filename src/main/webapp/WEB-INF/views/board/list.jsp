@@ -37,7 +37,7 @@
         <c:forEach items="${list}" var="list">
             <tr>
                 <th class="col text-center">${list.id}</th>
-                <td class="col-10 text-center titleLink" boardId="${list.id}">
+                <td class="col-10 text-center" boardId="${list.id}">
                     <a href="/board/detail?boardId=${list.id}">${list.title}</a>
                     <span class="badge text-bg-${list.roll == 1 ? 'warning' : 'success'}">${list.roll == 1 ? '파티장' : '파티원'}</span>
                     <c:if test="${list.commentCount gt 0}">
@@ -59,6 +59,5 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/viewCount.js"></script>
 </body>
 </html>

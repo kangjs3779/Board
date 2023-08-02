@@ -50,8 +50,12 @@ public class BoardService {
     public Map<String, Object> selectBoardByDetailId(Integer boardId) {
         Map<String, Object> info = new HashMap<>();
 
+        // 조회수 업데이트
+        boardMapper.addViewCount(boardId);
+        
         //상세 페이지 조회
         Board board = boardMapper.selectBoardByBoardId(boardId);
+
 
         //map에 저장
         info.put("board", board);
@@ -97,10 +101,5 @@ public class BoardService {
         count = boardMapper.modifyBoardByBoardId(board);
 
         return count == 1;
-    }
-
-    public void addViewCount(Board board) {
-        //조회수
-        boardMapper.addViewCount(board);
     }
 }
