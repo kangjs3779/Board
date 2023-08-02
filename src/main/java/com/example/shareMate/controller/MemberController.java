@@ -1,5 +1,6 @@
 package com.example.shareMate.controller;
 
+import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -140,6 +142,15 @@ public class MemberController {
     public void list(Model model) {
         //회원 리스트 조회
         Map<String, Object> list = memberService.selectAllMember();
+
+        model.addAllAttributes(list);
+    }
+
+    @GetMapping("myBoard")
+    @PreAuthorize("isAuthenticated()")
+    public void myBoard(Authentication authentication, Model model) {
+        //내가 쓴 게시글 포워드
+        Map<String, Object> list = memberService.selectMyBoardByUsername(authentication);
 
         model.addAllAttributes(list);
     }

@@ -1,5 +1,6 @@
 package com.example.shareMate.mapper;
 
+import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
 import org.apache.ibatis.annotations.*;
 
@@ -51,4 +52,9 @@ public interface MemberMapper {
             SELECT * FROM Member
             """)
     List<Member> selectAllMember();
+
+    @Select("""
+            SELECT * FROM Board WHERE memberId = #{memberId}
+            """)
+    List<Board> selectMyBoardByUsername(String memberId);
 }

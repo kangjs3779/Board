@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -165,5 +166,15 @@ public class MemberService {
        info.put("list", list);
 
        return info;
+    }
+
+    public Map<String, Object> selectMyBoardByUsername(Authentication authentication) {
+        //내가 쓴 게시물 조회
+        Map<String, Object> list = new HashMap<>();
+
+        List<Board> board = memberMapper.selectMyBoardByUsername(authentication.getName());
+        list.put("board", board);
+
+        return  list;
     }
 }
