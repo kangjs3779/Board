@@ -2,11 +2,11 @@ package com.example.shareMate.service;
 
 import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
+import com.example.shareMate.mapper.BoardCommentMapper;
 import com.example.shareMate.mapper.BoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import jakarta.websocket.OnClose;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -30,6 +30,8 @@ public class MemberService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private BoardCommentMapper boardCommentMapper;
     private Integer authNumber;
     @Value("${spring.mail.username}")
     private String username;
@@ -77,8 +79,6 @@ public class MemberService {
                 for (Board board : boardList) {
                     //작성한 게시글이 있으면 모두 삭제
                     boardService.deleteBoard(board.getId(), member);
-                    //ott서비스 정보 모두 삭제
-
                 }
             }
 
@@ -91,8 +91,6 @@ public class MemberService {
     public Map<String, Object> checkUserName(String username) {
         //아이디 중복 확인
         Member member = memberMapper.selectByUsername(username);
-        System.out.println(username);
-        System.out.println(member == null);
 
         return Map.of("available", member == null);
     }
@@ -168,15 +166,32 @@ public class MemberService {
        return info;
     }
 
-    public Map<String, Object> selectMyBoardByUsername(Authentication authentication) {
+    public List<Board> selectMyBoardByUsername(Authentication authentication) {
         //내가 쓴 게시물 조회
-        Map<String, Object> list = new HashMap<>();
+        List<Board> boards = memberMapper.selectMyBoardByUsername(authentication.getName());
 
-        List<Board> board = memberMapper.selectMyBoardByUsername(authentication.getName());
-        list.put("board", board);
+        //게시물의 댓글 조회
+        for(Board board : boards) {
+            board.setCommentCount(boardCommentMapper.selectCommentByBoarId(board.getId()));
+        }
 
-        return  list;
+        return  boards;
     }
 
+    public Map<String, Object> deleteMyboard(Integer boardId, Member member) {
+        //내가 쓴 게시물 한번에 삭제하기
+        Map<String, Object> res = new HashMap<>();
 
+        //게시글 삭제
+        boolean ok = boardService.deleteBoard(boardId, member);
+
+        if(ok) {
+            res.put("message", "선택한 게시글이 삭제 되었습니다.");
+        } else {
+            res.put("message", "선택한 게시글이 삭제 되지않았습니다.");
+        }
+
+        return res;
+
+    }
 }

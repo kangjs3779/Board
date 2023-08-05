@@ -153,17 +153,27 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     public void myBoard(Authentication authentication, Model model) {
         //내가 쓴 게시글 포워드
-        Map<String, Object> list = memberService.selectMyBoardByUsername(authentication);
+        List<Board> boards = memberService.selectMyBoardByUsername(authentication);
 
-        model.addAllAttributes(list);
+        model.addAttribute("boards", boards);
     }
 
-    @Delete("myBoardDelete")
+    @GetMapping("myBoardList")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> delete(@RequestBody String[] boardId) {
-        System.out.println("working");
-        System.out.println(boardId);
-        Map<String, Object> res = new HashMap<>();
+    public List<Board> myBoardList(Authentication authentication) {
+        //내가 쓴 게시글 포워드
+        List<Board> boards = memberService.selectMyBoardByUsername(authentication);
+
+        return boards;
+    }
+
+    @DeleteMapping("myBoardDelete/{boardId}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> delete(
+            @PathVariable("boardId") Integer boardId,
+            @RequestBody Member member) {
+        //내가 쓴 게시글에서 게시글 삭제
+        Map<String, Object> res = memberService.deleteMyboard(boardId, member);
 
         return ResponseEntity.ok().body(res);
     }

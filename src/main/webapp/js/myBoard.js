@@ -27,28 +27,54 @@ $("#fullCheckBtn").on("change", function () {
     checkBtn();
 });
 
-//삭제하기 버튼을 클릭하면
-$("#deleteBtn").click(function () {
-    var data = [];
-
-    // 체크된 모든 체크박스를 순회하여 boardId 값을 배열에 추가
+//삭제하기 모달 버튼을 클릭하면
+$("#deleteModalBtn").click(function () {
+    // 체크된 모든 체크박스의 boardId를 얻음
     $(".checkBtn:checked").each(function () {
         var boardId = $(this).attr("boardId");
-        data.push(boardId)
+        var password = $("#passwordInput").val();
+        var username = $("#usernameInput").val();
+        var data = {password, username};
+
+        $.ajax("/member/myBoardDelete/" + boardId, {
+            method: "delete",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function () {
+                myBoardList();
+            }
+        })
     });
+});
 
-    console.log(data)
+//내 게시글 전체 조회
+function myBoardList() {
+    $.ajax("/member/myBoardList", {
+        method: "get",
+        success: function (lists) {
+            $("#myBoardListBox").empty();
+            for(const list of lists) {
+                let commentCountSpan = '';
+                if (list.commentCount > 0) {
+                    commentCountSpan = `<span style="color: gray;">[${list.commentCount}]</span>`;
+                }
+                $("#myBoardListBox").append(`
+                <tr>
+                    <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
+                    <td class="col-10 text-center" boardId="${list.id}">
+                        <a href="/board/detail?boardId=${list.id}">${list.title}</a>
+                        <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                        ${commentCountSpan}
+                    </td>
+                    <td class="col text-center">${list.viewCount}</td>
+                    <td class="col text-center">${list.writer}</td>
+                </tr>
+                `);
+            }
 
-    $.ajax("/member/myBoardDelete", {
-        method: "delete",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function () {
-            console.log("success")
         }
     })
-
-});
+}
 
 
 

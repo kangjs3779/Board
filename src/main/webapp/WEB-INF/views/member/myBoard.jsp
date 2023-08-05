@@ -33,8 +33,8 @@
             <th class="col text-center">작성자</th>
         </tr>
         </thead>
-        <tbody>
-        <c:forEach items="${board}" var="list">
+        <tbody id="myBoardListBox">
+        <c:forEach items="${boards}" var="list">
             <tr>
                 <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
                 <td class="col-10 text-center" boardId="${list.id}">
@@ -51,7 +51,7 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-end gap-2 ">
-        <button type="button" class="btn btn-outline-danger" id="deleteBtn" disabled>
+        <button type="button" class="btn btn-outline-danger" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
             <i class="fa-regular fa-trash-can"></i>
             삭제하기
         </button>
@@ -59,6 +59,31 @@
             <i class="fa-regular fa-pen-to-square"></i>
             글쓰기
         </a>
+    </div>
+</div>
+
+<%--삭제하기 모달 --%>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">게시물 삭제</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                게시물을 삭제하려면 비밀번호를 입력해주세요.
+                <div class="mb-3">
+                    <label for="passwordInput" class="col-form-label">Password:</label>
+                    <input type="password" class="form-control" id="passwordInput">
+                    <sec:authentication property="principal.username" var="username" />
+                    <input type="hidden" id="usernameInput" class="form-control" value="<c:out value='${username}' />">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" id="deleteModalBtn" class="btn btn-outline-danger" data-bs-dismiss="modal">삭제</button>
+            </div>
+        </div>
     </div>
 </div>
 

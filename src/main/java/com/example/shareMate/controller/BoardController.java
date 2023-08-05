@@ -74,10 +74,7 @@ public class BoardController {
             rttr.addFlashAttribute("message", "게시글이 추가되었습니다.");
             rttr.addFlashAttribute("status", "success");
 
-            //파티장, 파티원에따라 다른 redirect 페이지
-            String path = (board.getRoll() == 1) ? "redirect:/board/addOttService" : "redirect:/board/detail?boardId=" + board.getId();
-
-            return path;
+            return "redirect:/board/detail?boardId=" + board.getId();
 
         } else {
             rttr.addFlashAttribute("message", "게시글이 추가하지 못했습니다.");
@@ -148,9 +145,9 @@ public class BoardController {
         return "redirect:/board/detail?boardId=" + board.getId();
     }
 
-    @GetMapping("addOttService")
-    @PreAuthorize("isAuthenticated()")
-    public void addOttService() {
-        //파티장이 ott서비스 선택하는 폼에 포워드
-    }
+//    @GetMapping("addOttService")
+//    @PreAuthorize("isAuthenticated()")
+//    public void addOttService() {
+//        //파티장이 ott서비스 선택하는 폼에 포워드
+//    }
 }

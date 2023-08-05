@@ -48,7 +48,7 @@
                     <input name="writer" readonly type="text" class="form-control-plaintext form-control-lg" id="writerInput" value="${member.nickname}">
                     <label for="writerInput">Mate Leader</label>
                 </div>
-                <button type="submit" id="addBoardBtn" class="btn btn-outline-secondary d-none" form="boardForm">
+                <button type="submit" id="addBoardBtn" class="btn btn-outline-secondary">
                     <i class="fa-regular fa-pen-to-square"></i>
                     글쓰기
                 </button>
@@ -58,16 +58,5 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    //파티장 버튼을 누르면
-    $("#leaderBtn").click(function () {
-        $("#serviceCheckBtn").removeClass("d-none");
-        $("#addBoardBtn").addClass("d-none");
-    })
-    $("#memberBtn").click(function () {
-        $("#addBoardBtn").removeClass("d-none");
-        $("#serviceCheckBtn").addClass("d-none");
-    })
-</script>
 </body>
 </html>
