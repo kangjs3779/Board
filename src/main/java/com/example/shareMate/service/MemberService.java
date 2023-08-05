@@ -150,9 +150,6 @@ public class MemberService {
 
     public Map<String, Object> checkVeriCode(Integer code) {
         //사용자가 입력한 인증 번호와 인증메일의 인증번호 확인
-        System.out.println("code : " + code);
-        System.out.println("auth : " + authNumber);
-        System.out.println(code.equals(authNumber));
         return Map.of("available", code.equals(authNumber));
     }
 
@@ -193,5 +190,12 @@ public class MemberService {
 
         return res;
 
+    }
+
+    public Map<String, Object> checkNickname(String nickname) {
+        //닉네임 중복확인
+        Member member = memberMapper.selectByNickname(nickname);
+
+        return Map.of("available", member == null);
     }
 }

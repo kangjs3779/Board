@@ -126,6 +126,13 @@ public class MemberController {
         return memberService.checkEmail(email);
     }
 
+    @GetMapping("checkNickname")
+    @ResponseBody
+    public Map<String, Object> checkNickname(@RequestParam("nickname") String nickname) {
+        //닉네임 중복확인
+        return memberService.checkNickname(nickname);
+    }
+
     @GetMapping("veriCode")
     @ResponseBody
     public String veriCode(@RequestParam("email") String email) {

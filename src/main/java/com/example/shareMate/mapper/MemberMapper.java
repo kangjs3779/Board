@@ -57,4 +57,9 @@ public interface MemberMapper {
             SELECT * FROM Board WHERE memberId = #{memberId}
             """)
     List<Board> selectMyBoardByUsername(String memberId);
+
+    @Select("""
+            SELECT * FROM Member WHERE nickname = #{nickname}
+            """)
+    Member selectByNickname(String nickname);
 }

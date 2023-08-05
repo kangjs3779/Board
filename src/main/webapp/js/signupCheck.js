@@ -3,12 +3,11 @@ let checkPw = false;
 let checkEmail = false;
 let checkVerification = false;
 let checkNickname = false;
-let checkPhoneNum = false;
 let checkAddress = false;
 
 function enableSubmitBtn() {
     //입력창이 모두 확인되지 않으면 가입 버튼은 비활성화, 모두 확인되면 활성화
-    if(checkUsername && checkPw && checkEmail && checkNickname && checkPhoneNum && checkAddress && checkVerification) {
+    if(checkUsername && checkPw && checkEmail && checkNickname && checkAddress && checkVerification) {
         $("#joinBtn").removeAttr("disabled");
     } else {
         $("#joinBtn").attr("disabled", "");
@@ -155,3 +154,31 @@ $("#veriCodeInput").keyup(function () {
 
     enableSubmitBtn();
 });
+
+//닉네임 중복확인
+$("#nicknameBtn").click(function () {
+    let nickname = $("#nicknameInput").val();
+
+    $.ajax("/member/checkNickname?nickname=" + nickname, {
+        success: function (data) {
+            if(data.available) {
+                $("#nicknameInput").removeClass("is-invalid");
+                $("#nicknameInput").addClass("is-valid");
+                checkNickname = true;
+            } else {
+                $("#nicknameInput").removeClass("is-valid");
+                $("#nicknameInput").addClass("is-invalid");
+                checkNickname = false;
+            }
+        },
+        complete: enableSubmitBtn
+    });
+})
+
+//닉네임 입력창에 키업이 발생하면
+$("#nicknameInput").keyup(function () {
+    checkNickname = false;
+    $("#nicknameInput").removeClass("is-invalid");
+    $("#nicknameInput").removeClass("is-valid");
+    enableSubmitBtn();
+})

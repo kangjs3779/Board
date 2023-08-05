@@ -71,12 +71,17 @@
         <div class="input-group mb-3">
             <label class="input-group-text" for="phoneNumInput">전화번호</label>
             <input type="text" required name="phoneNum" class="form-control" id="phoneNumInput" placeholder="'-'를 빼고 입력해주세요.">
-            <button class="btn btn-outline-secondary" id="phoneNumBtn" type="button">중복확인</button>
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="nicknameInput">닉네임</label>
             <input type="text" required name="nickname" class="form-control" id="nicknameInput" placeholder="nickname">
             <button class="btn btn-outline-secondary" id="nicknameBtn" type="button">중복확인</button>
+            <div class="valid-feedback">
+                사용가능한 닉네임입니다.
+            </div>
+            <div class="invalid-feedback">
+                이미 사용중인 닉네임입니다.
+            </div>
         </div>
         <%--주소--%>
         <div class="input-group mb-3">
