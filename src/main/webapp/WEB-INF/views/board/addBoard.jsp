@@ -52,10 +52,6 @@
                     <i class="fa-regular fa-pen-to-square"></i>
                     글쓰기
                 </button>
-                <button type="submit" id="serviceCheckBtn" class="btn btn-outline-secondary d-none" form="boardForm">
-                    <i class="fa-solid fa-check"></i>
-                    Ott 서비스 선택
-                </button>
             </form>
         </div>
     </div>
