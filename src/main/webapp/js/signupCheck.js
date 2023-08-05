@@ -78,6 +78,7 @@ function emailintialize() {
     //버튼 초기화
     $("#checkEmailBtn").removeClass("d-none");
     $("#veriCodeSendBtn").addClass("d-none");
+    $("#veriCodeSendBtn").text("인증 번호 발송");
 
     enableSubmitBtn();
 }
@@ -112,7 +113,7 @@ $("#checkEmailBtn").click(function () {
 
 //인증 번호 발송 버튼을 눌렀을 때
 $("#veriCodeSendBtn").click(function () {
-
+    $("#veriCodeSendBtn").text("인증 번호 발송 완료")
     //사용자가 입력한 이메일 정보 가져오기
     let email = $("#emailInput").val();
 
@@ -150,7 +151,8 @@ $("#veriCodeInput").keyup(function () {
     checkVerification = false;
     $("#veriCodeInput").removeClass("is-valid");
     $("#veriCodeInput").removeClass("is-invalid");
-    $("#veriCodeSendBtn").removeClass("d-none")
+    $("#veriCodeSendBtn").removeClass("d-none");
+    $("#veriCodeSendBtn").text("인증 번호 발송")
 
     enableSubmitBtn();
 });
