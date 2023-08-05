@@ -35,7 +35,7 @@
         <tbody>
         <c:forEach items="${board}" var="list">
             <tr>
-                <th class="col text-center"><input type="checkbox" class="checkBtn" value="${list.id}"></th>
+                <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
                 <td class="col-10 text-center" boardId="${list.id}">
                     <a href="/board/detail?boardId=${list.id}">${list.title}</a>
                     <span class="badge text-bg-${list.roll == 1 ? 'warning' : 'success'}">${list.roll == 1 ? '파티장' : '파티원'}</span>

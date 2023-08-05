@@ -4,7 +4,9 @@ import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -153,5 +156,15 @@ public class MemberController {
         Map<String, Object> list = memberService.selectMyBoardByUsername(authentication);
 
         model.addAllAttributes(list);
+    }
+
+    @Delete("myBoardDelete")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> delete(@RequestBody String[] boardId) {
+        System.out.println("working");
+        System.out.println(boardId);
+        Map<String, Object> res = new HashMap<>();
+
+        return ResponseEntity.ok().body(res);
     }
 }
