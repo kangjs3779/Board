@@ -35,18 +35,32 @@
                 <input type="text" class="form-control" name="nickname" id="nicknameInput" value="${member.nickname}">
             </div>
         </div>
-        <div class="mb-3 row">
-            <label for="addressInput" class="col-sm-2 col-form-label">Address</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="address" id="addressInput" value="${member.address}">
-            </div>
-        </div>
+        <%--        <div class="mb-3 row">--%>
+        <%--            <label for="addressInput" class="col-sm-2 col-form-label">Address</label>--%>
+        <%--            <div class="col-sm-10">--%>
+        <%--                <input type="text" class="form-control" name="address" id="addressInput" value="${member.address}">--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
         <div class="mb-3 row">
             <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="email" id="emailInput" value="${member.email}">
             </div>
         </div>
+        <%--주소--%>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="addressInput">Address</label>
+            <div class="col-sm-10 input-group">
+                <input type="text" readonly required name="address" class="form-control" id="addressInput" value="${member.address}" >
+                <button class="btn btn-outline-secondary" type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
+            </div>
+        </div>
+        <%--다음 주소 찾기 input--%>
+        <input type="hidden" id="sample4_roadAddress" placeholder="도로명주소">
+        <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+        <span id="guide" style="color:#999;display:none"></span>
+        <input type="hidden" id="sample4_detailAddress" placeholder="상세주소">
+        <input type="hidden" id="sample4_extraAddress" placeholder="참고항목">
     </form>
 
     <div class="d-grid gap-2 d-md-block">
@@ -57,5 +71,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/address.js"></script>
 </body>
 </html>

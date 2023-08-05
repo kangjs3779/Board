@@ -36,7 +36,7 @@
 
     <div class="d-grid gap-2 d-md-block">
         <button class="btn btn-outline-secondary" type="submit" form="loginForm" id="liveToastBtn">login</button>
-        <a class="btn btn-outline-secondary" href="/member/join">join</a>
+        <a class="btn btn-outline-secondary" href="/member/signup">sign up</a>
     </div>
 </div>
 
