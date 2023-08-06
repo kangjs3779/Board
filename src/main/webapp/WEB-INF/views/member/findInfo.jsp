@@ -23,36 +23,46 @@
 <my:navBar></my:navBar>
 <br>
 <br>
-<div class="container w-25">
+<div class="container" style="width: 500px;">
     <div class="ui top attached tabular menu">
-        <a class="item" data-tab="findId">아이디 찾기</a>
+        <a class="item active" data-tab="findId">아이디 찾기</a>
         <a class="item" data-tab="findPw">비밀번호 찾기</a>
     </div>
 
     <%-- 아이디 찾기 --%>
-    <div class="ui bottom attached tab segment" data-tab="findId">
+    <div class="ui bottom attached tab segment active" data-tab="findId">
+        <div id="findIdBox">
+            <form class="ui form">
+                <div class="field" id="emailBox">
+                    <label>Email</label>
+                    <input required type="email" placeholder="회원 가입 시 입력했던 이메일을 입력해주세요." id="emailInput">
+                </div>
+                <div class="field" id="nameBox">
+                    <label>Name</label>
+                    <input required type="text" placeholder="회원 가입 시 입력했던 이름을 입력해주세요." id="nameInput">
+                </div>
+                <button class="ui button" type="button" id="findIdBtn">아이디 찾기</button>
+            </form>
+        </div>
+    </div>
+
+    <%-- 비번 찾기 --%>
+    <div class="ui bottom attached tab segment" data-tab="findPw">
         <form class="ui form">
+            <div class="field">
+                <label>ID</label>
+                <input type="text" name="first-name" placeholder="아이디를 입력해주세요.">
+            </div>
             <div class="field">
                 <label>Email</label>
                 <input type="text" name="first-name" placeholder="회원 가입 시 입력했던 이메일을 입력해주세요.">
             </div>
             <div class="field">
-                <label>Last Name</label>
-                <input type="text" name="last-name" placeholder="Last Name">
+                <label>Name</label>
+                <input type="text" name="last-name" placeholder="회원 가입 시 입력했던 이름을 입력해주세요.">
             </div>
-            <div class="field">
-                <div class="ui checkbox">
-                    <input type="checkbox" tabindex="0" class="hidden">
-                    <label>I agree to the Terms and Conditions</label>
-                </div>
-            </div>
-            <button class="ui button" type="submit">Submit</button>
+            <button class="ui button" type="button">이메일 전송</button>
         </form>
-    </div>
-
-    <%-- 비번 찾기 --%>
-    <div class="ui bottom attached tab segment" data-tab="findPw">
-        비번 찾기지롱
     </div>
 
 </div>
@@ -62,6 +72,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/semantic/semantic.js"></script>
+<script src="/js/findIdPw.js"></script>
 <script>
     $('.menu .item')
         .tab()

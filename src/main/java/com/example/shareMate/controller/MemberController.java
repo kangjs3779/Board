@@ -189,4 +189,14 @@ public class MemberController {
     public void findInfoForward() {
         //아이디/비밀번호찾기 포워드
     }
+
+    @GetMapping("findEmailAndName")
+    @ResponseBody
+    public Map<String, Object> findEmailAndName(
+            @RequestParam("email") String email,
+            @RequestParam("name") String name) {
+        return  memberService.findEmailAndName(email, name);
+    }
+
+
 }

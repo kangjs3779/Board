@@ -39,9 +39,7 @@ public class MemberService {
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
         String plain = member.getPassword();
-        System.out.println("플레인 비밀번호 : " + plain);
         String encoder = passwordEncoder.encode(plain);
-        System.out.println("암호화된 비밀번호 : " + encoder);
         member.setPassword(encoder);
 
         //회원 추가
@@ -98,7 +96,7 @@ public class MemberService {
         return Map.of("available", member == null);
     }
 
-    public  Map<String, Object> checkEmail(String email) {
+    public Map<String, Object> checkEmail(String email) {
         Map<String, Object> data = new HashMap<>();
 
         //이메일 중복 확인
@@ -110,21 +108,21 @@ public class MemberService {
     }
 
     public void makeRandomNumber() {
-        //난수를 생성하는 메소드
+        //회원가입 시 필요한 난수를 생성하는 메소드
         Random random = new Random();
         int checkNum = random.nextInt(888888) + 111111;
         authNumber = checkNum;
     }
 
     public String joinEmail(String email) {
-        //보낼 메일 양식
+        //회원가입 시 보낼 메일 양식
         makeRandomNumber();
 
         String setFrom = username; // email-config에 설정한 자신의 이메일 주소를 입력
         String toMail = email;
         String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목
         String content =
-                "홈페이지를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 !
+                "Share Mate 홈페이지를 방문해주셔서 감사합니다." +    //html 형식으로 작성 !
                         "<br><br>" +
                         "인증 번호는 " + authNumber + "입니다." +
                         "<br>" +
@@ -139,12 +137,12 @@ public class MemberService {
         MimeMessage message = mailSender.createMimeMessage();
         // true 매개값을 전달하면 multipart 형식의 메세지 전달이 가능.문자 인코딩 설정도 가능하다.
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message,true,"utf-8");
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(setFrom);
             helper.setTo(toMail);
             helper.setSubject(title);
             // true 전달 > html 형식으로 전송 , 작성하지 않으면 단순 텍스트로 전달.
-            helper.setText(content,true);
+            helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -160,10 +158,10 @@ public class MemberService {
         Map<String, Object> info = new HashMap<>();
 
         //회원 정보 전체 리스트 조회
-       List<Member> list = memberMapper.selectAllMember();
-       info.put("list", list);
+        List<Member> list = memberMapper.selectAllMember();
+        info.put("list", list);
 
-       return info;
+        return info;
     }
 
     public List<Board> selectMyBoardByUsername(Authentication authentication) {
@@ -171,11 +169,11 @@ public class MemberService {
         List<Board> boards = memberMapper.selectMyBoardByUsername(authentication.getName());
 
         //게시물의 댓글 조회
-        for(Board board : boards) {
+        for (Board board : boards) {
             board.setCommentCount(boardCommentMapper.selectCommentByBoarId(board.getId()));
         }
 
-        return  boards;
+        return boards;
     }
 
     public Map<String, Object> deleteMyboard(Integer boardId, Member member) {
@@ -185,7 +183,7 @@ public class MemberService {
         //게시글 삭제
         boolean ok = boardService.deleteBoard(boardId, member);
 
-        if(ok) {
+        if (ok) {
             res.put("message", "선택한 게시글이 삭제 되었습니다.");
         } else {
             res.put("message", "선택한 게시글이 삭제 되지않았습니다.");
@@ -200,5 +198,11 @@ public class MemberService {
         Member member = memberMapper.selectByNickname(nickname);
 
         return Map.of("available", member == null);
+    }
+
+    public Map<String, Object> findEmailAndName(String email, String name) {
+        //이름과 이메일로 회원 확인
+        Member member = memberMapper.selectMemberByNameAndEmail(email, name);
+        return Map.of("check", member != null, "member", member);
     }
 }

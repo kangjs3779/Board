@@ -129,7 +129,7 @@ $("#veriCodeBtn").click(function () {
     $.ajax("/member/checkveriCode?code=" + code, {
         method: "get",
         success: function (data) {
-            console.log("인증 성공")
+
             if(data.available) {
                 console.log(data.available);
                 $("#veriCodeInput").addClass("is-valid");
