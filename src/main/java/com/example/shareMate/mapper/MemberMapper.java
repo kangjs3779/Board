@@ -10,8 +10,8 @@ import java.util.List;
 public interface MemberMapper {
 
     @Insert("""
-            INSERT INTO Member (username, password, nickname, phoneNum, address, email)
-            VALUES (#{username}, #{password}, #{nickname}, #{phoneNum}, #{address}, #{email})
+            INSERT INTO Member (username, password, nickname, phoneNum, address, email, name)
+            VALUES (#{username}, #{password}, #{nickname}, #{phoneNum}, #{address}, #{email}, #{name})
             """)
     Integer addMember(Member member);
 

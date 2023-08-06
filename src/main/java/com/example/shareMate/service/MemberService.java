@@ -39,7 +39,10 @@ public class MemberService {
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
         String plain = member.getPassword();
-        member.setPassword(passwordEncoder.encode(plain));
+        System.out.println("플레인 비밀번호 : " + plain);
+        String encoder = passwordEncoder.encode(plain);
+        System.out.println("암호화된 비밀번호 : " + encoder);
+        member.setPassword(encoder);
 
         //회원 추가
         Integer count = memberMapper.addMember(member);

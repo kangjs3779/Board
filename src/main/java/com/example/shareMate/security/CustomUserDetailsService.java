@@ -23,6 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //회원의 정보를 모두 조회함
         Member member = memberMapper.selectByUsername(username);
+        System.out.println("회원정보 조회 : " + member);
 
         if (member == null) {
             throw new UsernameNotFoundException(username + " 회원이 없습니다.");
@@ -39,6 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .authorities(list)
                 .password(member.getPassword()) // 사용자가 로그인한 비밀번호 정보
                 .build();
+        System.out.println("UserDetails : " + user);
         return user;
     }
 }

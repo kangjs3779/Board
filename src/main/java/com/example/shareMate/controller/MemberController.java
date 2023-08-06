@@ -184,4 +184,9 @@ public class MemberController {
 
         return ResponseEntity.ok().body(res);
     }
+
+    @GetMapping("findInfo")
+    public void findInfoForward() {
+        //아이디/비밀번호찾기 포워드
+    }
 }

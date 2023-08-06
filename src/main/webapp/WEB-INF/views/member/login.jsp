@@ -14,14 +14,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
 <my:navBar current="login"/>
 
 <div class="container w-25">
-    <h1>로그인 페이지</h1>
+    <br><br>
+    <h1 class="text-center">LOGIN</h1>
     <my:alert status="${status}"/>
     <form id="loginForm" method="post">
         <div class="mb-3">
@@ -34,13 +36,20 @@
         </div>
     </form>
 
-    <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-outline-secondary" type="submit" form="loginForm" id="liveToastBtn">login</button>
-        <a class="btn btn-outline-secondary" href="/member/signup">sign up</a>
+    <div class="d-flex justify-content-between">
+        <div>
+            <button class="btn btn-outline-secondary" type="submit" form="loginForm" id="liveToastBtn">로그인</button>
+            <a class="btn btn-outline-secondary" href="/member/signup">회원가입</a>
+        </div>
+        <div class="ml-auto">
+            <a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/member/findInfo">아이디/비밀번호 찾기</a>
+        </div>
     </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

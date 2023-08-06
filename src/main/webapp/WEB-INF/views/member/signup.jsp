@@ -41,13 +41,17 @@
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="pwCheckInput">비밀번호 확인</label>
-            <input type="text" required name="password" class="form-control pw" id="pwCheckInput" placeholder="Password Check">
+            <input type="text" required class="form-control pw" id="pwCheckInput" placeholder="Password Check">
             <div class="valid-feedback pwCheck">
                 비밀번호가 일치합니다.
             </div>
             <div class="invalid-feedback pwCheck">
                 비밀번호가 일치하지 않습니다.
             </div>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="nameInput">이름</label>
+            <input type="text" required name="name" class="form-control" id="nameInput" placeholder="본명을 입력해주세요.">
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="emailInput">이메일</label>

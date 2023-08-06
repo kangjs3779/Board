@@ -16,5 +16,6 @@ public class Member {
     private String email;
     private Date inserted;
     private List<String> authority;
+    private String name;
 
 }

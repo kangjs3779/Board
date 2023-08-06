@@ -31,6 +31,12 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label for="nameInout" class="col-sm-2 col-form-label">name</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" id="nameInout" value="${member.name}">
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label for="nicknameInput" class="col-sm-2 col-form-label">NickName</label>
         <div class="col-sm-10">
             <input type="text" readonly class="form-control-plaintext" id="nicknameInput" value="${member.nickname}">
