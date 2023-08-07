@@ -57,10 +57,20 @@ public class MemberService {
 
     public boolean modifyMemberByUsername(Member member) {
         //아이디로 회원 정보 수정
-        Integer count;
+        Integer count = 0;
 
-        count = memberMapper.modifyMemberByUsername(member);
+        if(member.getPassword() == null) {
+            //회원 정보 수정할떄
+            count = memberMapper.modifyMemberByUsername(member);
+        } else {
+            //비밀번호 수정할 때
+            //사용자가 입력한 비밀번호를 암호화
+            String plain = member.getPassword();
+            String encoder = passwordEncoder.encode(plain);
+            member.setPassword(encoder);
 
+            count = memberMapper.modifyPasswordByUsername(member);
+        }
         return count == 1;
     }
 

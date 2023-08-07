@@ -15,57 +15,50 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
     <title>Title</title>
 </head>
 <body>
 <my:navBar current="myPage"/>
-
-<%--회원 정보--%>
-<div class="container w-50">
-    <h1>${member.nickname}님의 회원정보입니다.</h1>
+<br>
+<br>
+<div class="container" style="width: 500px;">
     <my:alert status="${status}"/>
-    <div class="mb-3 row">
-        <label for="usernameInput" class="col-sm-2 col-form-label">ID</label>
-        <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="usernameInput" value="${member.username}">
-        </div>
+    <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="myPage">나의 정보</a>
     </div>
-    <div class="mb-3 row">
-        <label for="nameInout" class="col-sm-2 col-form-label">name</label>
-        <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="nameInout" value="${member.name}">
+    <%-- 아이디 찾기 --%>
+    <div class="ui bottom attached tab segment active" data-tab="myPage">
+        <div id="findIdBox">
+            <form class="ui form">
+                <div class="field">
+                    <label>ID</label>
+                    <input readonly type="email" value="${member.username}">
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input readonly type="text" value="${member.email}">
+                </div>
+                <div class="field">
+                    <label>Name</label>
+                    <input readonly type="text" value="${member.name}">
+                </div>
+                <div class="field">
+                    <label>NickName</label>
+                    <input readonly type="text" value="${member.nickname}">
+                </div>
+                <div class="field">
+                    <label>Phone Number</label>
+                    <input readonly type="text" value="${member.phoneNum}">
+                </div>
+                <div class="field">
+                    <label>Address</label>
+                    <input readonly type="text" value="${member.address}">
+                </div>
+                <a class="ui button" href="/member/modify">수정</a>
+                <button class="ui button" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">탈퇴</button>
+            </form>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="nicknameInput" class="col-sm-2 col-form-label">NickName</label>
-        <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="nicknameInput" value="${member.nickname}">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="phoneNumInput" class="col-sm-2 col-form-label">phone number</label>
-        <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="phoneNumInput" value="${member.phoneNum}">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="addressInput" class="col-sm-2 col-form-label">Address</label>
-        <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="addressInput" value="${member.address}">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="emailInput" value="${member.email}">
-        </div>
-    </div>
-
-    <%--  버튼  --%>
-    <div class="d-grid gap-2 d-md-block">
-        <a class="btn btn-outline-secondary" href="/member/myBoard">내가 쓴 게시글</a>
-        <a class="btn btn-outline-secondary" href="/member/modify">Modify</a>
-        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
     </div>
 </div>
 
@@ -89,7 +82,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="deleteForm" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</button>
+                <button type="submit" form="deleteForm" class="btn btn-outline-danger" data-bs-dismiss="modal">탈퇴</button>
             </div>
         </div>
     </div>
@@ -98,6 +91,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/semantic/semantic.js"></script>
+<script>
+    $('.menu .item')
+        .tab()
+    ;
+</script>
 </body>
 </html>

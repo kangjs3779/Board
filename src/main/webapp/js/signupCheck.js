@@ -7,7 +7,7 @@ let checkAddress = false;
 
 function enableSubmitBtn() {
     //입력창이 모두 확인되지 않으면 가입 버튼은 비활성화, 모두 확인되면 활성화
-    if(checkUsername && checkPw && checkEmail && checkNickname && checkAddress && checkVerification) {
+    if (checkUsername && checkPw && checkEmail && checkNickname && checkAddress && checkVerification) {
         $("#joinBtn").removeAttr("disabled");
     } else {
         $("#joinBtn").attr("disabled", "");
@@ -21,7 +21,7 @@ $("#usernameCheckBtn").click(function () {
     $.ajax("/member/checkUsername?username=" + username, {
         success: function (data) {
             console.log(data.available)
-            if(data.available) {
+            if (data.available) {
                 $("#usernameInput").addClass("is-valid");
                 checkUsername = true;
             } else {
@@ -48,7 +48,7 @@ $(".pw").keyup(function () {
     let pw = $("#pwInput").val();
     let pwCheck = $("#pwCheckInput").val();
 
-    if(pw == pwCheck) {
+    if (pw == pwCheck) {
         $("#pwCheckInput").removeClass("is-invalid");
         $("#pwCheckInput").addClass("is-valid");
         checkPw = true;
@@ -91,8 +91,8 @@ $("#checkEmailBtn").click(function () {
     let email = $("#emailInput").val();
 
     $.ajax("/member/checkEmail?email=" + email, {
-        success : function (data) {
-            if(data.available) {
+        success: function (data) {
+            if (data.available) {
                 $("#emailInput").removeClass("is-invalid");
                 $("#emailInput").addClass("is-valid");
                 $(".emailCheckComment").text("사용 가능한 이메일입니다.");
@@ -130,7 +130,7 @@ $("#veriCodeBtn").click(function () {
         method: "get",
         success: function (data) {
 
-            if(data.available) {
+            if (data.available) {
                 console.log(data.available);
                 $("#veriCodeInput").addClass("is-valid");
                 $(".veriCodeCheckComment").text("인증번호가 일치합니다.");
@@ -163,7 +163,7 @@ $("#nicknameBtn").click(function () {
 
     $.ajax("/member/checkNickname?nickname=" + nickname, {
         success: function (data) {
-            if(data.available) {
+            if (data.available) {
                 $("#nicknameInput").removeClass("is-invalid");
                 $("#nicknameInput").addClass("is-valid");
                 checkNickname = true;

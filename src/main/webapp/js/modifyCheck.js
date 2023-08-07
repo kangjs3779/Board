@@ -1,8 +1,8 @@
 //주소
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-function sample4_execDaumPostcode() {
+function execDaumPostcode() {
     new daum.Postcode({
-        oncomplete: function(data) {
+        oncomplete: function (data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
             // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
@@ -12,15 +12,15 @@ function sample4_execDaumPostcode() {
 
             // 법정동명이 있을 경우 추가한다. (법정리는 제외)
             // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
                 extraRoadAddr += data.bname;
             }
             // 건물명이 있고, 공동주택일 경우 추가한다.
-            if(data.buildingName !== '' && data.apartment === 'Y'){
+            if (data.buildingName !== '' && data.apartment === 'Y') {
                 extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
             }
             // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-            if(extraRoadAddr !== ''){
+            if (extraRoadAddr !== '') {
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
 
@@ -29,7 +29,7 @@ function sample4_execDaumPostcode() {
             document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
 
             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-            if(roadAddr !== ''){
+            if (roadAddr !== '') {
                 document.getElementById("sample4_extraAddress").value = extraRoadAddr;
             } else {
                 document.getElementById("sample4_extraAddress").value = '';
@@ -37,14 +37,13 @@ function sample4_execDaumPostcode() {
 
             var guideTextBox = document.getElementById("guide");
             // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            if(data.autoRoadAddress) {
+            if (data.autoRoadAddress) {
                 var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                 guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                 guideTextBox.style.display = 'block';
 
-            } else if(data.autoJibunAddress) {
+            } else if (data.autoJibunAddress) {
                 var expJibunAddr = data.autoJibunAddress;
-                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
                 guideTextBox.style.display = 'block';
             } else {
                 guideTextBox.innerHTML = '';
@@ -52,10 +51,22 @@ function sample4_execDaumPostcode() {
             }
 
             let address = $("#sample4_roadAddress").val();
-            $("#addressInput").val(address);
 
-            checkAddress = true;
-            enableSubmitBtn();
+            $("#addressInput").val(address);
         }
     }).open();
 }
+
+$(".pwInput").keyup(function () {
+    var pw = $("#pw").val();
+    var checkPw = $("#checkPw").val();
+    if (pw == checkPw) {
+        $("#checkPw").removeClass("is-invalid");
+        $("#checkPw").addClass("is-valid");
+        $("#pwBtn").removeClass("d-none");
+    } else {
+        $("#checkPw").removeClass("is-valid");
+        $("#checkPw").addClass("is-invalid");
+        $("#pwBtn").addClass("d-none");
+    }
+})

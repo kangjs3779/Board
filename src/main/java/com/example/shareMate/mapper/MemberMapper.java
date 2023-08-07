@@ -30,10 +30,9 @@ public interface MemberMapper {
     Member selectMemberByUsername(String username);
 
     @Update("""
-            UPDATE Member 
-            SET nickname = #{nickname},
-                address = #{address},
-                email = #{email}
+            UPDATE Member
+            SET address = #{address},
+                phoneNum = #{phoneNum}
             WHERE username = #{username}
             """)
     Integer modifyMemberByUsername(Member member);
@@ -67,4 +66,11 @@ public interface MemberMapper {
             SELECT * FROM Member WHERE email = #{email} AND name = #{name}
             """)
     Member selectMemberByNameAndEmail(String email, String name);
+
+    @Update("""
+            UPDATE Member
+            SET password = #{password}
+            WHERE username = #{username}
+            """)
+    Integer modifyPasswordByUsername(Member member);
 }
