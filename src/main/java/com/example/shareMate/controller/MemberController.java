@@ -198,5 +198,11 @@ public class MemberController {
         return  memberService.findEmailAndName(email, name);
     }
 
-
+    @GetMapping("findIdAndEmail")
+    @ResponseBody
+    public Map<String, Object> findIdAndEmail(
+            @RequestParam("email") String email,
+            @RequestParam("id") String id) {
+        return memberService.findIdAndEmail(id,email);
+    }
 }

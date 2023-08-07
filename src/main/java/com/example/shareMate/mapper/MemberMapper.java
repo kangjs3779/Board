@@ -73,4 +73,9 @@ public interface MemberMapper {
             WHERE username = #{username}
             """)
     Integer modifyPasswordByUsername(Member member);
+
+    @Select("""
+            SELECT * FROM Member WHERE email = #{email} AND username = #{id}
+            """)
+    Member selectMemberByIdAndEmail(String email, String id);
 }

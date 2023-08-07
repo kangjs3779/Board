@@ -215,4 +215,10 @@ public class MemberService {
         Member member = memberMapper.selectMemberByNameAndEmail(email, name);
         return Map.of("check", member != null, "member", member);
     }
+
+    public Map<String, Object> findIdAndEmail(String id, String email) {
+        //아이디와 이메일로 회원확인
+        Member member = memberMapper.selectMemberByIdAndEmail(email, id);
+        return Map.of("check", member != null, "member", member);
+    }
 }

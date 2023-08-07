@@ -48,21 +48,19 @@
 
     <%-- 비번 찾기 --%>
     <div class="ui bottom attached tab segment" data-tab="findPw">
-        <form class="ui form">
-            <div class="field">
-                <label>ID</label>
-                <input type="text" name="first-name" placeholder="아이디를 입력해주세요.">
-            </div>
-            <div class="field">
-                <label>Email</label>
-                <input type="text" name="first-name" placeholder="회원 가입 시 입력했던 이메일을 입력해주세요.">
-            </div>
-            <div class="field">
-                <label>Name</label>
-                <input type="text" name="last-name" placeholder="회원 가입 시 입력했던 이름을 입력해주세요.">
-            </div>
-            <button class="ui button" type="button">이메일 전송</button>
-        </form>
+        <div id="findPwBox">
+            <form class="ui form">
+                <div class="field" id="PwIdBox">
+                    <label>ID</label>
+                    <input type="text" id="PwIdInput" placeholder="아이디를 입력해주세요.">
+                </div>
+                <div class="field" id="pwEmailBox">
+                    <label>Email</label>
+                    <input type="text" id="PwEmailInput" placeholder="회원 가입 시 입력했던 이메일을 입력해주세요.">
+                </div>
+                <button class="ui button" type="button" id="findPwBtn">비번 찾기</button>
+            </form>
+        </div>
     </div>
 
 </div>
