@@ -5,11 +5,13 @@ import com.example.shareMate.domain.BoardComment;
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.mapper.BoardCommentMapper;
 import com.example.shareMate.mapper.BoardMapper;
+import com.example.shareMate.mapper.LikeBoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +57,6 @@ public class BoardService {
         
         //상세 페이지 조회
         Board board = boardMapper.selectBoardByBoardId(boardId);
-
 
         //map에 저장
         info.put("board", board);

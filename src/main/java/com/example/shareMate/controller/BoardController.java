@@ -42,8 +42,11 @@ public class BoardController {
 
         //로그인한 사용자의 정보 불러옴
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
+
+        if (!authentication.getName().equals("anonymousUser")) {
             Member member = memberService.selectMemberByUsername(authentication.getName());
+            member.setLike(memberService.checkLikeByUsernameAndBoardId(authentication.getName(), boardId));
+
             info.put("member", member);
         }
 

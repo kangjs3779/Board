@@ -1,9 +1,11 @@
 package com.example.shareMate.service;
 
 import com.example.shareMate.domain.Board;
+import com.example.shareMate.domain.Like;
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.mapper.BoardCommentMapper;
 import com.example.shareMate.mapper.BoardMapper;
+import com.example.shareMate.mapper.LikeBoardMapper;
 import com.example.shareMate.mapper.MemberMapper;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -35,6 +37,8 @@ public class MemberService {
     private Integer authNumber;
     @Value("${spring.mail.username}")
     private String username;
+    @Autowired
+    private LikeBoardMapper likeBoardMapper;
 
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
@@ -220,5 +224,16 @@ public class MemberService {
         //아이디와 이메일로 회원확인
         Member member = memberMapper.selectMemberByIdAndEmail(email, id);
         return Map.of("check", member != null, "member", member);
+    }
+
+    public boolean checkLikeByUsernameAndBoardId(String memberId, Integer boardId) {
+        //좋아요를 누른 게시글인지 확인
+        Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(memberId, boardId);
+
+        if(like == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

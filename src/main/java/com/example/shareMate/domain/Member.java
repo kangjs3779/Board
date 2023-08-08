@@ -17,5 +17,6 @@ public class Member {
     private Date inserted;
     private List<String> authority;
     private String name;
+    private boolean like;
 
 }

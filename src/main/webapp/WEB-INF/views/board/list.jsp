@@ -39,11 +39,19 @@
             <tr>
                 <th class="col text-center">${list.id}</th>
                 <td class="col-10 text-center" boardId="${list.id}">
-                    <a href="/board/detail?boardId=${list.id}">${list.title}</a>
-                    <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
-                    <c:if test="${list.commentCount gt 0}">
-                        <span style="color: gray;">[${list.commentCount}]</span>
-                    </c:if>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1; text-align: center;">
+                            <a href="/board/detail?boardId=${list.id}">${list.title}</a>
+                            <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                            <c:if test="${list.commentCount gt 0}">
+                                <span style="color: gray;">[${list.commentCount}]</span>
+                            </c:if>
+                        </div>
+                        <div>
+                            <span id="heartBox"><i style="color: gray;" class="heart outline icon"></i></span>
+                            <span><i style="color: gray;" class="bookmark outline icon"></i></span>
+                        </div>
+                    </div>
                 </td>
                 <td class="col text-center">${list.viewCount}</td>
                 <td class="col text-center">${list.writer}</td>
@@ -62,6 +70,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
-
 </body>
 </html>

@@ -28,7 +28,13 @@
     <div class="card mb-3">
         <div class="card-header d-flex align-items-center">
             <h3 class="flex-grow-1">${board.title}</h3>
-            <p class="text-end m-0" style="color: gray;">조회수 ${board.viewCount}</p>
+            <p class="text-end m-0" style="color: gray;">
+                조회수 ${board.viewCount} &nbsp;&nbsp;
+                <span><i style="color: gray;" class="heart icon ${member.like ? '' : 'outline'}"></i></span>
+                <span id="likeCount" style="color: gray;"></span> &nbsp;
+                <span><i style="color: gray;" class="bookmark outline icon"></i></span>
+                <span style="color: gray;"></span>
+            </p>
         </div>
         <div class="card-body">
             <%--게시글 간단 정보--%>
@@ -113,5 +119,6 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
 <script src="/js/BoardComment.js"></script>
+<script src="/js/likeBoard.js"></script>
 </body>
 </html>
