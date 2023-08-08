@@ -21,47 +21,66 @@
 </head>
 <body>
 <my:navBar/>
-<div class="container">
-    <h1 class="text-center">내가 쓴 게시글 목록</h1>
-    <my:alert/>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th class="col text-center"><input type="checkbox" class="text-center" id="fullCheckBtn"></th>
-            <th class="col text-center">제목</th>
-            <th class="col text-center">조회수</th>
-            <th class="col text-center">작성자</th>
-        </tr>
-        </thead>
-        <tbody id="myBoardListBox">
-        <c:forEach items="${boards}" var="list">
+<c:if test="${not empty boards}">
+    <div class="container">
+        <h1 class="text-center">내가 쓴 게시글 목록</h1>
+        <my:alert/>
+        <table class="table table-bordered">
+            <thead>
             <tr>
-                <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
-                <td class="col-10 text-center" boardId="${list.id}">
-                    <a href="/board/detail?boardId=${list.id}">${list.title}</a>
-                    <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
-                    <c:if test="${list.commentCount gt 0}">
-                        <span style="color: gray;">[${list.commentCount}]</span>
-                    </c:if>
-                </td>
-                <td class="col text-center">${list.viewCount}</td>
-                <td class="col text-center">${list.writer}</td>
+                <th class="col text-center"><input type="checkbox" class="text-center" id="fullCheckBtn"></th>
+                <th class="col text-center">제목</th>
+                <th class="col text-center">조회수</th>
+                <th class="col text-center">작성자</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-end gap-2 ">
-        <button type="button" class="btn btn-outline-danger" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
-            <i class="fa-regular fa-trash-can"></i>
-            삭제하기
-        </button>
-        <a type="button" class="btn btn-outline-secondary" href="/board/addBoard">
-            <i class="fa-regular fa-pen-to-square"></i>
-            글쓰기
-        </a>
+            </thead>
+            <tbody id="myBoardListBox">
+            <c:forEach items="${boards}" var="list">
+                <tr>
+                    <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
+                    <td class="col-10 text-center" boardId="${list.id}">
+                        <a href="/board/detail?boardId=${list.id}">${list.title}</a>
+                        <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                        <c:if test="${list.commentCount gt 0}">
+                            <span style="color: gray;">[${list.commentCount}]</span>
+                        </c:if>
+                    </td>
+                    <td class="col text-center">${list.viewCount}</td>
+                    <td class="col text-center">${list.writer}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end gap-2 ">
+            <button type="button" class="btn btn-outline-danger" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" disabled>
+                <i class="fa-regular fa-trash-can"></i>
+                삭제하기
+            </button>
+            <a type="button" class="btn btn-outline-secondary" href="/board/addBoard">
+                <i class="fa-regular fa-pen-to-square"></i>
+                글쓰기
+            </a>
+        </div>
     </div>
-</div>
+</c:if>
 
+<c:if test="${empty boards}">
+    <br>
+    <br>
+    <br>
+    <div class="container w-50">
+        <h1 class="ui center aligned header">
+            등록된 게시글이 없습니다.
+        </h1>
+        <br>
+        <div class="d-flex justify-content-center ">
+            <a type="button" class="btn btn-outline-secondary" href="/board/addBoard">
+                <i class="fa-regular fa-pen-to-square"></i>
+                글쓰기
+            </a>
+        </div>
+    </div>
+</c:if>
 <%--삭제하기 모달 --%>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -75,7 +94,7 @@
                 <div class="mb-3">
                     <label for="passwordInput" class="col-form-label">Password:</label>
                     <input type="password" class="form-control" id="passwordInput">
-                    <sec:authentication property="principal.username" var="username" />
+                    <sec:authentication property="principal.username" var="username"/>
                     <input type="hidden" id="usernameInput" class="form-control" value="<c:out value='${username}' />">
                 </div>
             </div>

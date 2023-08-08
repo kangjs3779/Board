@@ -55,8 +55,9 @@
                     <label>Address</label>
                     <input readonly type="text" value="${member.address}">
                 </div>
-                <a class="ui button" href="/member/modify">수정</a>
-                <button class="ui button" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">탈퇴</button>
+                <a class="ui primary basic button" href="/member/myBoard">나의 게시글</a>
+                <a class="ui secondary basic button" href="/member/modify">수정</a>
+                <button class="ui negative basic button" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">탈퇴</button>
             </form>
         </div>
     </div>
