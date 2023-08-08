@@ -25,6 +25,11 @@ public class BoardController {
     @Autowired
     private MemberService memberService;
 
+    @GetMapping("home")
+    public void home() {
+        
+    }
+
     @GetMapping("list")
     public void board(Model model) {
         //로그인한 사용자의 정보 불러옴
