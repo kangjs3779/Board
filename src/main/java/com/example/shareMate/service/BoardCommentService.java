@@ -39,7 +39,7 @@ public class BoardCommentService {
                 //회원의 정보를 찾아서
                 Member member = memberMapper.selectMemberByUsername(authentication.getName());
                 //comment자바빈에 로그인한 정보와 회원의 정보가 같은지 다른지의 결과를 넣음
-                comment.setEditable(authentication.getName().equals(member.getUsername()));
+                comment.setEditable(authentication.getName().equals(comment.getMemberId()));
             }
         }
 
