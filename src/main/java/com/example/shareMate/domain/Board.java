@@ -15,4 +15,5 @@ public class Board {
     private Integer viewCount;
     private Integer commentCount;
     private Integer roll;
+    private Integer likeCount;
 }

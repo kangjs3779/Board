@@ -32,4 +32,14 @@ public interface LikeBoardMapper {
             SELECT * FROM LikeBoard WHERE memberId = #{memberId} AND boardId = #{boardId}
             """)
     Like checkLikeByUsernameAndBoardId(String memberId, Integer boardId);
+
+    @Select("""
+            SELECT COUNT(*) FROM LikeBoard WHERE boardId = #{boardId}
+            """)
+    Integer selectLikeCountByBoardId(Integer boardId);
+
+    @Delete("""
+            DELETE FROM LikeBoard WHERE boardId = #{boardId}
+            """)
+    void deleteLikeByBoardId(Integer boardId);
 }

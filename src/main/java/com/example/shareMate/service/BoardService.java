@@ -30,6 +30,8 @@ public class BoardService {
     private BoardCommentMapper boardCommentMapper;
     @Autowired
     private BoardCommentService boardCommentService;
+    @Autowired
+    private LikeBoardMapper likeBoardMapper;
 
     public Map<String, Object> selectAllBoard() {
         Map<String, Object> info = new HashMap<>();
@@ -37,11 +39,16 @@ public class BoardService {
         //게시물 전체 조회
         List<Board> list = boardMapper.selectBoardList();
 
-        //댓글 갯수
         for (Board board : list) {
+            //댓글 갯수
             Integer commentCount = boardCommentMapper.selectCommentByBoarId(board.getId());
             board.setCommentCount(commentCount);
+
+            //좋아요 갯수
+            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
+            board.setLikeCount(likeCount);
         }
+
 
         //map에 저장
         info.put("list", list);
@@ -54,7 +61,7 @@ public class BoardService {
 
         // 조회수 업데이트
         boardMapper.addViewCount(boardId);
-        
+
         //상세 페이지 조회
         Board board = boardMapper.selectBoardByBoardId(boardId);
 
@@ -79,16 +86,25 @@ public class BoardService {
         Member origin = memberMapper.selectMemberByUsername(member.getUsername());
 
         //비밀번호 확인
-        if(passwordEncoder.matches(member.getPassword(), origin.getPassword())) {
+        if (passwordEncoder.matches(member.getPassword(), origin.getPassword())) {
             //댓글이 있는지 확인
             List<BoardComment> comments = boardCommentMapper.selectAllComment(boardId);
 
-            if(comments.size() != 0) {
+            if (comments.size() != 0) {
                 //댓글이 있으면 삭제
-                for(BoardComment comment : comments) {
+                for (BoardComment comment : comments) {
                     boardCommentService.deleteComment(comment);
                 }
             }
+
+            //좋아요 있는지 확인
+            Integer like = likeBoardMapper.selectLikeCountByBoardId(boardId);
+
+            if(like != 0 ) {
+                //좋아요가 있으면
+                likeBoardMapper.deleteLikeByBoardId(boardId);
+            }
+
             //게시글 삭제
             count = boardMapper.deleteBoardByBoardId(boardId);
         }
