@@ -2,6 +2,7 @@ package com.example.shareMate.service;
 
 import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.BoardComment;
+import com.example.shareMate.domain.Like;
 import com.example.shareMate.domain.Member;
 import com.example.shareMate.mapper.BoardCommentMapper;
 import com.example.shareMate.mapper.BoardMapper;
@@ -33,7 +34,7 @@ public class BoardService {
     @Autowired
     private LikeBoardMapper likeBoardMapper;
 
-    public Map<String, Object> selectAllBoard() {
+    public Map<String, Object> selectAllBoard(Authentication authentication) {
         Map<String, Object> info = new HashMap<>();
 
         //게시물 전체 조회
@@ -47,8 +48,14 @@ public class BoardService {
             //좋아요 갯수
             Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
             board.setLikeCount(likeCount);
-        }
 
+            //좋아요 확인
+            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
+            if(like != null) {
+                //좋아요를 누른 게시글이면
+                board.setLikeCheck(true);
+            }
+        }
 
         //map에 저장
         info.put("list", list);

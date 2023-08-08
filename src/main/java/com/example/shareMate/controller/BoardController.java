@@ -27,8 +27,12 @@ public class BoardController {
 
     @GetMapping("list")
     public void board(Model model) {
+        //로그인한 사용자의 정보 불러옴
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         //shareroom 전체 게시글 조회
-        Map<String, Object> info = boardService.selectAllBoard();
+        Map<String, Object> info = boardService.selectAllBoard(authentication);
+
 
         model.addAllAttributes(info);
     }

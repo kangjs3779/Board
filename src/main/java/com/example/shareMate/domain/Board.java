@@ -16,4 +16,5 @@ public class Board {
     private Integer commentCount;
     private Integer roll;
     private Integer likeCount;
+    private boolean likeCheck;
 }

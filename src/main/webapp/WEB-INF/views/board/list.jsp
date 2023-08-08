@@ -48,7 +48,7 @@
                             </c:if>
                         </div>
                         <div>
-                            <span id="heartBox"><i style="color: gray;" class="heart outline icon"></i></span>
+                            <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>
                             <span id="likeCount" style="color: gray;">${list.likeCount != null ? list.likeCount : 0}</span> &nbsp;
                             <span><i style="color: gray;" class="bookmark outline icon"></i></span>
                         </div>
