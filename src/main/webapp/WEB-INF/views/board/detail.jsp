@@ -26,20 +26,30 @@
 <div class="container w-50">
     <my:alert status="${status}"/>
     <div class="card mb-3">
-        <div class="card-header d-flex align-items-center">
-            <h3 class="flex-grow-1">${board.title}</h3>
+        <div class="card-header d-flex flex-column align-items-center">
+            <h3 class="flex-grow-1 text-center">${board.title}</h3>
             <p class="text-end m-0" style="color: gray;">
+                <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
                 조회수 ${board.viewCount} &nbsp;&nbsp;
                 <span><i style="color: gray;" class="heart icon ${member.like ? '' : 'outline'}"></i></span>
                 <span id="likeCount" style="color: gray;"></span> &nbsp;
-                <span><i style="color: gray;" class="bookmark outline icon"></i></span>
+                <span><i style="color: gray;" class="user outline icon"></i></span>
                 <span style="color: gray;"></span>
             </p>
         </div>
+
         <div class="card-body">
             <%--게시글 간단 정보--%>
-            <span><strong>${board.writer}&nbsp;&nbsp;</strong></span>
-            <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span style="font-size: 20px;"><strong>${board.writer}&nbsp;&nbsp;</strong></span>
+                        <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
+                    </div>
+                    <div class="ui icon button circular" data-tooltip="저요!">
+                        <i class="user outline icon"></i>
+                    </div>
+                </div>
+
             <hr>
 
             <%--본문--%>

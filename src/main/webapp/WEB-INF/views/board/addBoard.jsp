@@ -28,23 +28,41 @@
         <h4 class="card-header">Find Mate</h4>
         <div class="card-body">
             <form id="boardForm" method="post" action="/board/addBoard">
+                <%--역할 선택란--%>
                 <div class="col-auto">
                     <span class="form-text">
                       역할을 선택해주세요!
                     </span>
+                    <br>
                 </div>
                 <input type="radio" class="btn-check" name="roll" id="leaderBtn" autocomplete="off" value="1">
                 <label class="btn btn-outline-secondary mb-3" for="leaderBtn">파티장</label>
                 <input type="radio" class="btn-check" name="roll" id="memberBtn" autocomplete="off" value="2">
                 <label class="btn btn-outline-secondary mb-3" for="memberBtn">파티원</label>
+                <%--제목 입력란--%>
                 <div class="form-floating mb-3">
                     <input type="text" name="title" class="form-control form-control-lg" id="titleInput" placeholder="제목을 입력해주세요.">
                     <label for="titleInput">Title</label>
                 </div>
+                <%--본문 입력란--%>
                 <div class="form-floating mb-3">
                     <textarea name="body" class="form-control" placeholder="본문을 적어주세요." id="bodyInput" style="height: 300px"></textarea>
                     <label for="bodyInput">Comment</label>
                 </div>
+                <%--ott 선택란--%>
+                <select class="ui fluid selection dropdown">
+                    <option value="">공유하고 싶은 ott서비스를 선택해주세요!</option>
+                    <option value="netflix">넷플릭스</option>
+                    <option value="disney">디즈니플러스</option>
+                    <option value="tiving">티빙</option>
+                    <option value="wavve">웨이브</option>
+                    <option value="watcha">왓챠</option>
+                    <option value="apple">애플TV</option>
+                    <option value="laftel">라프텔</option>
+                    <option value="prime">프라임 비디오</option>
+                </select>
+                <br>
+
                 <div class="form-floating mb-3">
                     <input name="writer" readonly type="text" class="form-control-plaintext form-control-lg" id="writerInput" value="${member.nickname}">
                     <label for="writerInput">Mate Leader</label>
@@ -62,5 +80,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="/js/semantic/semantic.min.js"></script></body>
+<script src="/js/semantic/semantic.min.js"></script>
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>
+</body>
 </html>
