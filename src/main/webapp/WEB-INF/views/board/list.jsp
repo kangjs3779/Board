@@ -35,12 +35,16 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${list}" var="list">
+        <c:forEach items="${list}" var="list" varStatus="num">
             <tr>
-                <th class="col text-center">${list.id}</th>
+                <th class="col text-center">${num.index + 1}</th>
                 <td class="col-10 text-center" boardId="${list.id}">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="flex: 1; text-align: center;">
+                            <a class="ui basic image label">
+                                <img src="/images/tiving.png">
+                                Elliot
+                            </a>
                             <a href="/board/detail?boardId=${list.id}">${list.title}</a>
                             <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
                             <c:if test="${list.commentCount gt 0}">
@@ -60,12 +64,14 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="d-flex justify-content-end">
-        <a type="button" class="btn btn-outline-secondary" href="/board/addBoard">
-            <i class="fa-regular fa-pen-to-square"></i>
-            글쓰기
-        </a>
-    </div>
+    <sec:authorize access="isAuthenticated()">
+        <div class="d-flex justify-content-end">
+            <a type="button" class="btn btn-outline-secondary" href="/board/addBoard">
+                <i class="fa-regular fa-pen-to-square"></i>
+                글쓰기
+            </a>
+        </div>
+    </sec:authorize>
 </div>
 <my:foot></my:foot>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

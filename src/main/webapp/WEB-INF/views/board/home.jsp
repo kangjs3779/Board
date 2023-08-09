@@ -17,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
-    <title>Title</title>
+    <title>shareMate</title>
 </head>
 <body>
 <my:navBar></my:navBar>
@@ -25,7 +25,7 @@
 <div class="text-center">
     <img src="/images/background.jpg" class="img-fluid" alt="..." width="1000">
 </div>
-<h3 class="ui center aligned header">비싼 구독료 서비스 혼자 내지 마세요!</h3>
+<h3 class="ui center aligned header">비싼 구독 서비스! 요금 혼자 내지 마세요!</h3>
 <h1 class="ui center aligned header" style="font-size: 35px;">공유를 원한다면</h1>
 <h1 class="ui center aligned header violet" style="font-size: 50px;">Share Mate</h1>
 <div class="d-flex justify-content-center">
@@ -75,6 +75,11 @@
         <div class="card">
             <div class="image">
                 <img src="/images/laftel.png">
+            </div>
+        </div>
+        <div class="card">
+            <div class="image">
+                <img src="/images/primevideo.jpeg">
             </div>
         </div>
     </div>
