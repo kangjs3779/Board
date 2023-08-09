@@ -25,6 +25,7 @@
 <div class="text-center">
     <img src="/images/background.jpg" class="img-fluid" alt="..." width="1000">
 </div>
+<h3 class="ui center aligned header">비싼 구독료 서비스 혼자 내지 마세요!</h3>
 <h1 class="ui center aligned header" style="font-size: 35px;">공유를 원한다면</h1>
 <h1 class="ui center aligned header violet" style="font-size: 50px;">Share Mate</h1>
 <div class="d-flex justify-content-center">
@@ -39,12 +40,54 @@
     <br>
     <hr>
     <br>
-    <br>
+    <div class="ui six doubling cards">
+        <div class="card">
+            <div class="image">
+                <img src="/images/netflix.jpeg">
+            </div>
+        </div>
+        <div class="card">
+            <div class="image">
+                <img src="/images/disneyplus.jpeg">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image">
+                <img src="/images/tiving.png">
+            </div>
+        </div>
+        <div class="card">
+            <div class="image">
+                <img src="/images/wavve.png">
+            </div>
+        </div>
+        <div class="card">
+            <div class="image">
+                <img src="/images/whatcha.jpeg">
+            </div>
+        </div>
+        <div class="card">
+            <div class="image">
+                <img src="/images/apple.jpeg">
+            </div>
+        </div>
+        <div class="card">
+            <div class="image">
+                <img src="/images/laftel.png">
+            </div>
+        </div>
+    </div>
 </div>
+
+<my:foot></my:foot>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>
