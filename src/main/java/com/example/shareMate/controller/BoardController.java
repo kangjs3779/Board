@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,7 +28,7 @@ public class BoardController {
 
     @GetMapping("home")
     public void home() {
-        
+        //홈페이지 포워드
     }
 
     @GetMapping("list")
@@ -162,4 +163,12 @@ public class BoardController {
 //    public void addOttService() {
 //        //파티장이 ott서비스 선택하는 폼에 포워드
 //    }
+
+    @GetMapping("ottSearch")
+    @ResponseBody
+    public List<Board> ottSearch(@RequestParam("ott") String ott) {
+        //로그인한 사용자의 정보 불러옴
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return boardService.ottSearch(ott, authentication);
+    }
 }

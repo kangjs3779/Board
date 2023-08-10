@@ -49,6 +49,9 @@
 
         <a class="ui teal empty circular label ottType" ott="prime"></a>
         <span class="ottType" ott="prime">프라임비디오</span>
+
+        <a class="ui empty circular label ottType" ott=""></a>
+        <span class="ottType" ott="">초기화</span>
     </div>
     <table class="table table-bordered">
         <thead>
@@ -59,7 +62,7 @@
             <th class="col text-center">작성자</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="boardListBox">
         <c:forEach items="${list}" var="list" varStatus="num">
             <tr>
                 <th class="col text-center">${num.index + 1}</th>

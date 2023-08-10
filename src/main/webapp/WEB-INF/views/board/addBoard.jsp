@@ -50,7 +50,7 @@
                     <label for="bodyInput">Comment</label>
                 </div>
                 <%--ott 선택란--%>
-                <select class="ui fluid selection dropdown">
+                <select class="ui fluid selection dropdown" name="ott" required>
                     <option value="">공유하고 싶은 ott서비스를 선택해주세요!</option>
                     <option value="netflix">넷플릭스</option>
                     <option value="disney">디즈니플러스</option>

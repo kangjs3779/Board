@@ -126,4 +126,28 @@ public class BoardService {
 
         return count == 1;
     }
+
+    public List<Board> ottSearch(String ott, Authentication authentication) {
+        //ott서비스 검색을 포함한 게시물 전체 조회
+        List<Board> list =  boardMapper.selectBoardByOtt(ott);
+
+        for (Board board : list) {
+            //댓글 갯수
+            Integer commentCount = boardCommentMapper.selectCommentByBoarId(board.getId());
+            board.setCommentCount(commentCount);
+
+            //좋아요 갯수
+            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
+            board.setLikeCount(likeCount);
+
+            //좋아요 확인
+            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
+            if(like != null) {
+                //좋아요를 누른 게시글이면
+                board.setLikeCheck(true);
+            }
+        }
+
+        return list;
+    }
 }

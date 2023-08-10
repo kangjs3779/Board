@@ -52,26 +52,27 @@ function myBoardList() {
     $.ajax("/member/myBoardList", {
         method: "get",
         success: function (lists) {
-            $("#myBoardListBox").empty();
+            console.log(Array.isArray(lists));
+            $("#boardListBox").empty();
             for(const list of lists) {
                 let commentCountSpan = '';
                 if (list.commentCount > 0) {
                     commentCountSpan = `<span style="color: gray;">[${list.commentCount}]</span>`;
                 }
-                $("#myBoardListBox").append(`
+                $("#boardListBox").append(`
                 <tr>
                     <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
                     <td class="col-10 text-center" boardId="${list.id}">
-                        <a href="/board/detail?boardId=${list.id}">${list.title}</a>
-                        <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                        <a style="color: black;" href="/board/detail?boardId=${list.id}">${list.title}</a>
                         ${commentCountSpan}
+                        <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                        <a class="ui empty circular label ottType" ott="${list.ott}"></a>
                     </td>
                     <td class="col text-center">${list.viewCount}</td>
                     <td class="col text-center">${list.writer}</td>
                 </tr>
                 `);
             }
-
         }
     })
 }

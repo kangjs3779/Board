@@ -185,6 +185,17 @@ public class MemberService {
         //게시물의 댓글 조회
         for (Board board : boards) {
             board.setCommentCount(boardCommentMapper.selectCommentByBoarId(board.getId()));
+
+            //좋아요 갯수
+            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
+            board.setLikeCount(likeCount);
+
+            //좋아요 확인
+            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
+            if(like != null) {
+                //좋아요를 누른 게시글이면
+                board.setLikeCheck(true);
+            }
         }
 
         return boards;

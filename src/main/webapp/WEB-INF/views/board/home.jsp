@@ -113,6 +113,9 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <hr>
 </div>
 
 <footer>

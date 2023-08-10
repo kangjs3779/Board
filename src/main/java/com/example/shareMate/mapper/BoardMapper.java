@@ -8,7 +8,8 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     @Select("""
-            SELECT * FROM Board ORDER BY inserted DESC
+            SELECT * FROM Board 
+            ORDER BY inserted DESC
             """)
     List<Board> selectBoardList();
 
@@ -19,9 +20,9 @@ public interface BoardMapper {
 
     @Insert("""
             INSERT INTO Board 
-                (title, body, writer, memberId, roll) 
+                (title, body, writer, memberId, roll, ott) 
             VALUES 
-                (#{title}, #{body}, #{writer}, #{memberId}, #{roll})
+                (#{title}, #{body}, #{writer}, #{memberId}, #{roll}, #{ott})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     Integer addBoard(Board board);
@@ -52,4 +53,15 @@ public interface BoardMapper {
             UPDATE Board SET viewCount = viewCount + 1 WHERE id = #{boardId}
             """)
     void addViewCount(Integer boardId);
+
+    @Select("""
+            <script>
+            SELECT * FROM Board 
+            <if test="ott != ''">
+            WHERE ott = #{ott}
+            </if>
+            ORDER BY inserted DESC
+            </script>
+            """)
+    List<Board> selectBoardByOtt(String ott);
 }

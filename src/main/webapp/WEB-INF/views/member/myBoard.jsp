@@ -21,10 +21,38 @@
 </head>
 <body>
 <my:navBar/>
+<%--등록된 게시글이 있으면--%>
 <c:if test="${not empty boards}">
     <div class="container">
         <h1 class="text-center">내가 쓴 게시글 목록</h1>
         <my:alert/>
+
+        <div>
+            <a class="ui red empty circular label ottType" ott="netflix"></a>
+            <span class="ottType" ott="netflix">넷플릭스</span>
+
+            <a class="ui olive empty circular label ottType" ott="disney" ></a>
+            <span class="ottType" ott="disney">디즈니플러스</span>
+
+            <a class="ui orange empty circular label ottType" ott="tiving"></a>
+            <span class="ottType" ott="tiving">티빙</span>
+
+            <a class="ui blue empty circular label ottType" ott="wavve"></a>
+            <span class="ottType" ott="wavve">웨이브</span>
+
+            <a class="ui pink empty circular label ottType" ott="watcha"></a>
+            <span class="ottType" ott="watcha">왓챠</span>
+
+            <a class="ui black empty circular label ottType" ott="apple"></a>
+            <span class="ottType" ott="apple">애플TV</span>
+
+            <a class="ui purple empty circular label ottType" ott="laftel"></a>
+            <span class="ottType" ott="laftel">라프텔</span>
+
+            <a class="ui teal empty circular label ottType" ott="prime"></a>
+            <span class="ottType" ott="prime">프라임비디오</span>
+        </div>
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -34,16 +62,26 @@
                 <th class="col text-center">작성자</th>
             </tr>
             </thead>
-            <tbody id="myBoardListBox">
+            <tbody id="boardListBox">
             <c:forEach items="${boards}" var="list">
                 <tr>
                     <th class="col text-center"><input type="checkbox" class="checkBtn" boardId="${list.id}"></th>
                     <td class="col-10 text-center" boardId="${list.id}">
-                        <a href="/board/detail?boardId=${list.id}">${list.title}</a>
-                        <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
-                        <c:if test="${list.commentCount gt 0}">
-                            <span style="color: gray;">[${list.commentCount}]</span>
-                        </c:if>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="flex: 1; text-align: center;">
+                                <a style="color: black;" href="/board/detail?boardId=${list.id}">${list.title}</a>
+                                <c:if test="${list.commentCount gt 0}">
+                                    <span style="color: gray;">[${list.commentCount}]</span>
+                                </c:if>
+                                <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                                <a class="ui empty circular label ottType" ott="${list.ott}"></a>
+                            </div>
+                            <div>
+                                <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>
+                                <span id="likeCount" style="color: gray;">${list.likeCount != null ? list.likeCount : 0}</span> &nbsp;
+                                <i style="color: gray;" class="user outline icon"></i>
+                            </div>
+                        </div>
                     </td>
                     <td class="col text-center">${list.viewCount}</td>
                     <td class="col text-center">${list.writer}</td>
@@ -64,6 +102,7 @@
     </div>
 </c:if>
 
+<%--등록된 게시글이 없으면--%>
 <c:if test="${empty boards}">
     <br>
     <br>
@@ -112,5 +151,6 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
 <script src="/js/myBoard.js"></script>
+<script src="/js/ott.js"></script>
 </body>
 </html>

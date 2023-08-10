@@ -53,7 +53,7 @@ public interface MemberMapper {
     List<Member> selectAllMember();
 
     @Select("""
-            SELECT * FROM Board WHERE memberId = #{memberId}
+            SELECT * FROM Board WHERE memberId = #{memberId} ORDER BY inserted DESC
             """)
     List<Board> selectMyBoardByUsername(String memberId);
 
