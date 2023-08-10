@@ -12,43 +12,74 @@
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-  <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
-  <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
+    <title>Title</title>
 </head>
 <body>
 <my:navBar current="myPage"/>
 
 <%--수정 폼--%>
 <div class="container w-50">
-  <my:alert status="${status}"/>
-  <div class="card">
-    <h4 class="card-header">게시글 수정</h4>
-    <div class="card-body">
-      <form id="boardForm" method="post" action="/board/modify">
-        <input type="hidden" name="memberId" value="${member.username}">
-        <input type="hidden" name="id" value="${board.id}">
-        <div class="form-floating mb-3">
-          <input type="text" name="title" class="form-control form-control-lg" id="titleInput" value="${board.title}">
-          <label for="titleInput">Title</label>
+    <my:alert status="${status}"/>
+    <div class="card">
+        <h4 class="card-header">게시글 수정</h4>
+        <div class="card-body">
+            <form id="boardForm" method="post" action="/board/modify">
+                <input type="hidden" name="memberId" value="${member.username}">
+                <input type="hidden" name="id" value="${board.id}">
+                <%--역할 설명란--%>
+                <div class="col-auto">
+                    <h3 class="mb-3">
+                      역할은 <span class="ui green header">${board.roll == 1? '파티장' : '파티원'}</span>입니다.
+                    </h3>
+                </div>
+                <%--제목 입력란--%>
+                <div class="form-floating mb-3">
+                    <input type="text" name="title" class="form-control form-control-lg" id="titleInput" value="${board.title}">
+                    <label for="titleInput">Title</label>
+                </div>
+                <%--본문 입력란--%>
+                <div class="form-floating mb-3">
+                    <textarea name="body" class="form-control" id="bodyInput" style="height: 300px">${board.body}</textarea>
+                    <label for="bodyInput">Comment</label>
+                </div>
+                <%--ott 선택란--%>
+                <select class="ui fluid selection dropdown" name="ott" required>
+                    <option value="${board.ott}">공유하고 싶은 ott서비스를 선택해주세요!</option>
+                    <option value="netflix">넷플릭스</option>
+                    <option value="disney">디즈니플러스</option>
+                    <option value="tiving">티빙</option>
+                    <option value="wavve">웨이브</option>
+                    <option value="watcha">왓챠</option>
+                    <option value="apple">애플TV</option>
+                    <option value="laftel">라프텔</option>
+                    <option value="prime">프라임 비디오</option>
+                </select>
+                <br>
+                <%--날짜 선택란--%>
+                <div class="form-floating mb-3">
+                    <input type="date" value="${board.startDate}" class="form-control" name="startDate" id="startDate" placeholder="Password">
+                    <label for="startDate">시작 날짜</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" value="${board.endDate}" class="form-control" name="endDate" id="endDate" placeholder="Password">
+                    <label for="endDate">끝나는 날짜</label>
+                </div>
+                <%--작성자 정보--%>
+                <div class="form-floating mb-3">
+                    <input name="writer" readonly type="text" class="form-control-plaintext form-control-lg" id="writerInput" value="${member.nickname}">
+                    <label for="writerInput">Mate Leader</label>
+                </div>
+                <button type="submit" class="btn btn-outline-secondary" form="boardForm">
+                    수정
+                </button>
+            </form>
         </div>
-        <div class="form-floating mb-3">
-          <textarea name="body" class="form-control" id="bodyInput" style="height: 300px">${board.body}</textarea>
-          <label for="bodyInput">Comment</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input name="writer" readonly type="text" class="form-control-plaintext form-control-lg" id="writerInput" value="${member.nickname}">
-          <label for="writerInput">Mate Leader</label>
-        </div>
-        <button type="submit" class="btn btn-outline-secondary" form="boardForm">
-          수정
-        </button>
-      </form>
     </div>
-  </div>
 </div>
 
 <my:foot></my:foot>
@@ -56,5 +87,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>
 </body>
 </html>

@@ -158,12 +158,6 @@ public class BoardController {
         return "redirect:/board/detail?boardId=" + board.getId();
     }
 
-//    @GetMapping("addOttService")
-//    @PreAuthorize("isAuthenticated()")
-//    public void addOttService() {
-//        //파티장이 ott서비스 선택하는 폼에 포워드
-//    }
-
     @GetMapping("ottSearch")
     @ResponseBody
     public List<Board> ottSearch(@RequestParam("ott") String ott) {

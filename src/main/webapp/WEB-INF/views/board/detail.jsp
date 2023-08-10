@@ -27,28 +27,35 @@
     <my:alert status="${status}"/>
     <div class="card mb-3">
         <div class="card-header d-flex flex-column align-items-center">
-            <h3 class="flex-grow-1 text-center">${board.title}</h3>
+            <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label ottType" ott="${board.ott}"></a></h3>
             <p class="text-end m-0" style="color: gray;">
                 <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
                 조회수 ${board.viewCount} &nbsp;&nbsp;
                 <span><i style="color: gray;" class="heart icon ${member.like ? '' : 'outline'}"></i></span>
                 <span id="likeCount" style="color: gray;"></span> &nbsp;
-                <span><i style="color: gray;" class="user outline icon"></i></span>
-                <span style="color: gray;"></span>
+                <c:if test="${board.roll == 1}">
+                    <span><i style="color: gray;" class="user outline icon"></i></span>
+                    <span style="color: gray;">0</span>
+                </c:if>
             </p>
         </div>
 
         <div class="card-body">
             <%--게시글 간단 정보--%>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <span style="font-size: 20px;"><strong>${board.writer}&nbsp;&nbsp;</strong></span>
-                        <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
-                    </div>
-                    <div class="ui icon button circular" data-tooltip="저요!">
-                        <i class="user outline icon"></i>
-                    </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span style="font-size: 20px;"><strong>${board.writer}&nbsp;&nbsp;</strong></span>
+                    <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
                 </div>
+                <sec:authorize access="isAuthenticated()">
+                    <c:if test="${board.roll == 1}">
+                        <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn">
+                            <i class="user outline icon"></i>
+                            <span>0</span>
+                        </div>
+                    </c:if>
+                </sec:authorize>
+            </div>
 
             <hr>
 
@@ -133,5 +140,7 @@
 <script src="/js/semantic/semantic.min.js"></script>
 <script src="/js/BoardComment.js"></script>
 <script src="/js/likeBoard.js"></script>
+<script src="/js/ott.js"></script>
+<script src="/js/addMate.js"></script>
 </body>
 </html>

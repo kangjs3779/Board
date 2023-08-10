@@ -2,6 +2,7 @@ package com.example.shareMate.domain;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -18,4 +19,6 @@ public class Board {
     private Integer likeCount;
     private boolean likeCheck;
     private String ott;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

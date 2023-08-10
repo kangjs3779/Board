@@ -86,8 +86,17 @@
         <!--슬라이더 -->
         <div class="post-slider" style="height: 180px;">
             <div class="post-wrapper">
-                <div class="post">
-                    <img src="/images/netflix.jpeg" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/netflix.jpeg" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
                 <div class="post">
                     <img src="/images/disneyplus.jpeg" class="slider-image">
@@ -121,6 +130,7 @@
 <footer>
     <my:foot></my:foot>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

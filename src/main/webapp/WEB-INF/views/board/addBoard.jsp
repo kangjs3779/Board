@@ -62,7 +62,16 @@
                     <option value="prime">프라임 비디오</option>
                 </select>
                 <br>
-
+                <%--날짜 선택란--%>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" name="startDate" id="startDate" placeholder="Password">
+                    <label for="startDate">시작 날짜</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" name="endDate" id="endDate" placeholder="Password">
+                    <label for="endDate">끝나는 날짜</label>
+                </div>
+                <%--작성자 정보--%>
                 <div class="form-floating mb-3">
                     <input name="writer" readonly type="text" class="form-control-plaintext form-control-lg" id="writerInput" value="${member.nickname}">
                     <label for="writerInput">Mate Leader</label>

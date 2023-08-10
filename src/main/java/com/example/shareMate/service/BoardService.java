@@ -81,7 +81,7 @@ public class BoardService {
     public boolean addBoard(Board board) {
         //게시글 추가
         Integer count;
-
+        System.out.println(board);
         count = boardMapper.addBoard(board);
 
         return count == 1;
