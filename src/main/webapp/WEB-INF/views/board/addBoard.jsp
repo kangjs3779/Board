@@ -22,7 +22,7 @@
 <body>
 <my:navBar current="addBoard"/>
 
-<div class="container w-75">
+<div class="container w-50">
     <my:alert status="${status}"/>
     <div class="card">
         <h4 class="card-header">Find Mate</h4>
