@@ -29,11 +29,14 @@
         <div class="card-header d-flex flex-column align-items-center">
             <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label ottType" ott="${board.ott}"></a></h3>
             <p class="text-end m-0" style="color: gray;">
+                <%--조회수 조회--%>
                 <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
                 조회수 ${board.viewCount} &nbsp;&nbsp;
+                <%--좋아요 조회--%>
                 <span><i style="color: gray;" class="heart icon ${member.like ? '' : 'outline'}"></i></span>
                 <span id="likeCount" style="color: gray;"></span> &nbsp;
                 <c:if test="${board.roll == 1}">
+                    <%--모인 파티원 인원 수 조회--%>
                     <span><i style="color: gray;" class="user outline icon"></i></span>
                     <span style="color: gray;">0</span>
                 </c:if>
@@ -48,10 +51,21 @@
                     <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
                 </div>
                 <sec:authorize access="isAuthenticated()">
-                    <c:if test="${board.roll == 1}">
+                    <c:if test="${board.roll == 1 and board.memberId != member.username}">
+                        <%--파티장의 게시글이면서 본인이 쓴 게시글이 아닐 때--%>
+                        <%--저요 버튼--%>
                         <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn">
                             <i class="user outline icon"></i>
                             <span>0</span>
+                        </div>
+                    </c:if>
+                    <c:if test="${board.roll == 1 and board.memberId == member.username}">
+                        <%--파티장의 게시글이면서 본인이 쓴 게시글일 때--%>
+                        <%--파티원 목록 보기--%>
+                        <div>
+                            <img src="/images/남자1.png" data-title="Elliot Fu" data-content="Elliot has been a member since July 2012" class="ui avatar image mateInfo">
+                            <img src="/images/여자1.png" data-title="Stevie Feliciano" data-content="Stevie has been a member since August 2013" class="ui avatar image mateInfo">
+                            <img src="/images/여자2.png" data-title="Matt" data-content="Matt has been a member since July 2014" class="ui avatar image mateInfo">
                         </div>
                     </c:if>
                 </sec:authorize>
@@ -159,5 +173,10 @@
 <script src="/js/likeBoard.js"></script>
 <script src="/js/ott.js"></script>
 <script src="/js/addMate.js"></script>
+<script>
+    $('.mateInfo')
+        .popup()
+    ;
+</script>
 </body>
 </html>
