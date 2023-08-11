@@ -20,9 +20,9 @@ public interface BoardMapper {
 
     @Insert("""
             INSERT INTO Board 
-                (title, body, writer, memberId, roll, ott, startDate, endDate) 
+                (title, body, writer, memberId, roll, ottId, startDate, endDate) 
             VALUES 
-                (#{title}, #{body}, #{writer}, #{memberId}, #{roll}, #{ott}, #{startDate}, #{endDate})
+                (#{title}, #{body}, #{writer}, #{memberId}, #{roll}, #{ottId}, #{startDate}, #{endDate})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     Integer addBoard(Board board);
@@ -34,7 +34,7 @@ public interface BoardMapper {
 
     @Update("""
             UPDATE Board
-            SET title = #{title}, body = #{body}, ott = #{ott}, startDate = #{startDate}, endDate = #{endDate}
+            SET title = #{title}, body = #{body}, ottId = #{ottId}, startDate = #{startDate}, endDate = #{endDate}
             WHERE id = #{id}
             """)
     Integer modifyBoardByBoardId(Board board);

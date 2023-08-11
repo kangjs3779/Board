@@ -1,13 +1,7 @@
 package com.example.shareMate.service;
 
-import com.example.shareMate.domain.Board;
-import com.example.shareMate.domain.BoardComment;
-import com.example.shareMate.domain.Like;
-import com.example.shareMate.domain.Member;
-import com.example.shareMate.mapper.BoardCommentMapper;
-import com.example.shareMate.mapper.BoardMapper;
-import com.example.shareMate.mapper.LikeBoardMapper;
-import com.example.shareMate.mapper.MemberMapper;
+import com.example.shareMate.domain.*;
+import com.example.shareMate.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +27,8 @@ public class BoardService {
     private BoardCommentService boardCommentService;
     @Autowired
     private LikeBoardMapper likeBoardMapper;
+    @Autowired
+    private OttMapper ottMapper;
 
     public Map<String, Object> selectAllBoard(Authentication authentication) {
         Map<String, Object> info = new HashMap<>();
@@ -57,8 +53,12 @@ public class BoardService {
             }
         }
 
+        //ott서비스 전체 조회
+        List<Ott> otts = ottMapper.selectOtt();
+
         //map에 저장
         info.put("list", list);
+        info.put("otts", otts);
 
         return info;
     }
@@ -72,34 +72,34 @@ public class BoardService {
         //상세 페이지 조회
         Board board = boardMapper.selectBoardByBoardId(boardId);
 
-        //ott서비스 이름 치환
-        switch (board.getOtt()) {
-            case "netflix" :
-                board.setOtt("넷플릭스");
-                break;
-            case "disney" :
-                board.setOtt("디즈니플러스");
-                break;
-            case "tiving" :
-                board.setOtt("티빙");
-                break;
-            case "wavve" :
-                board.setOtt("웨이브");
-                break;
-            case "watcha" :
-                board.setOtt("왓챠");
-                break;
-            case "apple" :
-                board.setOtt("애플TV");
-                break;
-            case "laftel" :
-                board.setOtt("라프텔");
-                break;
-            case "prime" :
-                board.setOtt("프라임 비디오");
-                break;
-
-        }
+        //ott서비스 이름 한글로 치환
+//        switch (board.getOtt()) {
+//            case "netflix" :
+//                board.setOtt("넷플릭스");
+//                break;
+//            case "disney" :
+//                board.setOtt("디즈니플러스");
+//                break;
+//            case "tiving" :
+//                board.setOtt("티빙");
+//                break;
+//            case "wavve" :
+//                board.setOtt("웨이브");
+//                break;
+//            case "watcha" :
+//                board.setOtt("왓챠");
+//                break;
+//            case "apple" :
+//                board.setOtt("애플TV");
+//                break;
+//            case "laftel" :
+//                board.setOtt("라프텔");
+//                break;
+//            case "prime" :
+//                board.setOtt("프라임 비디오");
+//                break;
+//
+//        }
 
         //map에 저장
         info.put("board", board);
@@ -110,7 +110,7 @@ public class BoardService {
     public boolean addBoard(Board board) {
         //게시글 추가
         Integer count;
-        System.out.println(board);
+
         count = boardMapper.addBoard(board);
 
         return count == 1;

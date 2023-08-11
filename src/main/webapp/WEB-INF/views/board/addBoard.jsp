@@ -52,14 +52,9 @@
                 <%--ott 선택란--%>
                 <select class="ui fluid selection dropdown" name="ott" required>
                     <option value="">공유하고 싶은 ott서비스를 선택해주세요!</option>
-                    <option value="netflix">넷플릭스</option>
-                    <option value="disney">디즈니플러스</option>
-                    <option value="tiving">티빙</option>
-                    <option value="wavve">웨이브</option>
-                    <option value="watcha">왓챠</option>
-                    <option value="apple">애플TV</option>
-                    <option value="laftel">라프텔</option>
-                    <option value="prime">프라임 비디오</option>
+                    <c:forEach items="${otts}" var="ott">
+                        <option value="${ott.id}">${ott.ott}</option>
+                    </c:forEach>
                 </select>
                 <br>
                 <%--날짜 선택란--%>

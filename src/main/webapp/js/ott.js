@@ -1,42 +1,27 @@
 ottColor();
 
-function ottColor() {
-    $(".ottType").each(function () {
-        var ottName = $(this).attr("ott");
+function color() {
+    let colorMap = {}; // ottId와 해당 배경색을 저장할 맵
 
-        switch (ottName) {
-            case "netflix":
-            case "넷플릭스":
-                $(this).addClass("red");
-                break;
-            case "tiving":
-            case "티빙":
-                $(this).addClass("orange");
-                break;
-            case "disney":
-            case "디즈니플러스":
-                $(this).addClass("olive");
-                break;
-            case "wavve":
-            case "웨이브":
-                $(this).addClass("blue");
-                break;
-            case "watcha":
-            case "왓챠":
-                $(this).addClass("pink");
-                break;
-            case "apple":
-            case "애플TV":
-                $(this).addClass("black");
-                break;
-            case "laftel":
-            case "라프텔":
-                $(this).addClass("purple");
-                break;
-            case "prime":
-            case "프라임비디오":
-                $(this).addClass("teal");
-                break;
+    $(".ottColor").each(function () {
+        let ottColorId = $(this).attr("ottId");
+        let backGroundColor = $(this).attr("ottColor");
+        colorMap[ottColorId] = backGroundColor; // 맵에 저장
+    });
+
+    return colorMap;
+}
+
+function ottColor() {
+    let colorMap = color();
+
+    $(".ottService").each(function () {
+        let ottId = $(this).attr("ottId");
+
+        // colorMap에 해당 ottId의 배경색이 있는지 확인하고, 있다면 해당 배경색을 가져와서 적용합니다.
+        if (colorMap.hasOwnProperty(ottId)) {
+            let backgroundColor = colorMap[ottId];
+            $(this).css("background", backgroundColor);
         }
     });
 }

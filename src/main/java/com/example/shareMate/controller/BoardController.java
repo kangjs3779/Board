@@ -2,8 +2,10 @@ package com.example.shareMate.controller;
 
 import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
+import com.example.shareMate.domain.Ott;
 import com.example.shareMate.service.BoardService;
 import com.example.shareMate.service.MemberService;
+import com.example.shareMate.service.OttService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +27,8 @@ public class BoardController {
     private BoardService boardService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private OttService ottService;
 
     @GetMapping({ "/", "home" })
     public void home() {
@@ -68,8 +72,10 @@ public class BoardController {
     public void addBoardForm(Authentication authentication, Model model) {
         //게시글 추가폼 포워드
         Member member = memberService.selectMemberByUsername(authentication.getName());
+        List<Ott> otts = ottService.selectOtt();
 
         model.addAttribute("member", member);
+        model.addAttribute("otts", otts);
     }
 
     @PostMapping("addBoard")
