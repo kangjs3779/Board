@@ -34,7 +34,7 @@ public class customConfig {
 
         http.formLogin()
                 .loginPage("/member/login")
-                .defaultSuccessUrl("/board/list", true)
+                .defaultSuccessUrl("/board/home", true)
                 .failureHandler((request, response, exception) -> {
                     // 실패 시 처리할 로직 구현
                     String errorMessage = "로그인 실패하였습니다.";

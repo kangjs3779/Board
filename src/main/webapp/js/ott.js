@@ -1,31 +1,40 @@
 ottColor();
+
 function ottColor() {
     $(".ottType").each(function () {
         var ottName = $(this).attr("ott");
 
         switch (ottName) {
-            case "netflix" :
+            case "netflix":
+            case "넷플릭스":
                 $(this).addClass("red");
                 break;
-            case "tiving" :
+            case "tiving":
+            case "티빙":
                 $(this).addClass("orange");
                 break;
-            case "disney" :
+            case "disney":
+            case "디즈니플러스":
                 $(this).addClass("olive");
                 break;
-            case "wavve" :
+            case "wavve":
+            case "웨이브":
                 $(this).addClass("blue");
                 break;
-            case "watcha" :
+            case "watcha":
+            case "왓챠":
                 $(this).addClass("pink");
                 break;
-            case "apple" :
+            case "apple":
+            case "애플TV":
                 $(this).addClass("black");
                 break;
-            case "laftel" :
+            case "laftel":
+            case "라프텔":
                 $(this).addClass("purple");
                 break;
-            case "prime" :
+            case "prime":
+            case "프라임비디오":
                 $(this).addClass("teal");
                 break;
         }

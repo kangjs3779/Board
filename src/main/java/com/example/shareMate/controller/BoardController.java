@@ -26,7 +26,7 @@ public class BoardController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("home")
+    @GetMapping({ "/", "home" })
     public void home() {
         //홈페이지 포워드
     }

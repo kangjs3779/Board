@@ -63,6 +63,23 @@
             <pre>${board.body}</pre>
             <hr>
 
+            <%--구독 정보--%>
+            <form class="ui form">
+                <div class="field">
+                    <label style="color: gray;">Ott 서비스</label>
+                    <input readonly type="text" value="${board.ott}" id="ottName">
+                </div>
+                <div class="field">
+                    <label style="color: gray;">시작 날짜</label>
+                    <input type="text" readonly value="${board.startDate}">
+                </div>
+                <div class="field">
+                    <label style="color: gray;">끝나는 날짜</label>
+                    <input type="text" readonly value="${board.endDate}">
+                </div>
+            </form>
+            <hr>
+
             <%--댓글--%>
             <div class="mb-3"><strong>댓글&nbsp;<span id="commentCount"></span>개</strong></div>
 

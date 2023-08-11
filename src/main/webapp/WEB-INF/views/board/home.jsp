@@ -77,6 +77,9 @@
     <a class="massive ui inverted secondary button" href="/member/signup">
         SIGN UP
     </a>
+    <a class="massive ui inverted secondary button" href="/board/addBoard">
+        Share Mate
+    </a>
 </div>
 <div class="container">
     <br>
@@ -98,26 +101,89 @@
                         </p>
                     </div>
                 </div>
-                <div class="post">
-                    <img src="/images/disneyplus.jpeg" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/disneyplus.jpeg" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
-                <div class="post">
-                    <img src="/images/tiving.png" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/tiving.png" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
-                <div class="post">
-                    <img src="/images/wavve.png" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/wavve.png" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
-                <div class="post">
-                    <img src="/images/apple.jpeg" class="slider-image" style="border: gray solid 0.5px;">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/apple.jpeg" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
-                <div class="post">
-                    <img src="/images/whatcha.jpeg" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/whatcha.jpeg" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
-                <div class="post">
-                    <img src="/images/primevideo.jpeg" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/primevideo.jpeg" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~2명 모집 가능 <br>
+                            파티원 1명당<br> 매달 2,595원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 5,190원 절약!
+                        </p>
+                    </div>
                 </div>
-                <div class="post">
-                    <img src="/images/laftel.png" class="slider-image">
+                <div class="post ui move down reveal">
+                    <div class="visible content">
+                        <img src="/images/laftel.png" class="ui slider-image image">
+                    </div>
+                    <div class="hidden content slider-image" style="background-color: lightgrey;">
+                        <p>
+                            파티원 1~3명 모집 가능 <br>
+                            파티원 1명당<br> 매달 4,050원 지출! <br>
+                            최대 인원(3명) 모집하면, <br>매달 최대 12,150원 절약!
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
