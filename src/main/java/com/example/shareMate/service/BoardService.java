@@ -156,9 +156,9 @@ public class BoardService {
         return count == 1;
     }
 
-    public List<Board> ottSearch(String ott, Authentication authentication) {
+    public List<Board> ottSearch(Integer ottId, Authentication authentication) {
         //ott서비스 검색을 포함한 게시물 전체 조회
-        List<Board> list =  boardMapper.selectBoardByOtt(ott);
+        List<Board> list =  boardMapper.selectBoardByOtt(ottId);
 
         for (Board board : list) {
             //댓글 갯수

@@ -31,8 +31,8 @@
             <a class="ui empty circular label ottSearchBtn ottColor" ottColor="${ott.color}" style="background-color: ${ott.color}" ottId="${ott.id}"></a>
             <span class="ottSearchBtn" ottId="${ott.id}">${ott.ott}</span>
         </c:forEach>
-        <a class="ui empty circular label ottSearchBtn" ott=""></a>
-        <span class="ottSearchBtn" ott="">초기화</span>
+        <a class="ui empty circular label ottSearchBtn" ottId="0"></a>
+        <span class="ottSearchBtn" ottId="0">초기화</span>
     </div>
     <table class="table table-bordered">
         <thead>

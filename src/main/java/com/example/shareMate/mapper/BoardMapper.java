@@ -57,11 +57,11 @@ public interface BoardMapper {
     @Select("""
             <script>
             SELECT * FROM Board 
-            <if test="ott != ''">
-            WHERE ott = #{ott}
+            <if test="ott != 0">
+            WHERE ottId = #{ottId}
             </if>
             ORDER BY inserted DESC
             </script>
             """)
-    List<Board> selectBoardByOtt(String ott);
+    List<Board> selectBoardByOtt(Integer ottId);
 }

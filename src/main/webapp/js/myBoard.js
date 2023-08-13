@@ -66,7 +66,7 @@ function myBoardList() {
                         <a style="color: black;" href="/board/detail?boardId=${list.id}">${list.title}</a>
                         ${commentCountSpan}
                         <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
-                        <a class="ui empty circular label ottType" ott="${list.ott}"></a>
+                        <a class="ui empty circular label ottService" ottId="${list.ottId}"></a>
                     </td>
                     <td class="col text-center">${list.viewCount}</td>
                     <td class="col text-center">${list.writer}</td>
