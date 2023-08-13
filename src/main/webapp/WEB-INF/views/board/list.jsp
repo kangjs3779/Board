@@ -27,12 +27,15 @@
     <my:alert/>
     <div class="container">
         <%--검색 버튼--%>
+        <sec:authorize access="isAuthenticated()">
+            <sec:authentication property="principal.username" var="username"/>
+        </sec:authorize>
         <c:forEach items="${otts}" var="ott">
-            <a class="ui empty circular label ottSearchBtn ottColor" ottColor="${ott.color}" style="background-color: ${ott.color}" ottId="${ott.id}"></a>
-            <span class="ottSearchBtn" ottId="${ott.id}">${ott.ott}</span>
+            <a class="ui empty circular label ottSearchBtn ottColor" ottColor="${ott.color}" style="background-color: ${ott.color}" ottId="${ott.id}" username="${username}" page="list"></a>
+            <span class="ottSearchBtn" ottId="${ott.id}" username="${username}" page="list">${ott.ott}</span>
         </c:forEach>
-        <a class="ui empty circular label ottSearchBtn" ottId="0"></a>
-        <span class="ottSearchBtn" ottId="0">초기화</span>
+        <a class="ui empty circular label ottSearchBtn" ottId="0" username="${username}" page="list"></a>
+        <span class="ottSearchBtn" ottId="0" username="${username}" page="list">초기화</span>
     </div>
     <table class="table table-bordered">
         <thead>

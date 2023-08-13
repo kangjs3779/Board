@@ -56,12 +56,17 @@ public interface BoardMapper {
 
     @Select("""
             <script>
-            SELECT * FROM Board 
-            <if test="ott != 0">
-            WHERE ottId = #{ottId}
-            </if>
+            SELECT * FROM Board
+            <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                <if test="ottId != 0">
+                    ottId = #{ottId}
+                </if>
+                <if test="(!memberId.isEmpty() and memberId != null) and (page == 'myboard')">
+                   AND memberId = #{memberId}
+                </if>
+            </trim>
             ORDER BY inserted DESC
             </script>
             """)
-    List<Board> selectBoardByOtt(Integer ottId);
+    List<Board> selectBoardByOtt(Integer ottId, String memberId, String page);
 }

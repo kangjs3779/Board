@@ -26,31 +26,17 @@
     <div class="container">
         <h1 class="text-center">내가 쓴 게시글 목록</h1>
         <my:alert/>
-
-        <div>
-            <a class="ui red empty circular label ottType" ott="netflix"></a>
-            <span class="ottType" ott="netflix">넷플릭스</span>
-
-            <a class="ui olive empty circular label ottType" ott="disney" ></a>
-            <span class="ottType" ott="disney">디즈니플러스</span>
-
-            <a class="ui orange empty circular label ottType" ott="tiving"></a>
-            <span class="ottType" ott="tiving">티빙</span>
-
-            <a class="ui blue empty circular label ottType" ott="wavve"></a>
-            <span class="ottType" ott="wavve">웨이브</span>
-
-            <a class="ui pink empty circular label ottType" ott="watcha"></a>
-            <span class="ottType" ott="watcha">왓챠</span>
-
-            <a class="ui black empty circular label ottType" ott="apple"></a>
-            <span class="ottType" ott="apple">애플TV</span>
-
-            <a class="ui purple empty circular label ottType" ott="laftel"></a>
-            <span class="ottType" ott="laftel">라프텔</span>
-
-            <a class="ui teal empty circular label ottType" ott="prime"></a>
-            <span class="ottType" ott="prime">프라임비디오</span>
+        <div class="container">
+                <%--검색 버튼--%>
+            <sec:authorize access="isAuthenticated()">
+                <sec:authentication property="principal.username" var="username"/>
+            </sec:authorize>
+            <c:forEach items="${otts}" var="ott">
+                <a class="ui empty circular label ottSearchBtn ottColor" ottColor="${ott.color}" style="background-color: ${ott.color}" ottId="${ott.id}" username="${username}" page="myboard"></a>
+                <span class="ottSearchBtn" ottId="${ott.id}" page="myboard" page="myboard">${ott.ott}</span>
+            </c:forEach>
+            <a class="ui empty circular label ottSearchBtn" ottId="0" username="${username}" page="myboard"></a>
+            <span class="ottSearchBtn" ottId="0" username="${username}" page="myboard">초기화</span>
         </div>
 
         <table class="table table-bordered">
@@ -73,8 +59,10 @@
                                 <c:if test="${list.commentCount gt 0}">
                                     <span style="color: gray;">[${list.commentCount}]</span>
                                 </c:if>
+                                    <%--파티장 파티원 구분--%>
                                 <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
-                                <a class="ui empty circular label ottType" ott="${list.ott}"></a>
+                                    <%--ott 구분 점--%>
+                                <a class="ui empty circular label ottService" ottId="${list.ottId}"></a>
                             </div>
                             <div>
                                 <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>

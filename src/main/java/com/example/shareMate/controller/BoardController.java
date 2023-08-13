@@ -166,9 +166,11 @@ public class BoardController {
 
     @GetMapping("ottSearch")
     @ResponseBody
-    public List<Board> ottSearch(@RequestParam("ottId") Integer ottId) {
+    public List<Board> ottSearch(
+            @RequestParam("ottId") Integer ottId,
+            @RequestParam("page") String page) {
         //로그인한 사용자의 정보 불러옴
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return boardService.ottSearch(ottId, authentication);
+        return boardService.ottSearch(ottId, authentication, page);
     }
 }

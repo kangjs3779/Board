@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -72,35 +71,6 @@ public class BoardService {
         //상세 페이지 조회
         Board board = boardMapper.selectBoardByBoardId(boardId);
 
-        //ott서비스 이름 한글로 치환
-//        switch (board.getOtt()) {
-//            case "netflix" :
-//                board.setOtt("넷플릭스");
-//                break;
-//            case "disney" :
-//                board.setOtt("디즈니플러스");
-//                break;
-//            case "tiving" :
-//                board.setOtt("티빙");
-//                break;
-//            case "wavve" :
-//                board.setOtt("웨이브");
-//                break;
-//            case "watcha" :
-//                board.setOtt("왓챠");
-//                break;
-//            case "apple" :
-//                board.setOtt("애플TV");
-//                break;
-//            case "laftel" :
-//                board.setOtt("라프텔");
-//                break;
-//            case "prime" :
-//                board.setOtt("프라임 비디오");
-//                break;
-//
-//        }
-
         //map에 저장
         info.put("board", board);
 
@@ -156,9 +126,9 @@ public class BoardService {
         return count == 1;
     }
 
-    public List<Board> ottSearch(Integer ottId, Authentication authentication) {
+    public List<Board> ottSearch(Integer ottId, Authentication authentication, String page) {
         //ott서비스 검색을 포함한 게시물 전체 조회
-        List<Board> list =  boardMapper.selectBoardByOtt(ottId);
+        List<Board> list =  boardMapper.selectBoardByOtt(ottId, authentication.getName(), page);
 
         for (Board board : list) {
             //댓글 갯수

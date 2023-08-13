@@ -31,8 +31,9 @@ $(".ottSearchBtn").click(function () {
     //ott 버튼을 누르면 해당 ott만 검색
     let ottId = $(this).attr("ottId");
     console.log("ott 검색 : " + ottId);
+    let page = $(this).attr("page");
 
-    $.ajax("/board/ottSearch?ottId=" + ottId, {
+    $.ajax("/board/ottSearch?ottId=" + ottId + "&page=" + page, {
         success: function (lists) {
 
             $("#boardListBox").empty();

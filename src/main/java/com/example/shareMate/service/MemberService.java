@@ -3,10 +3,8 @@ package com.example.shareMate.service;
 import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Like;
 import com.example.shareMate.domain.Member;
-import com.example.shareMate.mapper.BoardCommentMapper;
-import com.example.shareMate.mapper.BoardMapper;
-import com.example.shareMate.mapper.LikeBoardMapper;
-import com.example.shareMate.mapper.MemberMapper;
+import com.example.shareMate.domain.Ott;
+import com.example.shareMate.mapper.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,8 @@ public class MemberService {
     private String username;
     @Autowired
     private LikeBoardMapper likeBoardMapper;
+    @Autowired
+    private OttMapper ottMapper;
 
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
@@ -178,7 +178,9 @@ public class MemberService {
         return info;
     }
 
-    public List<Board> selectMyBoardByUsername(Authentication authentication) {
+    public Map<String, Object> selectMyBoardByUsername(Authentication authentication) {
+        Map<String, Object> info = new HashMap<>();
+
         //내가 쓴 게시물 조회
         List<Board> boards = memberMapper.selectMyBoardByUsername(authentication.getName());
 
@@ -198,7 +200,13 @@ public class MemberService {
             }
         }
 
-        return boards;
+        //ott서비스 전체 조회
+        List<Ott> otts = ottMapper.selectOtt();
+
+        info.put("boards", boards);
+        info.put("otts", otts);
+
+        return info;
     }
 
     public Map<String, Object> deleteMyboard(Integer boardId, Member member) {

@@ -160,18 +160,18 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     public void myBoard(Authentication authentication, Model model) {
         //내가 쓴 게시글 포워드
-        List<Board> boards = memberService.selectMyBoardByUsername(authentication);
+        Map<String, Object> info = memberService.selectMyBoardByUsername(authentication);
 
-        model.addAttribute("boards", boards);
+        model.addAllAttributes(info);
     }
 
     @GetMapping("myBoardList")
     @ResponseBody
-    public List<Board> myBoardList(Authentication authentication) {
+    public Map<String, Object> myBoardList(Authentication authentication) {
         //내가 쓴 게시글 포워드
-        List<Board> boards = memberService.selectMyBoardByUsername(authentication);
+        Map<String, Object> info = memberService.selectMyBoardByUsername(authentication);
 
-        return boards;
+        return info;
     }
 
     @DeleteMapping("myBoardDelete/{boardId}")
