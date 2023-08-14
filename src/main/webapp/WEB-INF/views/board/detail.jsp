@@ -27,7 +27,7 @@
     <my:alert status="${status}"/>
     <div class="card mb-3">
         <div class="card-header d-flex flex-column align-items-center">
-            <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label ottType" ott="${board.ott}"></a></h3>
+            <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label"  style="background-color: ${ott.color};"></a></h3>
             <p class="text-end m-0" style="color: gray;">
                 <%--조회수 조회--%>
                 <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
@@ -81,7 +81,7 @@
             <form class="ui form">
                 <div class="field">
                     <label style="color: gray;">Ott 서비스</label>
-                    <input readonly type="text" value="${board.ott}" id="ottName">
+                    <input readonly type="text" value="${ott.ott}" id="ottName">
                 </div>
                 <div class="field">
                     <label style="color: gray;">시작 날짜</label>
@@ -171,7 +171,6 @@
 <script src="/js/semantic/semantic.min.js"></script>
 <script src="/js/BoardComment.js"></script>
 <script src="/js/likeBoard.js"></script>
-<script src="/js/ott.js"></script>
 <script src="/js/addMate.js"></script>
 <script>
     $('.mateInfo')

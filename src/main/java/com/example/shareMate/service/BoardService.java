@@ -71,8 +71,12 @@ public class BoardService {
         //상세 페이지 조회
         Board board = boardMapper.selectBoardByBoardId(boardId);
 
+        //ott 서비스 조회
+        Ott ott = ottMapper.selectOttByOttId(board.getOttId());
+
         //map에 저장
         info.put("board", board);
+        info.put("ott", ott);
 
         return info;
     }

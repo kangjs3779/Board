@@ -43,7 +43,7 @@
             <thead>
             <tr>
                 <th class="col text-center"><input type="checkbox" class="text-center" id="fullCheckBtn"></th>
-                <th class="col text-center">제목</th>
+                <th class="col-10 text-center">제목</th>
                 <th class="col text-center">조회수</th>
                 <th class="col text-center">작성자</th>
             </tr>

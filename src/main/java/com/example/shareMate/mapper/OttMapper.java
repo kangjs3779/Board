@@ -13,4 +13,10 @@ public interface OttMapper {
             SELECT * FROM Ott
             """)
     List<Ott> selectOtt();
+
+    @Select("""
+            SELECT * FROM Ott 
+            WHERE id = #{ottId}
+            """)
+    Ott selectOttByOttId(Integer ottId);
 }
