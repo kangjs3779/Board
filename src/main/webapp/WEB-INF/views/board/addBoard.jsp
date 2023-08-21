@@ -50,7 +50,7 @@
                     <label for="bodyInput">Comment</label>
                 </div>
                 <%--ott 선택란--%>
-                <select class="ui fluid selection dropdown" name="ott" required>
+                <select class="ui fluid selection dropdown" name="ottId" required>
                     <option value="">공유하고 싶은 ott서비스를 선택해주세요!</option>
                     <c:forEach items="${otts}" var="ott">
                         <option value="${ott.id}">${ott.ott}</option>
