@@ -31,7 +31,8 @@ public class customConfig {
     private String accessKeyId;
     @Value("${aws.secretAccessKey}")
     private String secretAccessKey;
-
+    @Value("${aws.bucketUrl}")
+    private String bucketUrl;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

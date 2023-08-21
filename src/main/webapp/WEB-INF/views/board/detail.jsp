@@ -38,7 +38,7 @@
                 <c:if test="${board.roll == 1}">
                     <%--모인 파티원 인원 수 조회--%>
                     <span><i style="color: gray;" class="user outline icon"></i></span>
-                    <span style="color: gray;">0</span>
+                    <span style="color: gray;" class="countShare"></span>
                 </c:if>
             </p>
         </div>
@@ -50,14 +50,16 @@
                     <span style="font-size: 20px;"><strong>${board.writer}&nbsp;&nbsp;</strong></span>
                     <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
                 </div>
+                <%--저요 버튼--%>
+                <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
+                    <i class="user outline icon"></i>
+                    <span class="countShare"></span>
+                </div>
                 <sec:authorize access="isAuthenticated()">
                     <c:if test="${board.roll == 1 and board.memberId != member.username}">
                         <%--파티장의 게시글이면서 본인이 쓴 게시글이 아닐 때--%>
                         <%--저요 버튼--%>
-                        <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
-                            <i class="user outline icon"></i>
-                            <span>0</span>
-                        </div>
+                        <%--여기로 이동--%>
                     </c:if>
                     <c:if test="${board.roll == 1 and board.memberId == member.username}">
                         <%--파티장의 게시글이면서 본인이 쓴 게시글일 때--%>
@@ -171,15 +173,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img class="ui medium rounded image" src="/images/wireframe/image.png">
+                <img class="ui small centered rounded image" src="http://bucket0503-qkskkfkk.s3.ap-northeast-2.amazonaws.com/ShareMate/ott/${ott.id}/${ott.logo}">
+                <br>
                 한 달 요금은 <span style="color: red;">${ott.costPerPerson}원</span> 입니다.<br>
                 시작 날짜는 <span style="color: red;">${board.startDate}부터 ${board.endDate}</span>입니다.<br>
+                최대 <span style="color: #5a30b5"><strong>${ott.limitedAttendance}명</strong></span>을 모집할 수 있습니다.<br>
+                현재 <span style="color: #5a30b5"><strong>0명</strong></span>이 모집되었습니다.
+            </div>
+            <!-- 기본 정보 -->
+            <div>
+                <input type="hidden" value="${ott.id}" id="ottId">
+                <input type="hidden" value="${param.boardId}" id="boardId">
+                <input type="hidden" value="${member.username}" id="memberId">
             </div>
             <div class="modal-footer">
                 <button type="button" class="ui basic button" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="ui basic button">
+                <button type="button" class="ui basic button" id="addMateModalBtn" data-bs-dismiss="modal">
                     <i class="icon user"></i>
-                    참여하기
+                    참여 신청
                 </button>
             </div>
         </div>
