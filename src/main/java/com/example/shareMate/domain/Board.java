@@ -18,6 +18,8 @@ public class Board {
     private Integer roll;
     private Integer likeCount;
     private boolean likeCheck;
+    private boolean mateCheck;
+    private Integer mateCount;
     private Integer ottId;
     private LocalDate startDate;
     private LocalDate endDate;

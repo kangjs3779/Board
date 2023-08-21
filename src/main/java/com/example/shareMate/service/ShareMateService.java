@@ -15,10 +15,18 @@ public class ShareMateService {
     @Autowired
     private ShareMateMapper shareMateMapper;
 
-    public boolean addMate(ShareMate shareMate) {
+    public Map<String, Object> addMate(ShareMate shareMate) {
+        Map<String, Object> info = new HashMap<>();
+
         Integer count = shareMateMapper.addMate(shareMate);
 
-        return count == 1;
+        if (count == 1) {
+            info.put("message", "신청이 추가되었습니다.");
+        } else {
+            info.put("message", "신청이 추가되지 않았습니다.");
+        }
+
+        return info;
     }
 
     public Map<String, Object> checkShareMate(Integer boardId) {
@@ -32,6 +40,20 @@ public class ShareMateService {
 
         info.put("mates", mates);
         info.put("countMate", countMate);
+
+        return info;
+    }
+
+    public Map<String, Object> cancleMate(ShareMate shareMate) {
+        Map<String, Object> info = new HashMap<>();
+
+        Integer count = shareMateMapper.cancleMate(shareMate);
+
+        if (count == 1) {
+            info.put("message", "신청이 취소되었습니다.");
+        } else {
+            info.put("message", "신청이 취소되지 않았습니다.");
+        }
 
         return info;
     }

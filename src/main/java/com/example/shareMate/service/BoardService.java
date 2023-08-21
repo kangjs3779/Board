@@ -29,6 +29,8 @@ public class BoardService {
     private LikeBoardMapper likeBoardMapper;
     @Autowired
     private OttMapper ottMapper;
+    @Autowired
+    private ShareMateMapper shareMateMapper;
 
     public Map<String, Object> selectAllBoard(Authentication authentication) {
         Map<String, Object> info = new HashMap<>();
@@ -47,10 +49,15 @@ public class BoardService {
 
             //좋아요 확인
             Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
-            if(like != null) {
-                //좋아요를 누른 게시글이면
-                board.setLikeCheck(true);
-            }
+            board.setLikeCheck(like != null);
+
+            //메이트 수
+            Integer mateCount = shareMateMapper.selectCountMate(board.getId());
+            board.setMateCount(mateCount);
+
+            //메이트 확인
+            ShareMate shareMate = shareMateMapper.checkMateByMemberIdAndBoardId(authentication.getName(), board.getId());
+            board.setMateCheck(shareMate != null);
         }
 
         //ott서비스 전체 조회

@@ -62,9 +62,11 @@ public class BoardController {
 
         if (!authentication.getName().equals("anonymousUser")) {
             Member member = memberService.selectMemberByUsername(authentication.getName());
-            member.setLike(memberService.checkLikeByUsernameAndBoardId(authentication.getName(), boardId));
+
+            Map<String, Object> check = memberService.checkeByUsernameAndBoardId(member.getUsername(), boardId);
 
             info.put("member", member);
+            info.put("check", check);
         }
 
         model.addAllAttributes(info);

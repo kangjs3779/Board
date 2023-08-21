@@ -33,11 +33,11 @@
                 <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
                 조회수 ${board.viewCount} &nbsp;&nbsp;
                 <%--좋아요 조회--%>
-                <span><i style="color: gray;" class="heart icon ${member.like ? '' : 'outline'}"></i></span>
+                <span><i style="color: gray;" class="heart icon ${check.like ? '' : 'outline'}"></i></span>
                 <span id="likeCount" style="color: gray;"></span> &nbsp;
                 <c:if test="${board.roll == 1}">
                     <%--모인 파티원 인원 수 조회--%>
-                    <span><i style="color: gray;" class="user outline icon"></i></span>
+                    <span><i style="color: gray;" class="user ${check.mate ? '' : 'outline'} icon"></i></span>
                     <span style="color: gray;" class="countShare"></span>
                 </c:if>
             </p>
@@ -51,7 +51,7 @@
                     <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
                 </div>
                 <%--저요 버튼--%>
-                <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
+                <div class="ui blue ${check.mate ? '' : 'basic'} icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
                     <i class="user outline icon"></i>
                     <span class="countShare"></span>
                 </div>
@@ -190,7 +190,7 @@
                 <button type="button" class="ui basic button" data-bs-dismiss="modal">취소</button>
                 <button type="button" class="ui basic button" id="addMateModalBtn" data-bs-dismiss="modal">
                     <i class="icon user"></i>
-                    참여 신청
+                    ${check.mate ? '참여 취소' : '참여 신청'}
                 </button>
             </div>
         </div>

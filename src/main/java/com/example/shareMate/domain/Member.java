@@ -18,5 +18,6 @@ public class Member {
     private List<String> authority;
     private String name;
     private boolean like;
+    private boolean mate;
 
 }

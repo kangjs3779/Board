@@ -1,9 +1,6 @@
 package com.example.shareMate.service;
 
-import com.example.shareMate.domain.Board;
-import com.example.shareMate.domain.Like;
-import com.example.shareMate.domain.Member;
-import com.example.shareMate.domain.Ott;
+import com.example.shareMate.domain.*;
 import com.example.shareMate.mapper.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -39,6 +36,8 @@ public class MemberService {
     private LikeBoardMapper likeBoardMapper;
     @Autowired
     private OttMapper ottMapper;
+    @Autowired
+    private ShareMateMapper shareMateMapper;
 
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
@@ -55,6 +54,7 @@ public class MemberService {
     public Member selectMemberByUsername(String username) {
         //아이디로 회원 정보 조회
         Member member = memberMapper.selectMemberByUsername(username);
+
 
         return member;
     }
@@ -245,14 +245,17 @@ public class MemberService {
         return Map.of("check", member != null, "member", member);
     }
 
-    public boolean checkLikeByUsernameAndBoardId(String memberId, Integer boardId) {
+    public Map<String, Object> checkeByUsernameAndBoardId(String memberId, Integer boardId) {
+        Map<String, Object> check = new HashMap<>();
+
         //좋아요를 누른 게시글인지 확인
         Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(memberId, boardId);
+        check.put("like", like != null);
 
-        if(like == null) {
-            return false;
-        } else {
-            return true;
-        }
+        //sharemate 참여한 게시글인지 확인
+        ShareMate shareMate = shareMateMapper.checkMateByMemberIdAndBoardId(memberId, boardId);
+        check.put("mate", shareMate != null);
+
+        return check;
     }
 }

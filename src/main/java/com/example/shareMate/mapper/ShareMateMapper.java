@@ -1,6 +1,7 @@
 package com.example.shareMate.mapper;
 
 import com.example.shareMate.domain.ShareMate;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,4 +29,16 @@ public interface ShareMateMapper {
             WHERE boardId = #{boardId}
             """)
     Integer selectCountMate(Integer boardId);
+
+    @Select("""
+            SELECT * FROM ShareMate
+            WHERE memberId = #{memberId} AND boardId = #{boardId}
+            """)
+    ShareMate checkMateByMemberIdAndBoardId(String memberId, Integer boardId);
+
+    @Delete("""
+            DELETE FROM ShareMate
+            WHERE memberId = #{memberId} AND boardId = #{boardId}
+            """)
+    Integer cancleMate(ShareMate shareMate);
 }

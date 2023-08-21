@@ -69,7 +69,8 @@
                             <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>
                             <span id="likeCount" style="color: gray;">${list.likeCount != null ? list.likeCount : 0}</span> &nbsp;
                                 <%--메이트 개수--%>
-                            <i style="color: gray;" class="user outline icon"></i>
+                            <i style="color: gray;" class="user ${list.mateCheck ? '' : 'outline'} icon"></i>
+                            <span id="mateCount" style="color: gray;">${list.mateCount != null ? list.mateCount : 0}</span> &nbsp;
                         </div>
                     </div>
                 </td>
