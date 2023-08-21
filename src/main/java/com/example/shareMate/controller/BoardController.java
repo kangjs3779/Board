@@ -31,8 +31,11 @@ public class BoardController {
     private OttService ottService;
 
     @GetMapping({ "/", "home" })
-    public void home() {
+    public void home(Model model) {
         //홈페이지 포워드
+        Map<String, Object> info = boardService.home();
+
+        model.addAllAttributes(info);
     }
 
     @GetMapping("list")

@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +74,13 @@ public class BoardService {
 
         //ott 서비스 조회
         Ott ott = ottMapper.selectOttByOttId(board.getOttId());
+
+        //한 명당 내는 비용 조회
+        Integer costPerPersonInt = ott.getCost() / ott.getLimitedAttendance();
+        DecimalFormat df = new DecimalFormat("###,###");
+        String costPerPersonString = df.format(costPerPersonInt);
+
+        ott.setCostPerPerson(costPerPersonString);
 
         //map에 저장
         info.put("board", board);
@@ -152,5 +160,31 @@ public class BoardService {
         }
 
         return list;
+    }
+
+    public Map<String, Object> home() {
+        Map<String, Object> info = new HashMap<>();
+
+        //홈페이지 포워드
+        List<Ott> otts = ottMapper.selectOtt();
+
+        for(Ott ott : otts) {
+            DecimalFormat df = new DecimalFormat("###,###");
+            //한 명당 내는 비용 조회
+            Integer costPerPersonInt = ott.getCost() / ott.getLimitedAttendance();
+            String costPerPersonString = df.format(costPerPersonInt);
+
+            //절약할 수 있는 금액 총액 조회
+            Integer saveMoneyInt = costPerPersonInt * (ott.getLimitedAttendance() - 1);
+            String saveMoneyString = df.format(saveMoneyInt);
+
+            ott.setCostPerPerson(costPerPersonString);
+            ott.setSaveMoney(saveMoneyString);
+
+        }
+
+        info.put("otts", otts);
+
+        return info;
     }
 }

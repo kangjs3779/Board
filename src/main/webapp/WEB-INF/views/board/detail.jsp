@@ -54,7 +54,7 @@
                     <c:if test="${board.roll == 1 and board.memberId != member.username}">
                         <%--파티장의 게시글이면서 본인이 쓴 게시글이 아닐 때--%>
                         <%--저요 버튼--%>
-                        <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn">
+                        <div class="ui blue basic icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
                             <i class="user outline icon"></i>
                             <span>0</span>
                         </div>
@@ -161,6 +161,30 @@
         </div>
     </div>
 </sec:authorize>
+
+<!-- 메이트 추가 모달 -->
+<div class="modal fade" id="addMateModal" tabindex="-1" aria-labelledby="addMateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addMateModalLabel">${ott.ott}구독에 참여하시겠습니까?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img class="ui medium rounded image" src="/images/wireframe/image.png">
+                한 달 요금은 <span style="color: red;">${ott.costPerPerson}원</span> 입니다.<br>
+                시작 날짜는 <span style="color: red;">${board.startDate}부터 ${board.endDate}</span>입니다.<br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ui basic button" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="ui basic button">
+                    <i class="icon user"></i>
+                    참여하기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer>
     <my:foot></my:foot>

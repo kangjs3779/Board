@@ -9,5 +9,7 @@ public class Ott {
     private Integer limitedAttendance;
     private Integer cost;
     private String color;
-
+    private String costPerPerson;
+    private String logo;
+    private String saveMoney;
 }

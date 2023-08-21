@@ -10,6 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +27,11 @@ public class customConfig {
     private String username;
     @Value("${spring.mail.password}")
     private String passward;
+    @Value("${aws.accessKeyId}")
+    private String accessKeyId;
+    @Value("${aws.secretAccessKey}")
+    private String secretAccessKey;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -66,6 +76,19 @@ public class customConfig {
         mailSender.setJavaMailProperties(properties);
 
         return mailSender;
+    }
 
+    @Bean
+    public S3Client s3client() {
+
+        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
+        AwsCredentialsProvider provider = StaticCredentialsProvider.create(credentials);
+
+        S3Client s3client = S3Client.builder()
+                .credentialsProvider(provider)
+                .region(Region.AP_NORTHEAST_2)
+                .build();
+
+        return s3client;
     }
 }
