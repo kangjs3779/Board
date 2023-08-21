@@ -1,6 +1,8 @@
 package com.example.shareMate.service;
 
+import com.example.shareMate.domain.Ott;
 import com.example.shareMate.domain.ShareMate;
+import com.example.shareMate.mapper.OttMapper;
 import com.example.shareMate.mapper.ShareMateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +16,25 @@ import java.util.Objects;
 public class ShareMateService {
     @Autowired
     private ShareMateMapper shareMateMapper;
+    @Autowired
+    private OttMapper ottMapper;
 
     public Map<String, Object> addMate(ShareMate shareMate) {
         Map<String, Object> info = new HashMap<>();
 
-        Integer count = shareMateMapper.addMate(shareMate);
+        //해당 구독 서비스의 제한 인원 탐색
+        Integer limitedAttendance = ottMapper.selectOttByOttId(shareMate.getOttId()).getLimitedAttendance();
+        //현재 모집된 인원 탐색
+        Integer currentMateCount = shareMateMapper.selectCountMate(shareMate.getBoardId());
 
-        if (count == 1) {
-            info.put("message", "신청이 추가되었습니다.");
+        if (limitedAttendance > currentMateCount) {
+            //해당 구독 서비스의 제한 인원보다 현재 모집된 인원이 적으면
+            Integer count = shareMateMapper.addMate(shareMate);
+
+            info.put("message", count == 1 ? "신청이 추가되었습니다." : "신청이 추가되지 않았습니다.");
         } else {
-            info.put("message", "신청이 추가되지 않았습니다.");
+            //해당 구독 서비스의 인원이 모두 차면?
         }
-
         return info;
     }
 

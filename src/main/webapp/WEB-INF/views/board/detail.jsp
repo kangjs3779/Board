@@ -27,7 +27,7 @@
     <my:alert status="${status}"/>
     <div class="card mb-3">
         <div class="card-header d-flex flex-column align-items-center">
-            <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label"  style="background-color: ${ott.color};"></a></h3>
+            <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label" style="background-color: ${ott.color};"></a></h3>
             <p class="text-end m-0" style="color: gray;">
                 <%--조회수 조회--%>
                 <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
@@ -50,27 +50,36 @@
                     <span style="font-size: 20px;"><strong>${board.writer}&nbsp;&nbsp;</strong></span>
                     <span style="font-size: 13px; color: gray;"><fmt:formatDate value="${board.inserted}" pattern="yyyy.MM.dd. hh:mm"/></span>
                 </div>
-                <%--저요 버튼--%>
-                <div class="ui blue ${check.mate ? '' : 'basic'} icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
-                    <i class="user outline icon"></i>
-                    <span class="countShare"></span>
-                </div>
                 <sec:authorize access="isAuthenticated()">
                     <c:if test="${board.roll == 1 and board.memberId != member.username}">
                         <%--파티장의 게시글이면서 본인이 쓴 게시글이 아닐 때--%>
-                        <%--저요 버튼--%>
-                        <%--여기로 이동--%>
+                        <c:if test="${ott.limitedAttendance > mateCount}">
+                            <%--모집인원이 다 안찼을 때--%>
+                            <%--저요 버튼--%>
+                            <div class="ui blue ${check.mate ? '' : 'basic'} icon button circular" data-tooltip="저요!" id="addMateBtn" data-bs-toggle="modal" data-bs-target="#addMateModal">
+                                <i class="user outline icon"></i>
+                                <span class="countShare"></span>
+                            </div>
+                        </c:if>
+                        <c:if test="${ott.limitedAttendance <= mateCount}">
+                            <%--모집인원이 다 찼을 때--%>
+                            <div class="ui blue ${check.mate ? '' : 'basic'} red icon button circular" data-tooltip="모집 완료!">
+                                <i class="user outline icon"></i>
+                                <span class="countShare"></span>
+                            </div>
+                        </c:if>
                     </c:if>
                     <c:if test="${board.roll == 1 and board.memberId == member.username}">
                         <%--파티장의 게시글이면서 본인이 쓴 게시글일 때--%>
                         <%--파티원 목록 보기--%>
                         <div>
-                            <img src="/images/남자1.png" data-title="Elliot Fu" data-content="Elliot has been a member since July 2012" class="ui avatar image mateInfo">
-                            <img src="/images/여자1.png" data-title="Stevie Feliciano" data-content="Stevie has been a member since August 2013" class="ui avatar image mateInfo">
-                            <img src="/images/여자2.png" data-title="Matt" data-content="Matt has been a member since July 2014" class="ui avatar image mateInfo">
+                            <c:forEach items="${mates}" var="mate" varStatus="num">
+                                <img src="/images/사람${num.index + 1}.png" data-title="${mate.nickname}님" data-content="신청을 완료했습니다!" class="ui avatar image mateInfo">
+                            </c:forEach>
                         </div>
                     </c:if>
                 </sec:authorize>
+
             </div>
 
             <hr>
@@ -123,16 +132,18 @@
 
     <%--  버튼  --%>
     <sec:authorize access="isAuthenticated() and #board.memberId == principal.username">
-        <div class="d-grid gap-2 d-md-block">
-            <a type="button" class="btn btn-outline-secondary" href="/board/modify?boardId=${param.boardId}">
-                <i class="fa-regular fa-pen-to-square"></i>
-                수정
-            </a>
-            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                <i class="fa-regular fa-trash-can"></i>
-                삭제
-            </button>
-        </div>
+        <c:if test="${mateCount == 0}">
+            <div class="d-grid gap-2 d-md-block">
+                <a type="button" class="btn btn-outline-secondary" href="/board/modify?boardId=${param.boardId}">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    수정
+                </a>
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="fa-regular fa-trash-can"></i>
+                    삭제
+                </button>
+            </div>
+        </c:if>
     </sec:authorize>
 </div>
 
@@ -178,7 +189,7 @@
                 한 달 요금은 <span style="color: red;">${ott.costPerPerson}원</span> 입니다.<br>
                 시작 날짜는 <span style="color: red;">${board.startDate}부터 ${board.endDate}</span>입니다.<br>
                 최대 <span style="color: #5a30b5"><strong>${ott.limitedAttendance}명</strong></span>을 모집할 수 있습니다.<br>
-                현재 <span style="color: #5a30b5"><strong>0명</strong></span>이 모집되었습니다.
+                현재 <strong style="color: #5a30b5"><span class="countShare"></span>명</strong>이 모집되었습니다.
             </div>
             <!-- 기본 정보 -->
             <div>

@@ -8,4 +8,5 @@ public class ShareMate {
     private String memberId;
     private Integer boardId;
     private Integer ottId;
+    private String nickname;
 }

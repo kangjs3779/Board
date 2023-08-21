@@ -89,9 +89,25 @@ public class BoardService {
 
         ott.setCostPerPerson(costPerPersonString);
 
+        //ott 전체 서비스 조회
+        List<Ott> otts = ottMapper.selectOtt();
+
+        //쉐어메이트 조회
+        List<ShareMate> mates = shareMateMapper.checkShareMate(boardId);
+        for(ShareMate mate : mates) {
+            String nickname = memberMapper.selectMemberByUsername(mate.getMemberId()).getNickname();
+            mate.setNickname(nickname);
+        }
+
+        //메이트 수 조회
+        Integer mateCount = shareMateMapper.selectCountMate(boardId);
+
         //map에 저장
         info.put("board", board);
         info.put("ott", ott);
+        info.put("otts", otts);
+        info.put("mates", mates);
+        info.put("mateCount", mateCount);
 
         return info;
     }

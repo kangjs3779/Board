@@ -1,11 +1,3 @@
-//
-// const ottId = $("#ottId").val();
-// const boardId = $("#boardId").val();
-// const memberId = $("#memberId").val();
-// const data = {ottId, boardId, memberId};
-//
-// console.log(data)
-
 checkShareMate();
 
 $("#addMateModalBtn").click(function () {
@@ -38,7 +30,7 @@ $("#addMateModalBtn").click(function () {
             }
         })
     } else {
-        //참여 취소를 하는 과가
+        //참여 취소를 하는 과정
         $.ajax("/shareMate/cancleMate", {
             method: "delete",
             contentType: "application/json",
@@ -61,34 +53,6 @@ $("#addMateModalBtn").click(function () {
     }
 
 });
-
-$("#cancleMateModalBtn").click(function () {
-    //참여하기 후에 참여취소를 누름
-    const boardId = $("#boardId").val();
-    const memberId = $("#memberId").val();
-    const data = {boardId, memberId};
-    console.log(data)
-
-    //참여를 취소하는 과정
-    $.ajax("/shareMate/cancleMate", {
-        method: "delete",
-        contentType: "application/json",
-        data: data,
-        success: function () {
-            checkShareMate();
-
-            //참여 신청버튼으로 변함
-            $("#cancleMateModalBtn").empty();
-            $("#cancleMateModalBtn").append(`
-                    <i class="icon user"></i>
-                    참여 신청
-                `);
-        }
-    })
-
-    //모달이 뜨고 참여취소버튼을 누르면 저요 버튼이 변함
-    $("#canclemateBtn").removeClass("basic");
-})
 
 //참여중인 메이트 확인
 function checkShareMate() {
