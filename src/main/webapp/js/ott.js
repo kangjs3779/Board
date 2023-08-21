@@ -48,12 +48,30 @@ $(".ottSearchBtn").click(function () {
                 <tr>
                     <th class="col text-center">${index + 1}</th> <!-- 순차적인 숫자 추가 -->
                     <td class="col-10 text-center" boardId="${list.id}">
-                        <a style="color: black;" href="/board/detail?boardId=${list.id}">${list.title}</a>
-                        ${commentCountSpan}
-                        <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
-                        <a class="ui empty circular label ottService" ottId="${list.ottId}"></a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="flex: 1; text-align: center;" boardId="${list.id}">
+                                <!--제목-->
+                                <a style="color: black;" href="/board/detail?boardId=${list.id}">${list.title}</a>
+                                <!--댓글개수-->
+                                ${commentCountSpan}
+                                <!--파티장 파티원 구분-->
+                                <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
+                                <!--ott 구분점-->
+                                <a class="ui empty circular label ottService" ottId="${list.ottId}"></a>
+                            </div>
+                            <div>
+                                <!--좋아요 개수-->
+                                <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>
+                                <span id="likeCount" style="color: gray;">${list.likeCount != null ? list.likeCount : 0}</span> &nbsp;
+                                <!--메이트 수-->
+                                <i style="color: gray;" class="user outline icon"></i>
+                            </div>
+                        </div>
                     </td>
+                    
+                    <!--조회수-->
                     <td class="col text-center">${list.viewCount}</td>
+                    <!--작성자-->
                     <td class="col text-center">${list.writer}</td>
                 </tr>
                 `);

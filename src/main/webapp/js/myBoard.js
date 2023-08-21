@@ -41,6 +41,7 @@ $("#deleteModalBtn").click(function () {
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function () {
+                console.log("성공")
                 myBoardList();
             }
         })
