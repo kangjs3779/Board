@@ -27,7 +27,15 @@
     <my:alert status="${status}"/>
     <div class="card mb-3">
         <div class="card-header d-flex flex-column align-items-center">
-            <h3 class="flex-grow-1 text-center">${board.title}&nbsp;&nbsp;<a class="ui empty circular label" style="background-color: ${ott.color};"></a></h3>
+            <h3 class="flex-grow-1 text-center">
+                ${board.title}&nbsp;&nbsp;
+                <%--ott 구분점--%>
+                <a class="ui empty circular label" style="background-color: ${ott.color};"></a>
+                <c:if test="${ott.limitedAttendance == mateCount}">
+                    <%--모집완료 체크--%>
+                    <i class="check icon"></i>
+                </c:if>
+            </h3>
             <p class="text-end m-0" style="color: gray;">
                 <%--조회수 조회--%>
                 <span>[${board.roll == 1 ? '파티장' : '파티원'}]&nbsp;&nbsp;</span>
@@ -61,12 +69,12 @@
                                 <span class="countShare"></span>
                             </div>
                         </c:if>
-                        <c:if test="${ott.limitedAttendance <= mateCount}">
+                        <c:if test="${ott.limitedAttendance == mateCount}">
                             <%--모집인원이 다 찼을 때--%>
-                            <div class="ui blue ${check.mate ? '' : 'basic'} red icon button circular" data-tooltip="모집 완료!">
-                                <i class="user outline icon"></i>
-                                <span class="countShare"></span>
-                            </div>
+                            <button class="ui basic button" data-tooltip="모집 완료!">
+                                <i class="icon user"></i>
+                                모집 완료!
+                            </button>
                         </c:if>
                     </c:if>
                     <c:if test="${board.roll == 1 and board.memberId == member.username}">
@@ -76,6 +84,7 @@
                             <c:forEach items="${mates}" var="mate" varStatus="num">
                                 <img src="/images/사람${num.index + 1}.png" data-title="${mate.nickname}님" data-content="신청을 완료했습니다!" class="ui avatar image mateInfo">
                             </c:forEach>
+
                         </div>
                     </c:if>
                 </sec:authorize>

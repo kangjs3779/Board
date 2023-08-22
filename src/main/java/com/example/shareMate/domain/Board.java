@@ -23,4 +23,5 @@ public class Board {
     private Integer ottId;
     private LocalDate startDate;
     private LocalDate endDate;
+    private boolean complete;
 }

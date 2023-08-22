@@ -38,6 +38,9 @@ public class BoardService {
         //게시물 전체 조회
         List<Board> list = boardMapper.selectBoardList();
 
+        //ott서비스 전체 조회
+        List<Ott> otts = ottMapper.selectOtt();
+
         for (Board board : list) {
             //댓글 갯수
             Integer commentCount = boardCommentMapper.selectCommentByBoarId(board.getId());
@@ -58,10 +61,11 @@ public class BoardService {
             //메이트 확인
             ShareMate shareMate = shareMateMapper.checkMateByMemberIdAndBoardId(authentication.getName(), board.getId());
             board.setMateCheck(shareMate != null);
-        }
 
-        //ott서비스 전체 조회
-        List<Ott> otts = ottMapper.selectOtt();
+            //모집완료 여부
+            Ott ott = ottMapper.selectOttByOttId(board.getOttId());
+            board.setComplete(ott.getLimitedAttendance() == mateCount ? true : false);
+        }
 
         //map에 저장
         info.put("list", list);

@@ -63,6 +63,8 @@
                             <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
                                 <%--ott 구분 점--%>
                             <a class="ui empty circular label ottService" ottId="${list.ottId}"></a>
+                                <%--모집완료 체크--%>
+                            <i class="check icon ${list.complete ? '' : 'd-none'}"></i>
                         </div>
                         <div>
                                 <%--좋아요 개수--%>
