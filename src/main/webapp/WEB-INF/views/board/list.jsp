@@ -31,7 +31,7 @@
             <sec:authentication property="principal.username" var="username"/>
         </sec:authorize>
         <c:forEach items="${otts}" var="ott">
-            <a class="ui empty circular label ottSearchBtn ottColor" ottColor="${ott.color}" style="background-color: ${ott.color}" ottId="${ott.id}" username="${username}" page="list"></a>
+            <a class="ui empty circular label ottSearchBtn ottColor" ottColor="${ott.color}" style="background-color: ${ott.color}" ottId="${ott.id}" username="${username}" page="list" data-title="${ott.ott}" data-content="최대 ${ott.limitedAttendance}명 더 모집가능!"></a>
             <span class="ottSearchBtn" ottId="${ott.id}" username="${username}" page="list">${ott.ott}</span>
         </c:forEach>
         <a class="ui empty circular label ottSearchBtn" ottId="0" username="${username}" page="list"></a>
@@ -70,7 +70,7 @@
                                 <%--좋아요 개수--%>
                             <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>
                             <span id="likeCount" style="color: gray;">${list.likeCount != null ? list.likeCount : 0}</span> &nbsp;
-                                <%--메이트 개수--%>
+                                <%--메이트 수--%>
                             <i style="color: gray;" class="user ${list.mateCheck ? '' : 'outline'} icon"></i>
                             <span id="mateCount" style="color: gray;">${list.mateCount != null ? list.mateCount : 0}</span> &nbsp;
                         </div>
@@ -99,12 +99,44 @@
         </sec:authorize>
     </div>
 
+    <%--페이지네이션--%>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <%--이전 버튼--%>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <%--숫자들--%>
+            <c:forEach begin="1" end="10" var="num">
+                <li class="page-item"><a class="page-link" href="#">${num}</a></li>
+            </c:forEach>
+
+            <%--다음 버튼--%>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
+
+
 <my:foot></my:foot>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
 <script src="/js/ott.js"></script>
+<script src="/js/pagination.js"></script>
+<script>
+    $('.ottSearchBtn')
+        .popup()
+    ;
+
+</script>
 </body>
 </html>

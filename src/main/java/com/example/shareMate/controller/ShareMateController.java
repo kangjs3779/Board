@@ -40,4 +40,12 @@ public class ShareMateController {
 
         return ResponseEntity.ok().body(info);
     }
+
+    @PatchMapping("approveMate")
+    public ResponseEntity<Boolean> approveMate(@RequestBody ShareMate shareMate) {
+        System.out.println("controller : " + shareMate);
+        boolean ok = shareMateService.approveMate(shareMate);
+
+        return ResponseEntity.ok().body(ok);
+    }
 }

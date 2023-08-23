@@ -72,6 +72,7 @@ public class BoardController {
         model.addAllAttributes(info);
     }
 
+
     @GetMapping("addBoard")
     @PreAuthorize("isAuthenticated()")
     public void addBoardForm(Authentication authentication, Model model) {

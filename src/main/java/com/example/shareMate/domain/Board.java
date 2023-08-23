@@ -24,4 +24,6 @@ public class Board {
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean complete;
+    private String ottMemberId;
+    private String ottMemberPw;
 }

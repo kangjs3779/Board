@@ -82,13 +82,20 @@
                         <%--파티원 목록 보기--%>
                         <div>
                             <c:forEach items="${mates}" var="mate" varStatus="num">
-                                <img src="/images/사람${num.index + 1}.png" data-title="${mate.nickname}님" data-content="신청을 완료했습니다!" class="ui avatar image mateInfo">
+                                <img src="/images/사람${num.index + 1}.png" class="ui avatar image mateInfo">
+                                <div class="ui flowing popup top left transition hidden" style="width: 180px;">
+                                    <div class="ui center aligned grid">
+                                        <div class="column">
+                                            <h4 class="ui header">${mate.nickname}님</h4>
+                                            <p>참여 신청을 완료했습니다!</p>
+                                            <button class="ui button approveBtn" mate-id="${mate.id}">${mate.approve == 1 ? '참여 승인' : '승인 완료'}</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </c:forEach>
-
                         </div>
                     </c:if>
                 </sec:authorize>
-
             </div>
 
             <hr>
@@ -227,9 +234,13 @@
 <script src="/js/BoardComment.js"></script>
 <script src="/js/likeBoard.js"></script>
 <script src="/js/addMate.js"></script>
+
 <script>
     $('.mateInfo')
-        .popup()
+        .popup({
+            on: 'click',
+            position   : 'bottom center'
+        })
     ;
 </script>
 </body>

@@ -38,4 +38,11 @@ public interface ShareMateMapper {
             WHERE memberId = #{memberId} AND boardId = #{boardId}
             """)
     Integer cancleMate(ShareMate shareMate);
+
+    @Update("""
+            UPDATE ShareMate
+            SET approve = #{approve}
+            WHERE id = #{id}
+            """)
+    Integer approveMate(ShareMate shareMate);
 }

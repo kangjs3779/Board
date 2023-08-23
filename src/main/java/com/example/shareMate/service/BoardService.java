@@ -38,9 +38,22 @@ public class BoardService {
         //게시물 전체 조회
         List<Board> list = boardMapper.selectBoardList();
 
+        //게시글 정보 입력하는 메소드
+        boardInfo(list, authentication);
+
         //ott서비스 전체 조회
         List<Ott> otts = ottMapper.selectOtt();
 
+
+        //map에 저장
+        info.put("list", list);
+        info.put("otts", otts);
+
+        return info;
+    }
+
+    public void boardInfo(List<Board> list, Authentication authentication) {
+        //게시글 정보 입력하는 메소드
         for (Board board : list) {
             //댓글 갯수
             Integer commentCount = boardCommentMapper.selectCommentByBoarId(board.getId());
@@ -66,12 +79,6 @@ public class BoardService {
             Ott ott = ottMapper.selectOttByOttId(board.getOttId());
             board.setComplete(ott.getLimitedAttendance() == mateCount ? true : false);
         }
-
-        //map에 저장
-        info.put("list", list);
-        info.put("otts", otts);
-
-        return info;
     }
 
     public Map<String, Object> selectBoardByDetailId(Integer boardId) {
@@ -169,22 +176,8 @@ public class BoardService {
         //ott서비스 검색을 포함한 게시물 전체 조회
         List<Board> list =  boardMapper.selectBoardByOtt(ottId, authentication.getName(), page);
 
-        for (Board board : list) {
-            //댓글 갯수
-            Integer commentCount = boardCommentMapper.selectCommentByBoarId(board.getId());
-            board.setCommentCount(commentCount);
-
-            //좋아요 갯수
-            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
-            board.setLikeCount(likeCount);
-
-            //좋아요 확인
-            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
-            if(like != null) {
-                //좋아요를 누른 게시글이면
-                board.setLikeCheck(true);
-            }
-        }
+        //메소드 정보 입력
+        boardInfo(list, authentication);
 
         return list;
     }

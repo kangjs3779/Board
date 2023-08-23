@@ -66,4 +66,11 @@ public class ShareMateService {
 
         return info;
     }
+
+    public boolean approveMate(ShareMate shareMate) {
+        Integer count = shareMateMapper.approveMate(shareMate);
+        System.out.println("service : " + shareMate);
+
+        return count == 1;
+    }
 }

@@ -66,6 +66,16 @@
                     <input type="date" class="form-control" name="endDate" id="endDate" placeholder="Password">
                     <label for="endDate">끝나는 날짜</label>
                 </div>
+                <%--아이디--%>
+                <div class="form-floating mb-3 ottInfo d-none">
+                    <input type="text" name="ottMemberId" class="form-control form-control-lg" id="idInput">
+                    <label for="titleInput">서비스 ID를 입력해주세요.</label>
+                </div>
+                <%--비밀번호--%>
+                <div class="form-floating mb-3 ottInfo d-none">
+                    <input type="text" name="ottMemberPw" class="form-control form-control-lg" id="pwInput">
+                    <label for="titleInput">서비스 Password를 입력해주세요.</label>
+                </div>
                 <%--작성자 정보--%>
                 <div class="form-floating mb-3">
                     <input name="writer" readonly type="text" class="form-control-plaintext form-control-lg" id="writerInput" value="${member.nickname}">
@@ -89,6 +99,14 @@
     $('.ui.dropdown')
         .dropdown()
     ;
+
+    $("#leaderBtn").click(function () {
+        $(".ottInfo").removeClass("d-none");
+    })
+
+    $("#memberBtn").click(function () {
+        $(".ottInfo").addClass("d-none");
+    })
 </script>
 </body>
 </html>
