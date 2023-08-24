@@ -27,6 +27,8 @@ $("#addMateModalBtn").click(function () {
 
                 //참여신청 버튼을 누르면 저요버튼이 진해짐
                 $("#addMateBtn").removeClass("basic");
+                //사람아이콘 진해짐
+                $("#userIcon").removeClass("outline");
             }
         })
     } else {
@@ -48,6 +50,8 @@ $("#addMateModalBtn").click(function () {
 
                 //참여취소 버튼을 누르면 저요버튼이 연해짐
                 $("#addMateBtn").addClass("basic");
+                //사람아이콘 연해짐
+                $("#userIcon").addClass("outline");
             }
         })
     }

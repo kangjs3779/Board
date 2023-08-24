@@ -157,6 +157,14 @@ public class BoardService {
                 likeBoardMapper.deleteLikeByBoardId(boardId);
             }
 
+            //쉐어메이트가 있는지 확인
+            Integer countMate = shareMateMapper.selectCountMate(boardId);
+
+            if(countMate > 0) {
+                //메이트가 있으면 삭제
+                shareMateMapper.deleteShareMate(boardId);
+            }
+
             //게시글 삭제
             count = boardMapper.deleteBoardByBoardId(boardId);
         }

@@ -55,7 +55,6 @@ public class MemberService {
         //아이디로 회원 정보 조회
         Member member = memberMapper.selectMemberByUsername(username);
 
-
         return member;
     }
 
@@ -63,7 +62,7 @@ public class MemberService {
         //아이디로 회원 정보 수정
         Integer count = 0;
 
-        if(member.getPassword() == null) {
+        if (member.getPassword() == null) {
             //회원 정보 수정할떄
             count = memberMapper.modifyMemberByUsername(member);
         } else {
@@ -184,21 +183,23 @@ public class MemberService {
         //내가 쓴 게시물 조회
         List<Board> boards = memberMapper.selectMyBoardByUsername(authentication.getName());
 
+        //게시글 정보 입력하는 메소드
+        boardService.boardInfo(boards, authentication);
         //게시물의 댓글 조회
-        for (Board board : boards) {
-            board.setCommentCount(boardCommentMapper.selectCommentByBoarId(board.getId()));
-
-            //좋아요 갯수
-            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
-            board.setLikeCount(likeCount);
-
-            //좋아요 확인
-            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
-            if(like != null) {
-                //좋아요를 누른 게시글이면
-                board.setLikeCheck(true);
-            }
-        }
+//        for (Board board : boards) {
+//            board.setCommentCount(boardCommentMapper.selectCommentByBoarId(board.getId()));
+//
+//            //좋아요 갯수
+//            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
+//            board.setLikeCount(likeCount);
+//
+//            //좋아요 확인
+//            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
+//            if(like != null) {
+//                //좋아요를 누른 게시글이면
+//                board.setLikeCheck(true);
+//            }
+//        }
 
         //ott서비스 전체 조회
         List<Ott> otts = ottMapper.selectOtt();
@@ -257,5 +258,26 @@ public class MemberService {
         check.put("mate", shareMate != null);
 
         return check;
+    }
+
+    public Map<String, Object> selectInfoByMemberId(String memberId) {
+
+        Map<String, Object> info = new HashMap<>();
+
+        //메이트 정보 찾기
+        List<ShareMate> shareMates = shareMateMapper.selectShareByMemberId(memberId);
+
+        //ott정보 찾기
+        List<Ott> otts = new ArrayList<>();
+        for(int i = 0; i < shareMates.size(); i++) {
+            Ott ott = ottMapper.selectOttByOttId(shareMates.get(i).getOttId());
+            ott.setBoardId(shareMates.get(i).getBoardId());
+            otts.add(ott);
+        }
+
+        info.put("sharMates", shareMates);
+        info.put("otts", otts);
+
+        return info;
     }
 }

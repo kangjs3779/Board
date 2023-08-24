@@ -4,6 +4,7 @@ import com.example.shareMate.domain.ShareMate;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ShareMateMapper {
@@ -45,4 +46,14 @@ public interface ShareMateMapper {
             WHERE id = #{id}
             """)
     Integer approveMate(ShareMate shareMate);
+
+    @Delete("""
+            DELETE FROM ShareMate WHERE boardId = #{boardId}
+            """)
+    void deleteShareMate(Integer boardId);
+
+    @Select("""
+            SELECT * FROM ShareMate WHERE memberId = #{memberId}
+            """)
+    List<ShareMate> selectShareByMemberId(String memberId);
 }

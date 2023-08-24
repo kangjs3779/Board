@@ -45,7 +45,7 @@
                 <span id="likeCount" style="color: gray;"></span> &nbsp;
                 <c:if test="${board.roll == 1}">
                     <%--모인 파티원 인원 수 조회--%>
-                    <span><i style="color: gray;" class="user ${check.mate ? '' : 'outline'} icon"></i></span>
+                    <span><i style="color: gray;" class="user ${check.mate ? '' : 'outline'} icon" id="userIcon"></i></span>
                     <span style="color: gray;" class="countShare"></span>
                 </c:if>
             </p>
@@ -88,6 +88,7 @@
                                         <div class="column">
                                             <h4 class="ui header">${mate.nickname}님</h4>
                                             <p>참여 신청을 완료했습니다!</p>
+                                            <p>${mate.approve == 1 ? '참여승인 버튼을 클릭하면 아이디와 비밀번호 정보가 전송됩니다.' : '아이디와 비밀번호 정보가 전송되었습니다.'}</p>
                                             <button class="ui button approveBtn" mate-id="${mate.id}">${mate.approve == 1 ? '참여 승인' : '승인 완료'}</button>
                                         </div>
                                     </div>
@@ -163,6 +164,8 @@
     </sec:authorize>
 </div>
 
+<button type="button" class="btn"><img style="width: 60px;" src="/images/kakaopay.png"></button>
+
 <%--삭제 모달--%>
 <sec:authorize access="isAuthenticated() and #board.memberId == principal.username">
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -199,6 +202,7 @@
                 <h1 class="modal-title fs-5" id="addMateModalLabel">${ott.ott}구독에 참여하시겠습니까?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- 표시 정보 -->
             <div class="modal-body text-center">
                 <img class="ui small centered rounded image" src="http://bucket0503-qkskkfkk.s3.ap-northeast-2.amazonaws.com/ShareMate/ott/${ott.id}/${ott.logo}">
                 <br>
@@ -231,6 +235,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+
 <script src="/js/BoardComment.js"></script>
 <script src="/js/likeBoard.js"></script>
 <script src="/js/addMate.js"></script>
@@ -239,7 +244,7 @@
     $('.mateInfo')
         .popup({
             on: 'click',
-            position   : 'bottom center'
+            position: 'bottom center'
         })
     ;
 </script>

@@ -63,11 +63,16 @@
                                 <a class="ui basic label ${list.roll == 1 ? 'yellow' : ''}">${list.roll == 1 ? '파티장' : '파티원'}</a>
                                     <%--ott 구분 점--%>
                                 <a class="ui empty circular label ottService" ottId="${list.ottId}"></a>
+                                    <%--모집완료 체크--%>
+                                <i class="check icon ${list.complete ? '' : 'd-none'}"></i>
                             </div>
                             <div>
+                                    <%--좋아요 개수--%>
                                 <span id="heartBox"><i style="color: gray;" class="heart ${list.likeCheck ? '' : 'outline'} icon"></i></span>
                                 <span id="likeCount" style="color: gray;">${list.likeCount != null ? list.likeCount : 0}</span> &nbsp;
-                                <i style="color: gray;" class="user outline icon"></i>
+                                    <%--메이트 수--%>
+                                <i style="color: gray;" class="user ${list.mateCheck ? '' : 'outline'} icon"></i>
+                                <span id="mateCount" style="color: gray;">${list.mateCount != null ? list.mateCount : 0}</span> &nbsp;
                             </div>
                         </div>
                     </td>

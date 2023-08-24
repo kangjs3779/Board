@@ -56,6 +56,7 @@
                     <input readonly type="text" value="${member.address}">
                 </div>
                 <a class="ui primary basic button" href="/member/myBoard">나의 게시글</a>
+                <button type="button" class="ui orange basic button" data-bs-toggle="modal" data-bs-target="#joinCheckModal">참여 서비스</button>
                 <a class="ui secondary basic button" href="/member/modify">수정</a>
                 <button class="ui negative basic button" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">탈퇴</button>
             </form>
@@ -89,11 +90,36 @@
     </div>
 </div>
 
+<!-- 참여 중인 서비스 확인 모달 -->
+<div class="modal fade" id="joinCheckModal" tabindex="-1" aria-labelledby="joinCheckModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="joinCheckModalLabel">참여 중인 서비스 확인</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <c:forEach items="${otts}" var="ott">
+                    <%--ott 구분 점--%>
+                    <a class="ui empty circular label ottService ottColor" ottId="${ott.id}" ottColor="${ott.color}"></a>
+                    <a style="color: black;" href="/board/detail?boardId=${ott.boardId}">${ott.ott}</a>
+                    <br>
+                </c:forEach>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary">결제하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <my:foot></my:foot>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/semantic/semantic.js"></script>
+<script src="/js/ott.js"></script>
 <script>
     $('.menu .item')
         .tab()

@@ -1,6 +1,7 @@
 package com.example.shareMate.domain;
 
 import lombok.Data;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 @Data
 public class Ott {
@@ -12,4 +13,5 @@ public class Ott {
     private String costPerPerson;
     private String logo;
     private String saveMoney;
+    private Integer boardId;
 }

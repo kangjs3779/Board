@@ -35,6 +35,7 @@ $("#deleteModalBtn").click(function () {
         var password = $("#passwordInput").val();
         var username = $("#usernameInput").val();
         var data = {password, username};
+        console.log(boardId)
 
         $.ajax("/member/myBoardDelete/" + boardId, {
             method: "delete",
@@ -53,9 +54,9 @@ function myBoardList() {
     $.ajax("/member/myBoardList", {
         method: "get",
         success: function (lists) {
-            console.log(Array.isArray(lists));
+            console.log(Array.isArray(lists.boards));
             $("#boardListBox").empty();
-            for(const list of lists) {
+            for(const list of lists.boards) {
                 let commentCountSpan = '';
                 if (list.commentCount > 0) {
                     commentCountSpan = `<span style="color: gray;">[${list.commentCount}]</span>`;

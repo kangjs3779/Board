@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,9 +60,13 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     public void myPageForm(Authentication authentication, Model model) {
         //마이페이지 포워드
+        Map<String, Object> info = memberService.selectInfoByMemberId(authentication.getName());
+
+        //회원 정보 조회
         Member member = memberService.selectMemberByUsername(authentication.getName());
 
-        model.addAttribute("member", member);
+        info.put("member", member);
+        model.addAllAttributes(info);
     }
 
     @GetMapping("modify")
@@ -167,7 +172,7 @@ public class MemberController {
 
     @GetMapping("myBoardList")
     @ResponseBody
-    public Map<String, Object> myBoardList(Authentication authentication) {
+    public Map<String, Object> 제myBoardList(Authentication authentication) {
         //내가 쓴 게시글 포워드
         Map<String, Object> info = memberService.selectMyBoardByUsername(authentication);
 
