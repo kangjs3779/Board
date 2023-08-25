@@ -106,7 +106,6 @@
                                         <%--결제완료 단계이면, approve = 3이면--%>
                                         <p class="service">구독 서비스 : ${ott.ott}<span style="color: darkred;">[결제완료]</span></p>
                                         <p class="date">결제 금액 : ${ott.costPerPerson}원</p>
-<%--                                        <p class="date">결제 날짜 : 23.01.01</p>--%>
                                         <hr>
                                     </c:if>
                                 </c:forEach>
@@ -251,14 +250,14 @@
                         <div class="content">
                             <div class="subscription">
                                 <c:forEach items="${mates}" var="mate">
-                                    <c:if test="${mate.approve eq 3}">
+                                    <c:if test="${mate.approve eq 3 || mate.approve eq 4}">
                                         <label class="form-check-label d-flex justify-content-between align-items-center">
                                             <div>
-                                                <a class="ui empty circular label ottService ottColor" ottId="${mate.id}" ottColor="${mate.color}"></a>
+                                                <a class="ui empty circular label ottService ottColor" ottId="${mate.ottId}" ottColor="${mate.color}"></a>
                                                 <a href="/board/detail?boardId=${mate.boardId}">${mate.ott}</a>
                                                 &nbsp;[${mate.name}님]&nbsp;&nbsp;[${mate.nickname}님]
                                             </div>
-                                            <button type="button" class="mini ui basic button">정보 전송</button>
+                                            <button type="button" mateId="${mate.id}" boardId="${mate.boardId}" ott="${mate.ott}" mateEmail="${mate.email}" class="mini ui basic button sendInfoBtn">${mate.approve == 3 ? "정보 전송" : "전송 완료"}</button>
                                         </label>
                                         <br>
                                     </c:if>
@@ -342,6 +341,7 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="/js/importPay.js"></script>
+<script src="/js/sendInfoEmail.js"></script>
 <script>
     $('.menu .item')
         .tab()

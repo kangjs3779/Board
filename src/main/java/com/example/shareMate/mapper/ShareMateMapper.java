@@ -70,4 +70,11 @@ public interface ShareMateMapper {
             WHERE id = #{shareMateId} 
             """)
     void updateApprove(Integer shareMateId);
+
+    @Update("""
+            UPDATE ShareMate
+            SET approve = 4
+            WHERE id = #{shareMateId} 
+            """)
+    void completeEmail(Integer shareMateId);
 }

@@ -2,9 +2,11 @@ package com.example.shareMate.controller;
 
 import com.example.shareMate.domain.Board;
 import com.example.shareMate.domain.Member;
+import com.example.shareMate.domain.ShareMate;
 import com.example.shareMate.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.One;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -150,6 +152,17 @@ public class MemberController {
         return memberService.joinEmail(email);
     }
 
+    @GetMapping("sendInfoEmail")
+    @ResponseBody
+    public  void sendInfoEmail(
+            @RequestParam("email") String email,
+            @RequestParam("ott") String ott,
+            @RequestParam("boardId") Integer boardId) {
+        //메이트 메일로 정보 보내기
+        memberService.sendInfoEmail(email, ott, boardId);
+        System.out.println(email + ", " + ott);
+    }
+
     @GetMapping("checkveriCode")
     @ResponseBody
     public Map<String, Object> checkVeriCode(@RequestParam("code") Integer code) {
@@ -214,5 +227,13 @@ public class MemberController {
             @RequestParam("email") String email,
             @RequestParam("id") String id) {
         return memberService.findIdAndEmail(id,email);
+    }
+
+    @PatchMapping("completeEmail")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> completeEmail(@RequestBody ShareMate shareMate) {
+        Map<String, Object> res = memberService.completeEmail(shareMate);
+
+        return ResponseEntity.ok().body(res);
     }
 }

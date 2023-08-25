@@ -6,6 +6,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
@@ -165,6 +166,29 @@ public class MemberService {
         }
     }
 
+    public void sendInfoEmail(String email, String ott, Integer boardId) {
+        //서비스 아이디와 비밀번호 탐색
+        Board board = boardMapper.selectBoardByBoardId(boardId);
+
+        //메이트에게 정보를 보낼 양식
+        String setFrom = username; // email-config에 설정한 자신의 이메일 주소를 입력
+        String toMail = email;
+        String title = "결제하신 " + ott + " 서비스 아이디와 비밀번호 정보입니다."; // 이메일 제목
+        String content =
+                "Share Mate서비스를 이용해주셔서 감사합니다." +    //html 형식으로 작성 !
+                        "<br><br>" +
+                        "결제하신 서비스는" + ott + " 입니다." +
+                        "<br>" +
+                        "아이디는 " + "'" + board.getOttMemberId()+ "'" + " 입니다." +
+                        "<br>" +
+                        "비밀번호는 " + "'" + board.getOttMemberPw() + "'" + " 입니다." +
+                        "<br>" +
+                        "파티장의 아이디와 비밀번호를 함부로 공유하지 말아주세요~"; //이메일 내용 삽입
+        mailSend(setFrom, toMail, title, content);
+//        return Integer.toString(authNumber);
+
+    }
+
     public Map<String, Object> checkVeriCode(Integer code) {
         //사용자가 입력한 인증 번호와 인증메일의 인증번호 확인
         return Map.of("available", code.equals(authNumber));
@@ -261,7 +285,7 @@ public class MemberService {
         //결제 정보 찾기
         List<Payment> payments = new ArrayList<>();
 
-        for(int i = 0; i < shareMates.size(); i++) {
+        for (int i = 0; i < shareMates.size(); i++) {
             Ott ott = ottMapper.selectOttByOttId(shareMates.get(i).getOttId());
             //쉐어메이트 아이디 넣기
             ott.setShareMateId(shareMates.get(i).getId());
@@ -270,7 +294,7 @@ public class MemberService {
             ott.setBoardId(shareMates.get(i).getBoardId());
 
             //한 명당 내는 요금 넣기
-            Integer costPerPerson = ott.getCost()/ott.getLimitedAttendance();
+            Integer costPerPerson = ott.getCost() / ott.getLimitedAttendance();
             DecimalFormat df = new DecimalFormat("#,###");
             ott.setCostPerPerson(df.format(costPerPerson));
 
@@ -281,8 +305,6 @@ public class MemberService {
             Payment payment = paymentMapper.selectPaymentByShareId(shareMates.get(i).getId());
 
             payments.add(payment);
-
-            System.out.println(payment);
 
             otts.add(ott);
         }
@@ -305,12 +327,12 @@ public class MemberService {
         //참여 신청한 메이트 정보 찾기
         List<ShareMate> mates = new ArrayList<>();
 
-        for(Board board : leaderBoard) {
+        for (Board board : leaderBoard) {
             //해당 게시글의 메이트들을 조회함
             List<ShareMate> shareMate = shareMateMapper.selectLeaderShareByBoardId(board.getId());
 
-            for(int i = 0; i < shareMate.size(); i++) {
-                Integer costPerPerson = shareMate.get(i).getCost()/shareMate.get(i).getLimitedAttendance();
+            for (int i = 0; i < shareMate.size(); i++) {
+                Integer costPerPerson = shareMate.get(i).getCost() / shareMate.get(i).getLimitedAttendance();
                 shareMate.get(i).setCostPerPerson(df.format(costPerPerson));
 
                 mates.add(shareMate.get(i));
@@ -321,5 +343,14 @@ public class MemberService {
         leaderInfo.put("mates", mates);
 
         return leaderInfo;
+    }
+
+    public Map<String, Object> completeEmail(ShareMate shareMate) {
+        Map<String, Object> res = new HashMap<>();
+
+        //approve 4로 단계 바꾸기
+        shareMateMapper.completeEmail(shareMate.getId());
+
+        return res;
     }
 }
