@@ -56,4 +56,18 @@ public interface ShareMateMapper {
             SELECT * FROM ShareMate WHERE memberId = #{memberId}
             """)
     List<ShareMate> selectShareByMemberId(String memberId);
+
+    @Select("""
+            SELECT * FROM ShareMate sm JOIN Ott O ON sm.ottId = O.id
+            JOIN Member m on sm.memberId = m.username
+            WHERE sm.boardId = #{boardId}
+            """)
+    List<ShareMate> selectLeaderShareByBoardId(Integer boardId);
+
+    @Update("""
+            UPDATE ShareMate
+            SET approve = 3
+            WHERE id = #{shareMateId} 
+            """)
+    void updateApprove(Integer shareMateId);
 }

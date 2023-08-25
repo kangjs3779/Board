@@ -62,11 +62,16 @@ public class MemberController {
         //마이페이지 포워드
         Map<String, Object> info = memberService.selectInfoByMemberId(authentication.getName());
 
+        //파티장 정보 조회
+        Map<String, Object> leaderInfo = memberService.selectLeaderInfoByMemberId(authentication.getName());
+
         //회원 정보 조회
         Member member = memberService.selectMemberByUsername(authentication.getName());
 
         info.put("member", member);
         model.addAllAttributes(info);
+        model.addAllAttributes(leaderInfo);
+
     }
 
     @GetMapping("modify")

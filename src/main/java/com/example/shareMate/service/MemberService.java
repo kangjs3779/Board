@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
@@ -38,6 +39,8 @@ public class MemberService {
     private OttMapper ottMapper;
     @Autowired
     private ShareMateMapper shareMateMapper;
+    @Autowired
+    private PaymentMapper paymentMapper;
 
     public boolean addMember(Member member) {
         //사용자의 비밀번호를 암호화
@@ -185,21 +188,6 @@ public class MemberService {
 
         //게시글 정보 입력하는 메소드
         boardService.boardInfo(boards, authentication);
-        //게시물의 댓글 조회
-//        for (Board board : boards) {
-//            board.setCommentCount(boardCommentMapper.selectCommentByBoarId(board.getId()));
-//
-//            //좋아요 갯수
-//            Integer likeCount = likeBoardMapper.selectLikeCountByBoardId(board.getId());
-//            board.setLikeCount(likeCount);
-//
-//            //좋아요 확인
-//            Like like = likeBoardMapper.checkLikeByUsernameAndBoardId(authentication.getName(), board.getId());
-//            if(like != null) {
-//                //좋아요를 누른 게시글이면
-//                board.setLikeCheck(true);
-//            }
-//        }
 
         //ott서비스 전체 조회
         List<Ott> otts = ottMapper.selectOtt();
@@ -264,20 +252,74 @@ public class MemberService {
 
         Map<String, Object> info = new HashMap<>();
 
-        //메이트 정보 찾기
+        //내가 참여 중인 (파티원으로서)메이트 정보 찾기
         List<ShareMate> shareMates = shareMateMapper.selectShareByMemberId(memberId);
 
         //ott정보 찾기
         List<Ott> otts = new ArrayList<>();
+
+        //결제 정보 찾기
+        List<Payment> payments = new ArrayList<>();
+
         for(int i = 0; i < shareMates.size(); i++) {
             Ott ott = ottMapper.selectOttByOttId(shareMates.get(i).getOttId());
+            //쉐어메이트 아이디 넣기
+            ott.setShareMateId(shareMates.get(i).getId());
+
+            //게시글 아이디 넣기
             ott.setBoardId(shareMates.get(i).getBoardId());
+
+            //한 명당 내는 요금 넣기
+            Integer costPerPerson = ott.getCost()/ott.getLimitedAttendance();
+            DecimalFormat df = new DecimalFormat("#,###");
+            ott.setCostPerPerson(df.format(costPerPerson));
+
+            //승인 단계 넣기
+            ott.setApprove(shareMates.get(i).getApprove());
+
+            //결제 정보
+            Payment payment = paymentMapper.selectPaymentByShareId(shareMates.get(i).getId());
+
+            payments.add(payment);
+
+            System.out.println(payment);
+
             otts.add(ott);
         }
 
         info.put("sharMates", shareMates);
         info.put("otts", otts);
+        info.put("payments", payments);
+
 
         return info;
+    }
+
+    public Map<String, Object> selectLeaderInfoByMemberId(String memberId) {
+        Map<String, Object> leaderInfo = new HashMap<>();
+        DecimalFormat df = new DecimalFormat("#,###");
+
+        //내가 쓴 게시글이면서 파티장인 서비스의 메이트들 정보 찾기 = 내가 구독 중인 서비스의 메이트 정보(리더로서)
+        List<Board> leaderBoard = boardMapper.selectBoardByMemberIdAndRoll(memberId);
+
+        //참여 신청한 메이트 정보 찾기
+        List<ShareMate> mates = new ArrayList<>();
+
+        for(Board board : leaderBoard) {
+            //해당 게시글의 메이트들을 조회함
+            List<ShareMate> shareMate = shareMateMapper.selectLeaderShareByBoardId(board.getId());
+
+            for(int i = 0; i < shareMate.size(); i++) {
+                Integer costPerPerson = shareMate.get(i).getCost()/shareMate.get(i).getLimitedAttendance();
+                shareMate.get(i).setCostPerPerson(df.format(costPerPerson));
+
+                mates.add(shareMate.get(i));
+                System.out.println(shareMate.get(i));
+            }
+        }
+
+        leaderInfo.put("mates", mates);
+
+        return leaderInfo;
     }
 }

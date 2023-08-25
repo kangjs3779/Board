@@ -18,11 +18,14 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-        <!--카카오 알림톡 관련 의존성-->
+
+        <!-- 아임포트 REST API연동 모듈 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.github.iamport</groupId>
+            <artifactId>iamport-rest-client-java</artifactId>
+            <version>0.2.14</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

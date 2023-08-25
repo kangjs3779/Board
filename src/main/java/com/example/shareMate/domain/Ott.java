@@ -1,7 +1,8 @@
 package com.example.shareMate.domain;
 
 import lombok.Data;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
+
+import java.util.Date;
 
 @Data
 public class Ott {
@@ -14,4 +15,7 @@ public class Ott {
     private String logo;
     private String saveMoney;
     private Integer boardId;
+    private Integer approve;
+    private Integer shareMateId;
+    private Date paymentDate;
 }

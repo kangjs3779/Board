@@ -164,8 +164,6 @@
     </sec:authorize>
 </div>
 
-<button type="button" class="btn"><img style="width: 60px;" src="/images/kakaopay.png"></button>
-
 <%--삭제 모달--%>
 <sec:authorize access="isAuthenticated() and #board.memberId == principal.username">
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -227,7 +225,6 @@
         </div>
     </div>
 </div>
-
 <footer>
     <my:foot></my:foot>
 </footer>
@@ -235,10 +232,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
-
 <script src="/js/BoardComment.js"></script>
 <script src="/js/likeBoard.js"></script>
 <script src="/js/addMate.js"></script>
+<script src="/js/approve.js"></script>
 
 <script>
     $('.mateInfo')

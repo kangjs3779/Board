@@ -69,4 +69,9 @@ public interface BoardMapper {
             </script>
             """)
     List<Board> selectBoardByOtt(Integer ottId, String memberId, String page);
+
+    @Select("""
+            SELECT * FROM Board WHERE memberId = #{memberId} AND roll = 1;
+            """)
+    List<Board> selectBoardByMemberIdAndRoll(String memberId);
 }
