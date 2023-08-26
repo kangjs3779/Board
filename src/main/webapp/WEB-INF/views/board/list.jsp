@@ -83,11 +83,11 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-between">
-        <div class="ui tiny buttons">
-            <button class="ui button">파티장</button>
-            <div class="or"></div>
-            <button class="ui button">파티원</button>
-        </div>
+<%--        <div class="ui tiny buttons">--%>
+<%--            <button class="ui button">파티장</button>--%>
+<%--            <div class="or"></div>--%>
+<%--            <button class="ui button">파티원</button>--%>
+<%--        </div>--%>
 
         <sec:authorize access="isAuthenticated()">
             <div>
@@ -99,29 +99,29 @@
         </sec:authorize>
     </div>
 
-    <%--페이지네이션--%>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <%--이전 버튼--%>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+<%--    &lt;%&ndash;페이지네이션&ndash;%&gt;--%>
+<%--    <nav aria-label="Page navigation example">--%>
+<%--        <ul class="pagination">--%>
+<%--            &lt;%&ndash;이전 버튼&ndash;%&gt;--%>
+<%--            <li class="page-item">--%>
+<%--                <a class="page-link" href="#" aria-label="Previous">--%>
+<%--                    <span aria-hidden="true">&laquo;</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
 
-            <%--숫자들--%>
-            <c:forEach begin="1" end="10" var="num">
-                <li class="page-item"><a class="page-link" href="#">${num}</a></li>
-            </c:forEach>
+<%--            &lt;%&ndash;숫자들&ndash;%&gt;--%>
+<%--            <c:forEach begin="1" end="10" var="num">--%>
+<%--                <li class="page-item"><a class="page-link" href="#">${num}</a></li>--%>
+<%--            </c:forEach>--%>
 
-            <%--다음 버튼--%>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+<%--            &lt;%&ndash;다음 버튼&ndash;%&gt;--%>
+<%--            <li class="page-item">--%>
+<%--                <a class="page-link" href="#" aria-label="Next">--%>
+<%--                    <span aria-hidden="true">&raquo;</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+<%--    </nav>--%>
 </div>
 
 
