@@ -177,7 +177,7 @@ public class MemberService {
         String content =
                 "Share Mate서비스를 이용해주셔서 감사합니다." +    //html 형식으로 작성 !
                         "<br><br>" +
-                        "결제하신 서비스는" + ott + " 입니다." +
+                        "결제하신 서비스는 " + ott + " 입니다." +
                         "<br>" +
                         "아이디는 " + "'" + board.getOttMemberId()+ "'" + " 입니다." +
                         "<br>" +
