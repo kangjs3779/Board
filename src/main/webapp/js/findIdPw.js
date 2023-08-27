@@ -88,6 +88,13 @@ $("#findPwBtn").click(function () {
     } else {
         //가입된 아이디와 이메일인지 확인
         $.ajax("/member/findIdAndEmail?email=" + emailInput + "&" + "id=" + idInput, {
+            error: function () {
+                $("#findPwBtn").after(`
+                    <div class="ui left pointing red basic label">
+                        잘못된 아이디 또는 이메일이 입력되었습니다.
+                    </div>
+                `);
+            },
             success: function (data) {
                 if (data.check) {
                     var username = data.member.username;
