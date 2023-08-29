@@ -32,8 +32,6 @@ public class ShareMateService {
             Integer count = shareMateMapper.addMate(shareMate);
 
             info.put("message", count == 1 ? "신청이 추가되었습니다." : "신청이 추가되지 않았습니다.");
-        } else {
-            //해당 구독 서비스의 인원이 모두 차면?
         }
         return info;
     }

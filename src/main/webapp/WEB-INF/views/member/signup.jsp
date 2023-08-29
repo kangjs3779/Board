@@ -39,11 +39,11 @@
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="pwInput">비밀번호</label>
-            <input type="text" required name="password" class="form-control pw" id="pwInput" placeholder="Password">
+            <input type="password" required name="password" class="form-control pw" id="pwInput" placeholder="Password">
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="pwCheckInput">비밀번호 확인</label>
-            <input type="text" required class="form-control pw" id="pwCheckInput" placeholder="Password Check">
+            <input type="password" required class="form-control pw" id="pwCheckInput" placeholder="Password Check">
             <div class="valid-feedback pwCheck">
                 비밀번호가 일치합니다.
             </div>

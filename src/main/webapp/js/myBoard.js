@@ -35,7 +35,6 @@ $("#deleteModalBtn").click(function () {
         var password = $("#passwordInput").val();
         var username = $("#usernameInput").val();
         var data = {password, username};
-        console.log(boardId)
 
         $.ajax("/member/myBoardDelete/" + boardId, {
             method: "delete",
