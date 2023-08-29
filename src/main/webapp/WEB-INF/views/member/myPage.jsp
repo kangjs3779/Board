@@ -284,7 +284,7 @@
                 <form id="deleteForm" action="/member/delete" method="post">
                     <div class="mb-3">
                         <label for="passowordInput" class="col-form-label">Password:</label>
-                        <input type="text" name="password" class="form-control" id="passowordInput">
+                        <input type="password" name="password" class="form-control" id="passowordInput">
                         <input type="hidden" name="username" class="form-control" value="${member.username}">
                     </div>
                 </form>

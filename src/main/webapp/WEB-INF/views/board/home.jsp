@@ -69,7 +69,7 @@
 </div>
 <h3 class="ui center aligned header">비싼 구독 서비스! 요금 혼자 내지 마세요!</h3>
 <h1 class="ui center aligned header" style="font-size: 35px;">공유를 원한다면</h1>
-<h1 class="ui center aligned header violet" style="font-size: 50px;">Share Mate</h1>
+<h1 class="ui center aligned header" style="font-size: 50px; color: #8445FF;">Share Mate</h1>
 <div class="d-flex justify-content-center">
     <a class="massive ui inverted secondary button" href="/member/login">
         LOGIN
